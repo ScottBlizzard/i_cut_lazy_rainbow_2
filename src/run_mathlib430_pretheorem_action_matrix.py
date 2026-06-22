@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -105,6 +106,41 @@ ACTIONS = [
     Action("aesop_learned32", "aesop", fact_pool="fact_learned32", simp_pool="simp_learned32"),
     Action("aesop_learned32_facts", "aesop", fact_pool="fact_learned32", simp_pool="empty"),
     Action("aesop_learned32_simps", "aesop", fact_pool="empty", simp_pool="simp_learned32"),
+    Action(
+        "aesop_core_plus_learned_identity",
+        "aesop",
+        fact_pool="identity_core_plus_learned8",
+        simp_pool="identity_core_plus_learned8",
+    ),
+    Action(
+        "aesop_core_plus_learned_swapped",
+        "aesop",
+        fact_pool="simp_core_plus_learned8",
+        simp_pool="fact_core_plus_learned8",
+    ),
+    Action(
+        "aesop_core_plus_learned_countmatched_facts",
+        "aesop",
+        fact_pool="union_core_plus_learned8",
+        simp_pool="empty",
+    ),
+    Action(
+        "aesop_core_plus_learned_countmatched_simps",
+        "aesop",
+        fact_pool="empty",
+        simp_pool="union_core_plus_learned8",
+    ),
+    Action(
+        "aesop_core_plus_learned_random_split",
+        "aesop",
+        fact_pool="hash_fact_core_plus_learned8",
+        simp_pool="hash_simp_core_plus_learned8",
+    ),
+    Action("aesop_learned8_identity", "aesop", fact_pool="identity_learned8", simp_pool="identity_learned8"),
+    Action("aesop_learned8_swapped", "aesop", fact_pool="simp_learned8", simp_pool="fact_learned8"),
+    Action("aesop_learned8_countmatched_facts", "aesop", fact_pool="union_learned8", simp_pool="empty"),
+    Action("aesop_learned8_countmatched_simps", "aesop", fact_pool="empty", simp_pool="union_learned8"),
+    Action("aesop_learned8_random_split", "aesop", fact_pool="hash_fact_learned8", simp_pool="hash_simp_learned8"),
     Action("omega_empty", "raw", raw_tactic="omega"),
     Action("linarith_empty", "raw", raw_tactic="linarith"),
     Action("nlinarith_empty", "raw", raw_tactic="nlinarith"),
@@ -253,7 +289,12 @@ def strip_dangling_attributes(lines: list[str]) -> list[str]:
     return out
 
 
-def candidate_records(row: dict[str, Any], n: int) -> list[dict[str, Any]]:
+def candidate_records(
+    row: dict[str, Any],
+    n: int,
+    *,
+    include_proof_core_only: bool = True,
+) -> list[dict[str, Any]]:
     candidates = list(row.get("candidates") or [])
 
     def key(item: dict[str, Any]) -> tuple[float, float, str]:
@@ -269,14 +310,17 @@ def candidate_records(row: dict[str, Any], n: int) -> list[dict[str, Any]]:
     top = sorted(candidates, key=key)[:n]
     by_name: dict[str, dict[str, Any]] = {str(c.get("name", "")): c for c in candidates}
     for name in row.get("proof_core", []) or []:
-        if name and name not in by_name:
+        if include_proof_core_only and name and name not in by_name:
             top.append({"name": str(name), "features": {}, "tags": ["proof_core_only"]})
     return top
 
 
-def selected_names_for_check(row: dict[str, Any], max_candidates: int) -> list[str]:
-    proof_core = [str(p) for p in row.get("proof_core", []) if p]
-    learned = [str(c.get("name", "")) for c in candidate_records(row, max_candidates)]
+def selected_names_for_check(row: dict[str, Any], max_candidates: int, *, candidate_source: str) -> list[str]:
+    proof_core = [] if candidate_source == "retrieved_only" else [str(p) for p in row.get("proof_core", []) if p]
+    learned = [] if candidate_source == "oracle_core_only" else [
+        str(c.get("name", ""))
+        for c in candidate_records(row, max_candidates, include_proof_core_only=False)
+    ]
     return unique(proof_core + learned)
 
 
@@ -385,6 +429,24 @@ def is_simp_safe(name: str, candidate: dict[str, Any] | None, row: dict[str, Any
     return bool(features.get("has_simp_attr") or "rewrite" in tags)
 
 
+def hash_split(names: list[str], goal_id: str) -> tuple[list[str], list[str]]:
+    def digest_int(name: str) -> int:
+        return int.from_bytes(hashlib.sha256(f"{goal_id}|{name}".encode("utf-8")).digest(), "big")
+
+    ordered = sorted(
+        unique(names),
+        key=lambda name: (digest_int(name) % 2, digest_int(name), name),
+    )
+    facts: list[str] = []
+    simps: list[str] = []
+    for name in ordered:
+        if digest_int(name) % 2:
+            simps.append(name)
+        else:
+            facts.append(name)
+    return facts, simps
+
+
 def build_candidate_audit(
     *,
     row: dict[str, Any],
@@ -435,12 +497,23 @@ def build_pools(
     max_candidates: int,
     *,
     pool_mode: str = "legacy",
+    candidate_source: str = "oracle_plus_retrieved",
 ) -> dict[str, list[str]]:
     candidates = candidate_records(row, max_candidates)
+    retrieved_candidates = candidate_records(row, max_candidates, include_proof_core_only=False)
     by_name = {str(c.get("name", "")): c for c in candidates}
-    proof_core = unique([str(p) for p in row.get("proof_core", []) if p and str(p) in available])
+    proof_core = (
+        []
+        if candidate_source == "retrieved_only"
+        else unique([str(p) for p in row.get("proof_core", []) if p and str(p) in available])
+    )
 
-    learned_records = [c for c in candidates if str(c.get("name", "")) in available]
+    learned_records = (
+        []
+        if candidate_source == "oracle_core_only"
+        else [c for c in retrieved_candidates if str(c.get("name", "")) in available]
+    )
+    learned_names = unique([str(c.get("name", "")) for c in learned_records if c.get("name")])
     fact_learned: list[str] = []
     simp_learned: list[str] = []
     for candidate in learned_records:
@@ -475,6 +548,24 @@ def build_pools(
         "simp_core_plus_learned16": unique(proof_core + simp_learned[:16]),
         "simp_core_plus_learned32": unique(proof_core + simp_learned[:32]),
     }
+    for n in [8, 16, 32]:
+        identity_core_plus_learned = unique(proof_core + learned_names[:n])
+        union_core_plus_learned = unique(
+            pools[f"fact_core_plus_learned{n}"] + pools[f"simp_core_plus_learned{n}"]
+        )
+        hash_fact, hash_simp = hash_split(union_core_plus_learned, str(row.get("goal_id", "")))
+        pools[f"identity_core_plus_learned{n}"] = identity_core_plus_learned
+        pools[f"union_core_plus_learned{n}"] = union_core_plus_learned
+        pools[f"hash_fact_core_plus_learned{n}"] = hash_fact
+        pools[f"hash_simp_core_plus_learned{n}"] = hash_simp
+    for n in [8, 16, 32]:
+        identity_learned = unique(learned_names[:n])
+        union_learned = unique(pools[f"fact_learned{n}"] + pools[f"simp_learned{n}"])
+        hash_fact, hash_simp = hash_split(union_learned, str(row.get("goal_id", "")))
+        pools[f"identity_learned{n}"] = identity_learned
+        pools[f"union_learned{n}"] = union_learned
+        pools[f"hash_fact_learned{n}"] = hash_fact
+        pools[f"hash_simp_learned{n}"] = hash_simp
     if pool_mode == "strict_aesop":
         aesop_fact_core = [
             name for name in pools["fact_core"] if is_aesop_safe_fact(name, by_name.get(name), row)
@@ -762,6 +853,7 @@ def write_md(payload: dict[str, Any], out: Path) -> None:
     lines.append(f"- Verdict: `{payload['verdict']}`")
     lines.append(f"- Replay filter: `{payload['replay_json']}`")
     lines.append(f"- Pool mode: `{payload.get('pool_mode', 'legacy')}`")
+    lines.append(f"- Candidate source: `{payload.get('candidate_source', 'oracle_plus_retrieved')}`")
     if payload.get("result_action_suffix"):
         lines.append(f"- Result action suffix: `{payload['result_action_suffix']}`")
     lines.append(f"- Replayable goals evaluated: {summary['n_goals']}")
@@ -881,6 +973,11 @@ def main() -> None:
     parser.add_argument("--max-candidates", type=int, default=32)
     parser.add_argument("--action-names", nargs="*", default=None)
     parser.add_argument("--pool-mode", choices=["legacy", "strict_aesop"], default="legacy")
+    parser.add_argument(
+        "--candidate-source",
+        choices=["oracle_plus_retrieved", "oracle_core_only", "retrieved_only"],
+        default="oracle_plus_retrieved",
+    )
     parser.add_argument("--result-action-suffix", default="")
     parser.add_argument("--jobs", type=int, default=1)
     parser.add_argument("--timeout-s", type=float, default=180.0)
@@ -927,7 +1024,7 @@ def main() -> None:
         metadata = row.get("metadata") or {}
         source_file = mathlib_root / str(metadata.get("file_path", ""))
         source_lines = source_file.read_text(encoding="utf-8").splitlines(keepends=True)
-        names = selected_names_for_check(row, args.max_candidates)
+        names = selected_names_for_check(row, args.max_candidates, candidate_source=args.candidate_source)
         available, check = check_available_names(
             row=row,
             names=names,
@@ -938,7 +1035,13 @@ def main() -> None:
             idx=idx,
             timeout_s=args.timeout_s,
         )
-        pools = build_pools(row, available, args.max_candidates, pool_mode=args.pool_mode)
+        pools = build_pools(
+            row,
+            available,
+            args.max_candidates,
+            pool_mode=args.pool_mode,
+            candidate_source=args.candidate_source,
+        )
         candidate_audit = build_candidate_audit(
             row=row,
             names=names,
@@ -989,7 +1092,7 @@ def main() -> None:
 
     goal_order = {row.get("goal_id", ""): i for i, row in enumerate(rows)}
     action_order = {action.name: i for i, action in enumerate(actions)}
-    results.sort(key=lambda row: (goal_order.get(row["goal_id"], 0), action_order.get(row["action"], 0)))
+    results.sort(key=lambda row: (goal_order.get(row["goal_id"], 0), action_order.get(row.get("source_action", row["action"]), 0)))
     summary = summarize(results, availability_rows)
     verdict = (
         "pass_action_dependent"
@@ -1011,6 +1114,7 @@ def main() -> None:
         "max_candidates": args.max_candidates,
         "action_names": [action.name for action in actions],
         "pool_mode": args.pool_mode,
+        "candidate_source": args.candidate_source,
         "result_action_suffix": args.result_action_suffix,
         "verdict": verdict,
         "summary": summary,
