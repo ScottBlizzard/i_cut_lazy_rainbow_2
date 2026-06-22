@@ -22,6 +22,8 @@ The route is alive, but not yet paper-strong.
 - Broad candidate insertion still damages reconstruction unless names are filtered and routed through the right interface.
 - `iclr2027/paper.tex` has been rewritten around the typed proof-action portfolio mainline and compiled to `iclr2027/paper.pdf`. The current paper claim is scoped as a verified interface-mechanism result, not as adaptive routing or a full theorem-proving leaderboard.
 - `analysis/paper_adversarial_review_typed_portfolio.md` records the current reviewer risks, claim-evidence map, and exact next experiments.
+- `analysis/deep_research_report_maintrack_review.md` independently agrees with the current strategic order: do not restart, strengthen the typed interface-mechanism paper, run E1 interface filtering first, run E2 paired stability second, and only attempt E3 adaptive routing if E1 creates new headroom or action diversity.
+- E1 strict interface filtering is complete: `analysis/mathlib430_e1_strict_interface_filtering.md` shows filtered-only oracle 4/230, combined oracle still 58/230, and no new oracle goals. The audit is useful because names are mostly available (7321/7497) and target/alias hits are low (24), but strict theorem-like/simp-attr filtering over-cleans the interface and destroys most Aesop successes.
 
 ## P1. Stabilize The Replayable Subset
 
@@ -36,18 +38,22 @@ Pending:
 
 Goal: prevent invalid or wrong-interface premises from poisoning Lean reconstruction.
 
-Pending:
+Completed:
 
-1. Run the interface filtering gate on the 230 replayable goals, starting only with high-value families: `aesop_core_plus_learned`, `aesop_core_plus_learned16`, `hammerCore_core_plus_learned`, `hammer_core_plus_learned16`, and `solve_by_elim_core`.
-2. Improve context visibility filtering; scaled230 still has residual `unknown_identifier` / invalid-rule failures after filtering.
-3. Split selected names into:
+1. Ran the strict interface filtering gate on the 230 replayable goals for `aesop_core_plus_learned`, `aesop_core_plus_learned16`, `hammerCore_core_plus_learned`, `hammer_core_plus_learned16`, and `solve_by_elim_core`.
+2. Added context visibility / candidate survival audit to `src/run_mathlib430_pretheorem_action_matrix.py`.
+3. Split selected names into audit categories:
    - fact candidates for `hammer [facts]`;
    - simp candidates for `simp [lemmas]` / `simpa [lemmas]`;
    - HammerCore simp/fact pairs;
    - definitions/classes/instances that should not be sent to Aesop as unsafe rules.
-4. Add leak guards for target theorem, aliases, and same-file later declarations.
-5. Record candidate survival rates per goal and per interface.
-6. Stop filtering variants if they do not add oracle goals or improve the fixed typed portfolio over the current 58/230 ceiling.
+4. Added target theorem / alias guards for the strict filtering audit. Same-file-later declaration filtering still lacks candidate declaration spans and should not be claimed as complete.
+5. Recorded candidate survival rates per goal and per interface in the E1 outputs.
+
+Pending:
+
+1. Do not continue stricter theorem-like/simp-attr filtering variants as a mainline: E1 did not add oracle goals and reduced filtered-only oracle to 4/230.
+2. If filtering is revisited, use it as a more surgical diagnostic, not as another broad strict policy. Candidate declaration spans would be needed before claiming same-file-later leak filtering.
 
 ## P3. Improve Proof-Action Routing
 
@@ -65,8 +71,8 @@ Current pilot:
 Pending:
 
 1. Keep the paper mainline fixed as `aesop`-augmented typed proof-action portfolios unless a new verified experiment changes the evidence.
-2. Improve premise/interface filtering only where it can plausibly raise the fixed portfolio or oracle ceiling: invalid identifiers, definitions/classes/instances sent to Aesop, and target/alias leak guards.
-3. Produce a paired portfolio stability table: per-fold K=1/2/3/4, paired wins/losses versus best single action and `hammer_empty`, strict-only coverage, and only-family counts.
+2. Produce a paired portfolio stability table: per-fold K=1/2/3/4, paired wins/losses versus best single action and `hammer_empty`, strict-only coverage, and only-family counts. The lightweight output `outputs/mathlib430_fixed_portfolio_stability_scaled230_e1_filtered.md` already provides the first fixed-greedy per-fold table; extend it with clearer paired win/loss summaries for paper use.
+3. Treat E1 as a robustness boundary: strict filtering is useful evidence against unknown-identifier/target-leak explanations, but it does not improve the method.
 4. Do not continue naive `rw` / `simp only` templates without a typed rewrite-direction selector.
 5. Do not scale `simp_rw` unless a typed rewrite-direction selector is added.
 
@@ -92,6 +98,8 @@ Pending:
 
 Prepared inputs:
 
+- `analysis/deep_research_report_maintrack_review.md`
+- `analysis/mathlib430_e1_strict_interface_filtering.md`
 - `analysis/paper_adversarial_review_typed_portfolio.md`
 - `outputs/mathlib430_replayable490_goal_ids.txt`
 - `outputs/mathlib430_replayable490_splits.json` with 138 train / 46 dev / 46 test goals.

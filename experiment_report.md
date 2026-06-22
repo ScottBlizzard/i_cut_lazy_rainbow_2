@@ -1393,6 +1393,14 @@ Paper rewrite status:
 - The draft marks trace-core and bridge experiments as supporting discovery evidence, not full theorem-proving claims.
 - `analysis/paper_adversarial_review_typed_portfolio.md` records the current reviewer risks and next upgrade experiments.
 
+E1 strict interface filtering update:
+
+- `analysis/mathlib430_e1_strict_interface_filtering.md` compares the full scaled230 baseline against strict filtered variants of the five high-value actions.
+- Strict filtering uses `strict_aesop` mode: Aesop safe facts are restricted to resolved theorem/lemma-like names, and simp channels are restricted to `@[simp]` or rewrite-tagged candidates.
+- The result is negative for ceiling improvement: filtered-only oracle is 4/230, combined oracle remains 58/230, and no new oracle goals are added.
+- The audit is still useful: 7321/7497 selected names are available, only 176 are unavailable, and target/alias hits are 24, so the current main effect is not primarily an unknown-identifier problem.
+- The important boundary is that over-cleaning the interface destroys most Aesop successes. The paper should not claim a pure theorem-like/simp-attribute mechanism; it should describe the current result as a real Lean typed-exposure mechanism and report strict filtering as a robustness boundary.
+
 Avoid:
 
 - Do not claim full proof reconstruction success for Phase 3; bridge replay is a filtered subset validation, not a full benchmark.

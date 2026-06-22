@@ -325,7 +325,117 @@ def check_available_names(
     }
 
 
-def build_pools(row: dict[str, Any], available: set[str], max_candidates: int) -> dict[str, list[str]]:
+def target_alias_names(row: dict[str, Any]) -> set[str]:
+    metadata = row.get("metadata") or {}
+    theorem = str(metadata.get("theorem", "") or "")
+    goal_id = str(row.get("goal_id", "") or "")
+    names = {theorem} if theorem else set()
+    if "::" in goal_id:
+        names.add(goal_id.split("::", 1)[1])
+    if theorem:
+        names.add(theorem.split(".")[-1])
+    return {name for name in names if name}
+
+
+def is_target_or_alias(name: str, row: dict[str, Any]) -> bool:
+    aliases = target_alias_names(row)
+    if name in aliases:
+        return True
+    leaf = name.split(".")[-1]
+    return bool(leaf and leaf in aliases)
+
+
+def decl_category(candidate: dict[str, Any] | None, *, proof_core_only: bool = False) -> str:
+    if proof_core_only:
+        return "proof_core_only_unknown"
+    if not candidate:
+        return "unknown"
+    features = candidate.get("features") or {}
+    kind = str(features.get("decl_kind", "") or "unknown")
+    if features.get("has_simp_attr"):
+        return "simp_attr"
+    if features.get("is_theorem_like") or kind in {"lemma", "theorem"}:
+        return "theorem_like"
+    if features.get("is_def_like") or kind in {"def", "abbrev"}:
+        return "definition_like"
+    if kind in {"class", "instance", "structure", "inductive"}:
+        return kind
+    return kind or "unknown"
+
+
+def is_aesop_safe_fact(name: str, candidate: dict[str, Any] | None, row: dict[str, Any]) -> bool:
+    if is_target_or_alias(name, row):
+        return False
+    if not candidate:
+        return False
+    features = candidate.get("features") or {}
+    kind = str(features.get("decl_kind", "") or "")
+    return bool(features.get("is_theorem_like") or kind in {"lemma", "theorem"}) and not bool(
+        features.get("is_def_like")
+    )
+
+
+def is_simp_safe(name: str, candidate: dict[str, Any] | None, row: dict[str, Any]) -> bool:
+    if is_target_or_alias(name, row):
+        return False
+    if not candidate:
+        return False
+    features = candidate.get("features") or {}
+    tags = candidate.get("tags") or []
+    return bool(features.get("has_simp_attr") or "rewrite" in tags)
+
+
+def build_candidate_audit(
+    *,
+    row: dict[str, Any],
+    names: list[str],
+    available: set[str],
+    max_candidates: int,
+) -> dict[str, Any]:
+    candidates = candidate_records(row, max_candidates)
+    by_name = {str(candidate.get("name", "")): candidate for candidate in candidates}
+    proof_core = {str(name) for name in row.get("proof_core", []) or [] if name}
+    counts: dict[str, Any] = {
+        "selected": len(names),
+        "available": sum(1 for name in names if name in available),
+        "unavailable": sum(1 for name in names if name not in available),
+        "target_or_alias": sum(1 for name in names if is_target_or_alias(name, row)),
+        "proof_core": sum(1 for name in names if name in proof_core),
+        "learned_candidate": sum(1 for name in names if name in by_name),
+        "by_decl_kind": {},
+        "by_category": {},
+        "aesop_safe_fact_available": 0,
+        "aesop_unsafe_fact_available": 0,
+        "simp_safe_available": 0,
+        "simp_unsafe_available": 0,
+    }
+    for name in names:
+        candidate = by_name.get(name)
+        proof_core_only = name in proof_core and candidate is None
+        features = (candidate or {}).get("features") or {}
+        kind = str(features.get("decl_kind", "") or ("proof_core_only" if proof_core_only else "unknown"))
+        category = decl_category(candidate, proof_core_only=proof_core_only)
+        counts["by_decl_kind"][kind] = counts["by_decl_kind"].get(kind, 0) + 1
+        counts["by_category"][category] = counts["by_category"].get(category, 0) + 1
+        if name in available:
+            if is_aesop_safe_fact(name, candidate, row):
+                counts["aesop_safe_fact_available"] += 1
+            else:
+                counts["aesop_unsafe_fact_available"] += 1
+            if is_simp_safe(name, candidate, row):
+                counts["simp_safe_available"] += 1
+            else:
+                counts["simp_unsafe_available"] += 1
+    return counts
+
+
+def build_pools(
+    row: dict[str, Any],
+    available: set[str],
+    max_candidates: int,
+    *,
+    pool_mode: str = "legacy",
+) -> dict[str, list[str]]:
     candidates = candidate_records(row, max_candidates)
     by_name = {str(c.get("name", "")): c for c in candidates}
     proof_core = unique([str(p) for p in row.get("proof_core", []) if p and str(p) in available])
@@ -348,7 +458,7 @@ def build_pools(row: dict[str, Any], available: set[str], max_candidates: int) -
         if not features or features.get("is_theorem_like") or name in row.get("proof_core", []):
             fact_core.append(name)
 
-    return {
+    pools = {
         "empty": [],
         "fact_core": unique(fact_core),
         "fact_learned8": unique(fact_learned[:8]),
@@ -365,11 +475,55 @@ def build_pools(row: dict[str, Any], available: set[str], max_candidates: int) -
         "simp_core_plus_learned16": unique(proof_core + simp_learned[:16]),
         "simp_core_plus_learned32": unique(proof_core + simp_learned[:32]),
     }
+    if pool_mode == "strict_aesop":
+        aesop_fact_core = [
+            name for name in pools["fact_core"] if is_aesop_safe_fact(name, by_name.get(name), row)
+        ]
+        aesop_fact_learned = [
+            name for name in fact_learned if is_aesop_safe_fact(name, by_name.get(name), row)
+        ]
+        strict_simp_core = [
+            name for name in pools["simp_core"] if is_simp_safe(name, by_name.get(name), row)
+        ]
+        strict_simp_learned = [
+            name for name in simp_learned if is_simp_safe(name, by_name.get(name), row)
+        ]
+        for key, values in list(pools.items()):
+            if key.startswith("fact_"):
+                pools[f"aesop_{key}"] = []
+            if key.startswith("simp_"):
+                pools[f"strict_{key}"] = []
+        pools["aesop_fact_core"] = unique(aesop_fact_core)
+        pools["aesop_fact_learned8"] = unique(aesop_fact_learned[:8])
+        pools["aesop_fact_learned16"] = unique(aesop_fact_learned[:16])
+        pools["aesop_fact_learned32"] = unique(aesop_fact_learned[:32])
+        pools["aesop_fact_core_plus_learned8"] = unique(aesop_fact_core + aesop_fact_learned[:8])
+        pools["aesop_fact_core_plus_learned16"] = unique(aesop_fact_core + aesop_fact_learned[:16])
+        pools["aesop_fact_core_plus_learned32"] = unique(aesop_fact_core + aesop_fact_learned[:32])
+        pools["strict_simp_core"] = unique(strict_simp_core)
+        pools["strict_simp_learned8"] = unique(strict_simp_learned[:8])
+        pools["strict_simp_learned16"] = unique(strict_simp_learned[:16])
+        pools["strict_simp_learned32"] = unique(strict_simp_learned[:32])
+        pools["strict_simp_core_plus_learned8"] = unique(strict_simp_core + strict_simp_learned[:8])
+        pools["strict_simp_core_plus_learned16"] = unique(strict_simp_core + strict_simp_learned[:16])
+        pools["strict_simp_core_plus_learned32"] = unique(strict_simp_core + strict_simp_learned[:32])
+    return pools
 
 
-def render_action(action: Action, pools: dict[str, list[str]]) -> tuple[str, list[str], list[str]]:
-    facts = pools.get(action.fact_pool, [])
-    simps = pools.get(action.simp_pool, [])
+def render_action(
+    action: Action,
+    pools: dict[str, list[str]],
+    *,
+    pool_mode: str = "legacy",
+) -> tuple[str, list[str], list[str]]:
+    fact_pool = action.fact_pool
+    if pool_mode == "strict_aesop" and action.kind == "aesop" and fact_pool:
+        fact_pool = f"aesop_{fact_pool}"
+    simp_pool = action.simp_pool
+    if pool_mode == "strict_aesop" and simp_pool:
+        simp_pool = f"strict_{simp_pool}"
+    facts = pools.get(fact_pool, [])
+    simps = pools.get(simp_pool, [])
     fact_text = ", ".join(facts)
     simp_text = ", ".join(simps)
     if action.kind == "hammer":
@@ -493,17 +647,24 @@ def run_attempt(
     env: dict[str, str],
     save_dir: Path,
     timeout_s: float,
+    pool_mode: str,
+    result_action_suffix: str,
 ) -> dict[str, Any]:
     metadata = row.get("metadata") or {}
     start = metadata.get("start") or []
     end = metadata.get("end") or []
-    tactic_line, facts, simps = render_action(action, pools)
+    tactic_line, facts, simps = render_action(action, pools, pool_mode=pool_mode)
+    result_action = f"{action.name}{result_action_suffix}"
     base = {
         "goal_id": row.get("goal_id", ""),
         "theorem": metadata.get("theorem", ""),
         "file_path": metadata.get("file_path", ""),
-        "action": action.name,
+        "action": result_action,
+        "source_action": action.name,
+        "pool_mode": pool_mode,
         "kind": action.kind,
+        "fact_pool": action.fact_pool,
+        "simp_pool": action.simp_pool,
         "fact_count": len(facts),
         "simp_count": len(simps),
         "facts": facts,
@@ -531,7 +692,7 @@ def run_attempt(
     )
     if patch_error or patched is None:
         return {**base, "verified": False, "status": patch_error, "time_s": 0.0}
-    out_file = save_dir / f"action_matrix_{goal_index:04d}_{lean_ident(action.name)}.lean"
+    out_file = save_dir / f"action_matrix_{goal_index:04d}_{lean_ident(result_action)}.lean"
     out_file.write_text("".join(patched), encoding="utf-8")
     result = run_cmd(["lean", str(out_file)], cwd=hammer_root, env=env, timeout_s=timeout_s)
     output = ((result.get("stdout") or "") + "\n" + (result.get("stderr") or "")).strip()
@@ -600,6 +761,9 @@ def write_md(payload: dict[str, Any], out: Path) -> None:
     lines.append("")
     lines.append(f"- Verdict: `{payload['verdict']}`")
     lines.append(f"- Replay filter: `{payload['replay_json']}`")
+    lines.append(f"- Pool mode: `{payload.get('pool_mode', 'legacy')}`")
+    if payload.get("result_action_suffix"):
+        lines.append(f"- Result action suffix: `{payload['result_action_suffix']}`")
     lines.append(f"- Replayable goals evaluated: {summary['n_goals']}")
     lines.append(f"- Attempts: {summary['n_attempts']}")
     lines.append(f"- Verified attempts: {summary['n_verified_attempts']}")
@@ -637,10 +801,59 @@ def write_md(payload: dict[str, Any], out: Path) -> None:
     lines.append("")
     lines.append("## Availability")
     lines.append("")
-    lines.append("| Goal | Checked | Available | Failed |")
-    lines.append("|---|---:|---:|---:|")
+    lines.append("| Goal | Checked | Available | Failed | Target/alias | Aesop-safe available | Aesop-unsafe available | Simp-safe available | Simp-unsafe available |")
+    lines.append("|---|---:|---:|---:|---:|---:|---:|---:|---:|")
     for row in summary["availability"]:
-        lines.append(f"| `{row['goal_id']}` | {row['checked']} | {row['available']} | {row['failed']} |")
+        audit = row.get("candidate_audit") or {}
+        lines.append(
+            f"| `{row['goal_id']}` | {row['checked']} | {row['available']} | {row['failed']} | "
+            f"{audit.get('target_or_alias', 0)} | {audit.get('aesop_safe_fact_available', 0)} | "
+            f"{audit.get('aesop_unsafe_fact_available', 0)} | {audit.get('simp_safe_available', 0)} | "
+            f"{audit.get('simp_unsafe_available', 0)} |"
+        )
+    lines.append("")
+    lines.append("## Candidate Audit Summary")
+    lines.append("")
+    audit_totals: dict[str, int] = {}
+    category_totals: dict[str, int] = {}
+    kind_totals: dict[str, int] = {}
+    for row in summary["availability"]:
+        audit = row.get("candidate_audit") or {}
+        for key in [
+            "selected",
+            "available",
+            "unavailable",
+            "target_or_alias",
+            "proof_core",
+            "learned_candidate",
+            "aesop_safe_fact_available",
+            "aesop_unsafe_fact_available",
+            "simp_safe_available",
+            "simp_unsafe_available",
+        ]:
+            audit_totals[key] = audit_totals.get(key, 0) + int(audit.get(key, 0))
+        for key, value in (audit.get("by_category") or {}).items():
+            category_totals[key] = category_totals.get(key, 0) + int(value)
+        for key, value in (audit.get("by_decl_kind") or {}).items():
+            kind_totals[key] = kind_totals.get(key, 0) + int(value)
+    lines.append("| Metric | Count |")
+    lines.append("|---|---:|")
+    for key, value in sorted(audit_totals.items()):
+        lines.append(f"| `{key}` | {value} |")
+    lines.append("")
+    lines.append("### By Category")
+    lines.append("")
+    lines.append("| Category | Count |")
+    lines.append("|---|---:|")
+    for key, value in sorted(category_totals.items(), key=lambda item: (-item[1], item[0])):
+        lines.append(f"| `{key}` | {value} |")
+    lines.append("")
+    lines.append("### By Decl Kind")
+    lines.append("")
+    lines.append("| Decl kind | Count |")
+    lines.append("|---|---:|")
+    for key, value in sorted(kind_totals.items(), key=lambda item: (-item[1], item[0])):
+        lines.append(f"| `{key}` | {value} |")
     lines.append("")
     lines.append("## Readout")
     lines.append("")
@@ -667,6 +880,8 @@ def main() -> None:
     parser.add_argument("--goal-offset", type=int, default=0)
     parser.add_argument("--max-candidates", type=int, default=32)
     parser.add_argument("--action-names", nargs="*", default=None)
+    parser.add_argument("--pool-mode", choices=["legacy", "strict_aesop"], default="legacy")
+    parser.add_argument("--result-action-suffix", default="")
     parser.add_argument("--jobs", type=int, default=1)
     parser.add_argument("--timeout-s", type=float, default=180.0)
     args = parser.parse_args()
@@ -723,13 +938,20 @@ def main() -> None:
             idx=idx,
             timeout_s=args.timeout_s,
         )
-        pools = build_pools(row, available, args.max_candidates)
+        pools = build_pools(row, available, args.max_candidates, pool_mode=args.pool_mode)
+        candidate_audit = build_candidate_audit(
+            row=row,
+            names=names,
+            available=available,
+            max_candidates=args.max_candidates,
+        )
         availability_rows.append(
             {
                 "goal_id": row.get("goal_id", ""),
                 "theorem": metadata.get("theorem", ""),
                 **{k: v for k, v in check.items() if k != "output_tail"},
                 "pool_sizes": {name: len(items) for name, items in pools.items()},
+                "candidate_audit": candidate_audit,
             }
         )
         prepared.append({"row": row, "source_lines": source_lines, "pools": pools})
@@ -756,6 +978,8 @@ def main() -> None:
                         env=env,
                         save_dir=save_dir,
                         timeout_s=args.timeout_s,
+                        pool_mode=args.pool_mode,
+                        result_action_suffix=args.result_action_suffix,
                     )
                 )
         for future in as_completed(futures):
@@ -786,6 +1010,8 @@ def main() -> None:
         "goal_offset": args.goal_offset,
         "max_candidates": args.max_candidates,
         "action_names": [action.name for action in actions],
+        "pool_mode": args.pool_mode,
+        "result_action_suffix": args.result_action_suffix,
         "verdict": verdict,
         "summary": summary,
         "results": results,
