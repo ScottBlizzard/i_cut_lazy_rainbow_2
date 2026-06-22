@@ -1,0 +1,59 @@
+# LeanHammer / Verified Adaptive Premise Intervention Environment
+
+created: 2026-06-21
+status: mathlib430_leanhammer430_route_a_ready
+
+purpose: >
+  Pin the environment needed for verified adaptive premise-intervention experiments
+  with LeanHammer and Mathlib.
+
+lean:
+  leanhammer_version: "4.30.0"
+  mathlib_current_version: "4.31.0"
+  mathlib_evaluation_version: "4.30.0"
+  toolchain_file: lean-toolchain
+
+mathlib:
+  source: "/workspace/thymic_project/paper/iclr_2/repos/mathlib4_current"
+  commit: "current A40 repo; Lean 4.31.0"
+  compatibility_status: "not directly compatible with LeanHammer 4.30 stack"
+
+mathlib430_evaluation:
+  source: "/workspace/thymic_project/paper/iclr_2/repos/mathlib4_lean430"
+  commit: "c5ea00351c28e24afc9f0f84379aa41082b1188f"
+  tag: "v4.30.0"
+  toolchain: "leanprover/lean4:v4.30.0"
+  cache_status: "lake exe cache get completed on A40"
+  combined_import_status: "passes with LeanHammer 4.30; see outputs/mathlib_leanhammer_compat_probe_v2.md"
+
+leanhammer:
+  repo: https://github.com/JOSHCLUNE/LeanHammer
+  commit: "3ef50193c9e80f84930f8f400bfd3c097c5e1fd3"
+  install_path: "/workspace/thymic_project/paper/iclr_2/repos/LeanHammer"
+  status: "built on A40 for Lean 4.30.0; synthetic Gate 1/2 and Mathlib-context Gate 1/2 theorem-family pilot passed"
+
+backend:
+  mode: "LeanHammer hammer [premises] explicit user terms"
+  timeout_seconds: 120
+  max_premises: 11
+  selector_control: "Gate 1/2 set auto/aesop/grind selector premise counts to zero; user premise list is controlled variable."
+
+hardware:
+  preferred_server: A40
+  notes: "A40 used for LeanHammer build and synthetic verified gates; no GPU required for current Lean runs."
+
+known_blockers:
+  - "Existing traced mathlib data was collected from current Mathlib 4.31, while the verified LeanHammer route currently uses Mathlib 4.30."
+  - "Generated Mathlib theorem-family Gate 2 is not a final traced-corpus replay benchmark."
+  - "Paper-level verified claims need a Mathlib 4.30 native trace corpus or a safe 4.31-to-4.30 replay migration."
+
+logging:
+  required_fields:
+    - goal_id
+    - module
+    - premise_set_id
+    - actual_backend_premises
+    - terminal_status
+    - wall_clock_seconds
+    - proof_verified
+    - failure_trace

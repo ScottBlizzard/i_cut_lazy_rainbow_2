@@ -1,0 +1,46 @@
+# Primary Evaluation Protocol Draft
+
+created: 2026-06-21
+status: draft
+
+goal: >
+  Evaluate verified adaptive premise interventions under matched compute.
+
+primary_metric:
+  name: kernel_verified_success
+  direction: higher
+
+secondary_metrics:
+  - wall_clock_seconds
+  - prover_calls
+  - timeout_rate
+  - reconstruction_failure_rate
+  - unique_solves
+  - premise_count
+  - trace_core_coverage_diagnostic
+
+required_policies:
+  - official_leanhammer_default
+  - static_single_k_tuned
+  - static_multi_action_schedule
+  - blind_expansion_schedule
+  - learned_base_fallback
+  - trace_supervised_second_stage
+  - verified_gate_masked_feedback
+  - verified_gate_matched_shuffled_feedback
+  - verified_gate_true_feedback
+  - oracle_adaptive_action
+
+decision_thresholds:
+  oral_route:
+    min_absolute_gain_points: 4.0
+    uncertainty_excludes_zero: true
+    true_feedback_beats_masked_and_shuffled: true
+    transfer_positive: true
+  strong_accept_route:
+    min_absolute_gain_points: 2.0
+    uncertainty_excludes_zero: true
+  stop_route:
+    max_absolute_gain_points: 2.0
+    or_no_causal_feedback_gap: true
+

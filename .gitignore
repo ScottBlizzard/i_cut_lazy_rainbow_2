@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+*.tmp
+
+# Large generated artifacts. Keep Markdown summaries and selected small JSON
+# files explicitly when needed.
+outputs/*.json
+outputs/*.jsonl
+outputs/*.tmp
+outputs/log_*.txt
+outputs/nohup_*.txt
+outputs/pid_*.txt
+outputs/elan-init-test.sh
+outputs/run_*.sh
+
+# Do not vendor third-party Lean dependencies into this review package.
+external/
+
+# Related-paper PDFs are useful locally but should not be redistributed here.
+papers/*.pdf
+
+# Local Lean/build caches.
+.lake/
+build/
+lake-packages/

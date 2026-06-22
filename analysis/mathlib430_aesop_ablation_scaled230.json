@@ -1,0 +1,207 @@
+{
+  "ablation_json": "outputs\\mathlib430_pretheorem_action_matrix_scaled230_aesop_ablation_merged.json",
+  "baseline_json": "outputs\\mathlib430_pretheorem_action_matrix_scaled230_extended_merged.json",
+  "summary": {
+    "n_goals": 230,
+    "n_actions": 22,
+    "n_ablation_solved_goals": 49,
+    "n_new_goals_over_baseline": 0,
+    "action_counts": {
+      "aesop_empty": {
+        "attempts": 230,
+        "verified": 29,
+        "verified_goals": 29,
+        "source": "other",
+        "exposure": "other"
+      },
+      "aesop_core_plus_learned": {
+        "attempts": 230,
+        "verified": 38,
+        "verified_goals": 38,
+        "source": "core+learned8",
+        "exposure": "facts+simps"
+      },
+      "aesop_core_plus_learned16": {
+        "attempts": 230,
+        "verified": 37,
+        "verified_goals": 37,
+        "source": "core+learned16",
+        "exposure": "facts+simps"
+      },
+      "aesop_core": {
+        "attempts": 230,
+        "verified": 4,
+        "verified_goals": 4,
+        "source": "core",
+        "exposure": "facts+simps"
+      },
+      "aesop_core_facts": {
+        "attempts": 230,
+        "verified": 5,
+        "verified_goals": 5,
+        "source": "core",
+        "exposure": "facts-only"
+      },
+      "aesop_core_simps": {
+        "attempts": 230,
+        "verified": 4,
+        "verified_goals": 4,
+        "source": "core",
+        "exposure": "simps-only"
+      },
+      "aesop_core_plus_learned_facts": {
+        "attempts": 230,
+        "verified": 5,
+        "verified_goals": 5,
+        "source": "core+learned8",
+        "exposure": "facts-only"
+      },
+      "aesop_core_plus_learned_simps": {
+        "attempts": 230,
+        "verified": 4,
+        "verified_goals": 4,
+        "source": "core+learned8",
+        "exposure": "simps-only"
+      },
+      "aesop_core_plus_learned16_facts": {
+        "attempts": 230,
+        "verified": 5,
+        "verified_goals": 5,
+        "source": "core+learned16",
+        "exposure": "facts-only"
+      },
+      "aesop_core_plus_learned16_simps": {
+        "attempts": 230,
+        "verified": 3,
+        "verified_goals": 3,
+        "source": "core+learned16",
+        "exposure": "simps-only"
+      },
+      "aesop_core_plus_learned32": {
+        "attempts": 230,
+        "verified": 3,
+        "verified_goals": 3,
+        "source": "core+learned32",
+        "exposure": "facts+simps"
+      },
+      "aesop_core_plus_learned32_facts": {
+        "attempts": 230,
+        "verified": 5,
+        "verified_goals": 5,
+        "source": "core+learned32",
+        "exposure": "facts-only"
+      },
+      "aesop_core_plus_learned32_simps": {
+        "attempts": 230,
+        "verified": 3,
+        "verified_goals": 3,
+        "source": "core+learned32",
+        "exposure": "simps-only"
+      },
+      "aesop_learned8": {
+        "attempts": 230,
+        "verified": 4,
+        "verified_goals": 4,
+        "source": "learned8",
+        "exposure": "facts+simps"
+      },
+      "aesop_learned8_facts": {
+        "attempts": 230,
+        "verified": 5,
+        "verified_goals": 5,
+        "source": "learned8",
+        "exposure": "facts-only"
+      },
+      "aesop_learned8_simps": {
+        "attempts": 230,
+        "verified": 4,
+        "verified_goals": 4,
+        "source": "learned8",
+        "exposure": "simps-only"
+      },
+      "aesop_learned16": {
+        "attempts": 230,
+        "verified": 3,
+        "verified_goals": 3,
+        "source": "learned16",
+        "exposure": "facts+simps"
+      },
+      "aesop_learned16_facts": {
+        "attempts": 230,
+        "verified": 5,
+        "verified_goals": 5,
+        "source": "learned16",
+        "exposure": "facts-only"
+      },
+      "aesop_learned16_simps": {
+        "attempts": 230,
+        "verified": 3,
+        "verified_goals": 3,
+        "source": "learned16",
+        "exposure": "simps-only"
+      },
+      "aesop_learned32": {
+        "attempts": 230,
+        "verified": 3,
+        "verified_goals": 3,
+        "source": "learned32",
+        "exposure": "facts+simps"
+      },
+      "aesop_learned32_facts": {
+        "attempts": 230,
+        "verified": 5,
+        "verified_goals": 5,
+        "source": "learned32",
+        "exposure": "facts-only"
+      },
+      "aesop_learned32_simps": {
+        "attempts": 230,
+        "verified": 3,
+        "verified_goals": 3,
+        "source": "learned32",
+        "exposure": "simps-only"
+      }
+    },
+    "source_counts": {
+      "learned8": 7,
+      "other": 29,
+      "learned16": 7,
+      "core+learned32": 7,
+      "core": 7,
+      "core+learned8": 41,
+      "learned32": 7,
+      "core+learned16": 41
+    },
+    "exposure_counts": {
+      "other": 29,
+      "facts-only": 5,
+      "simps-only": 4,
+      "facts+simps": 38
+    },
+    "source_exposure_counts": {
+      "core|facts-only": 5,
+      "core+learned32|facts-only": 5,
+      "learned32|facts-only": 5,
+      "core+learned8|facts-only": 5,
+      "learned8|facts-only": 5,
+      "learned16|facts-only": 5,
+      "other|other": 29,
+      "core+learned16|facts-only": 5,
+      "learned32|simps-only": 3,
+      "learned16|simps-only": 3,
+      "learned8|facts+simps": 4,
+      "core+learned16|simps-only": 3,
+      "learned8|simps-only": 4,
+      "learned16|facts+simps": 3,
+      "core+learned16|facts+simps": 37,
+      "core|simps-only": 4,
+      "learned32|facts+simps": 3,
+      "core|facts+simps": 4,
+      "core+learned32|simps-only": 3,
+      "core+learned8|simps-only": 4,
+      "core+learned32|facts+simps": 3,
+      "core+learned8|facts+simps": 38
+    },
+    "new_goals_over_baseline": []
+  }
+}

@@ -1,0 +1,60 @@
+# Pre-registered Action Grid v1
+
+created: 2026-06-21
+status: synthetic_verified_pilot_passed
+
+description: >
+  Candidate premise-set actions for oracle adaptive headroom and verified action gate.
+  Do not edit after inspecting final-test outcomes.
+
+actions:
+  - name: keep
+    type: identity
+    description: Reuse the first failed premise set.
+
+  - name: shrink_050
+    type: shrink
+    keep_fraction: 0.50
+    description: Keep top 50% premises by current score.
+
+  - name: shrink_075
+    type: shrink
+    keep_fraction: 0.75
+    description: Keep top 75% premises by current score.
+
+  - name: expand_150
+    type: expand
+    multiplier: 1.50
+    description: Expand premise count by 1.5x within budget.
+
+  - name: expand_200
+    type: expand
+    multiplier: 2.00
+    description: Expand premise count by 2x within budget.
+
+  - name: base_rescue_8
+    type: rescue
+    top_base: 8
+    description: Add a small number of high-base-score rescue premises.
+
+  - name: base_rescue_16
+    type: rescue
+    top_base: 16
+    description: Wider high-base rescue action used in Gate 2 pilot.
+
+  - name: second_stage_rescore
+    type: rescore
+    description: Use failure-conditioned second-stage premise ordering.
+
+  - name: stop
+    type: abstain
+    description: Do not spend another proof attempt.
+
+optional_actions:
+  - name: mepo_swap
+    enabled: false
+    description: Replace or interleave with MePo-style selector if available.
+
+  - name: structural_swap
+    enabled: false
+    description: Replace or interleave with structural/tree-based selector if available.

@@ -1,0 +1,4842 @@
+{
+  "n_goals": 230,
+  "n_strict": 29,
+  "family_goal_counts": {
+    "aesop": 20,
+    "simp": 11,
+    "simp_all": 12,
+    "simpa": 11,
+    "hammerCore": 12,
+    "solve_by_elim": 5,
+    "hammer": 3
+  },
+  "only_family_counts": {
+    "aesop": 6,
+    "hammerCore": 5,
+    "solve_by_elim": 2,
+    "hammer": 1
+  },
+  "action_goal_counts": {
+    "aesop_core_plus_learned": 20,
+    "aesop_core_plus_learned16": 20,
+    "simp_core": 9,
+    "simp_core_plus_learned": 11,
+    "simpa_core": 9,
+    "simpa_core_plus_learned": 11,
+    "simp_all_core": 9,
+    "simp_all_core_plus_learned": 12,
+    "simp_all_core_plus_learned16": 12,
+    "simp_all_core_plus_learned32": 12,
+    "hammerCore_core_plus_learned": 12,
+    "hammerCore_core_plus_learned16": 10,
+    "hammerCore_core_plus_learned32": 10,
+    "solve_by_elim_core": 5,
+    "solve_by_elim_core_plus_learned": 5,
+    "hammerCore_core": 9,
+    "solve_by_elim_core_plus_learned16": 5,
+    "solve_by_elim_core_plus_learned32": 5,
+    "hammer_core_plus_learned": 2,
+    "hammer_core_plus_learned16": 3,
+    "hammer_core_plus_learned32": 3,
+    "aesop_core": 2,
+    "aesop_core_simps": 2,
+    "aesop_core_plus_learned_simps": 2,
+    "aesop_core_plus_learned16_simps": 2,
+    "aesop_core_plus_learned32": 2,
+    "aesop_core_plus_learned32_simps": 2,
+    "aesop_learned8": 2,
+    "aesop_learned8_simps": 2,
+    "aesop_learned16": 2,
+    "aesop_learned16_simps": 2,
+    "aesop_learned32": 2,
+    "aesop_learned32_simps": 2
+  },
+  "family_pair_counts": {
+    "aesop+simp": 11,
+    "aesop+simp_all": 12,
+    "aesop+simpa": 11,
+    "simp+simp_all": 11,
+    "simp+simpa": 11,
+    "simp_all+simpa": 11,
+    "hammerCore+solve_by_elim": 3,
+    "aesop+hammerCore": 6,
+    "hammerCore+simp": 5,
+    "hammerCore+simp_all": 5,
+    "hammerCore+simpa": 5,
+    "aesop+hammer": 2,
+    "hammer+simp_all": 1,
+    "aesop+solve_by_elim": 2,
+    "simp+solve_by_elim": 2,
+    "simp_all+solve_by_elim": 2,
+    "simpa+solve_by_elim": 2
+  },
+  "strict_goals": [
+    {
+      "goal_id": "mathlib4::AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms",
+      "theorem": "AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms",
+      "file_path": "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+      "families": [
+        "aesop"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 13,
+          "simp_count": 9,
+          "facts": [
+            "AlgebraicGeometry.IsClosedImmersion",
+            "AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono",
+            "AlgebraicGeometry.IsProper",
+            "AlgebraicGeometry.Scheme",
+            "CategoryTheory.MorphismProperty.monomorphisms",
+            "AlgebraicGeometry.isProper_eq",
+            "AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono",
+            "AlgebraicGeometry.isPreimmersion_eq_inf",
+            "AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite",
+            "AlgebraicGeometry.isImmersion_eq_inf",
+            "AlgebraicGeometry.isOpenImmersion_eq_inf",
+            "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+            "AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective"
+          ],
+          "simps": [
+            "AlgebraicGeometry.IsClosedImmersion",
+            "AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono",
+            "AlgebraicGeometry.IsProper",
+            "AlgebraicGeometry.Scheme",
+            "CategoryTheory.MorphismProperty.monomorphisms",
+            "AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus",
+            "AlgebraicGeometry.IsClosedImmersion.lift",
+            "AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData",
+            "AlgebraicGeometry.Scheme.Hom.mem_quasiFiniteLocus"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 19,
+          "simp_count": 9,
+          "facts": [
+            "AlgebraicGeometry.IsClosedImmersion",
+            "AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono",
+            "AlgebraicGeometry.IsProper",
+            "AlgebraicGeometry.Scheme",
+            "CategoryTheory.MorphismProperty.monomorphisms",
+            "AlgebraicGeometry.isProper_eq",
+            "AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono",
+            "AlgebraicGeometry.isPreimmersion_eq_inf",
+            "AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite",
+            "AlgebraicGeometry.isImmersion_eq_inf",
+            "AlgebraicGeometry.isOpenImmersion_eq_inf",
+            "AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+            "AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective",
+            "AlgebraicGeometry.IsClosedImmersion.eq_inf",
+            "AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite",
+            "AlgebraicGeometry.coheight_eq_of_isOpenImmersion",
+            "AlgebraicGeometry.Scheme.Hom.mem_quasiFiniteLocus",
+            "AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion",
+            "AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion"
+          ],
+          "simps": [
+            "AlgebraicGeometry.IsClosedImmersion",
+            "AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono",
+            "AlgebraicGeometry.IsProper",
+            "AlgebraicGeometry.Scheme",
+            "CategoryTheory.MorphismProperty.monomorphisms",
+            "AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus",
+            "AlgebraicGeometry.IsClosedImmersion.lift",
+            "AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData",
+            "AlgebraicGeometry.Scheme.Hom.mem_quasiFiniteLocus"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::BoxIntegral.Box.MeasureTheory.Measure.BoxIntegral.Box.volume_apply",
+      "theorem": "BoxIntegral.Box.MeasureTheory.Measure.BoxIntegral.Box.volume_apply",
+      "file_path": "Mathlib/Analysis/BoxIntegral/Partition/Measure.lean",
+      "families": [
+        "aesop"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 12,
+          "simp_count": 8,
+          "facts": [
+            "BoxIntegral.Box",
+            "BoxIntegral.Box.coe_eq_pi",
+            "MeasureTheory.Measure",
+            "MeasureTheory.measureReal_def",
+            "Real.volume_pi_Ioc_toReal",
+            "BoxIntegral.Box.lower_le_upper",
+            "BoxIntegral.Box.lower_ne_upper",
+            "BoxIntegral.Box.Ioo_ae_eq_Icc",
+            "BoxIntegral.Box.coe_ae_eq_Icc",
+            "BoxIntegral.Box.splitLower_ne_splitUpper",
+            "BoxIntegral.Box.disjoint_splitLower_splitUpper",
+            "BoxIntegral.Box.measurableSet_Ioo"
+          ],
+          "simps": [
+            "BoxIntegral.Box",
+            "BoxIntegral.Box.coe_eq_pi",
+            "MeasureTheory.Measure",
+            "MeasureTheory.measureReal_def",
+            "Real.volume_pi_Ioc_toReal",
+            "BoxIntegral.BoxAdditiveMap.toSMul",
+            "BoxIntegral.BoxAdditiveMap.upperSubLower",
+            "BoxIntegral.BoxAdditiveMap.ofMapSplitAdd"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 18,
+          "simp_count": 9,
+          "facts": [
+            "BoxIntegral.Box",
+            "BoxIntegral.Box.coe_eq_pi",
+            "MeasureTheory.Measure",
+            "MeasureTheory.measureReal_def",
+            "Real.volume_pi_Ioc_toReal",
+            "BoxIntegral.Box.lower_le_upper",
+            "BoxIntegral.Box.lower_ne_upper",
+            "BoxIntegral.Box.Ioo_ae_eq_Icc",
+            "BoxIntegral.Box.coe_ae_eq_Icc",
+            "BoxIntegral.Box.splitLower_ne_splitUpper",
+            "BoxIntegral.Box.disjoint_splitLower_splitUpper",
+            "BoxIntegral.Box.measurableSet_Ioo",
+            "BoxIntegral.Box.measurableSet_Icc",
+            "BoxIntegral.Box.measurableSet_coe",
+            "BoxIntegral.Box.mapsTo_insertNth_face_Icc",
+            "BoxIntegral.Box.measure_coe_lt_top",
+            "BoxIntegral.Box.measure_Icc_lt_top",
+            "BoxIntegral.BoxAdditiveMap.toSMul_apply"
+          ],
+          "simps": [
+            "BoxIntegral.Box",
+            "BoxIntegral.Box.coe_eq_pi",
+            "MeasureTheory.Measure",
+            "MeasureTheory.measureReal_def",
+            "Real.volume_pi_Ioc_toReal",
+            "BoxIntegral.BoxAdditiveMap.toSMul",
+            "BoxIntegral.BoxAdditiveMap.upperSubLower",
+            "BoxIntegral.BoxAdditiveMap.ofMapSplitAdd",
+            "BoxIntegral.BoxAdditiveMap.toSMul_apply"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::CategoryTheory.Limits.inr_zeroCoprodIso_hom",
+      "theorem": "CategoryTheory.Limits.inr_zeroCoprodIso_hom",
+      "file_path": "Mathlib/CategoryTheory/Limits/Constructions/ZeroObjects.lean",
+      "families": [
+        "aesop",
+        "simp",
+        "simp_all",
+        "simpa"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 7,
+          "simp_count": 9,
+          "facts": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso",
+            "CategoryTheory.Limits.zeroProdIso_inv_snd",
+            "CategoryTheory.Limits.prodZeroIso_iso_inv_snd",
+            "CategoryTheory.Limits.pushoutCoconeOfRightIso_inr",
+            "CategoryTheory.Limits.coprod.desc_inl_inr"
+          ],
+          "simps": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso",
+            "CategoryTheory.Limits.binaryFanZeroRight",
+            "CategoryTheory.Limits.binaryFanZeroLeft",
+            "CategoryTheory.Limits.binaryFanZeroRightIsLimit",
+            "CategoryTheory.Limits.binaryFanZeroLeftIsLimit",
+            "CategoryTheory.Limits.binaryCofanZeroLeftIsColimit",
+            "CategoryTheory.Limits.zeroProdIso"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 7,
+          "simp_count": 16,
+          "facts": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso",
+            "CategoryTheory.Limits.zeroProdIso_inv_snd",
+            "CategoryTheory.Limits.prodZeroIso_iso_inv_snd",
+            "CategoryTheory.Limits.pushoutCoconeOfRightIso_inr",
+            "CategoryTheory.Limits.coprod.desc_inl_inr"
+          ],
+          "simps": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso",
+            "CategoryTheory.Limits.binaryFanZeroRight",
+            "CategoryTheory.Limits.binaryFanZeroLeft",
+            "CategoryTheory.Limits.binaryFanZeroRightIsLimit",
+            "CategoryTheory.Limits.binaryFanZeroLeftIsLimit",
+            "CategoryTheory.Limits.binaryCofanZeroLeftIsColimit",
+            "CategoryTheory.Limits.zeroProdIso",
+            "CategoryTheory.Limits.prodZeroIso",
+            "CategoryTheory.Limits.coprodComparisonNatIso",
+            "CategoryTheory.Limits.opHomCompWhiskeringLimYonedaIsoCocones",
+            "CategoryTheory.Limits.zeroProdIso_inv_snd",
+            "CategoryTheory.Limits.prodZeroIso_iso_inv_snd",
+            "CategoryTheory.Limits.WalkingCospan.Hom.inr",
+            "CategoryTheory.Limits.pushoutCoconeOfRightIso_inr"
+          ]
+        },
+        {
+          "action": "simp_all_core",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso",
+            "CategoryTheory.Limits.binaryFanZeroRight",
+            "CategoryTheory.Limits.binaryFanZeroLeft",
+            "CategoryTheory.Limits.binaryFanZeroRightIsLimit",
+            "CategoryTheory.Limits.binaryFanZeroLeftIsLimit",
+            "CategoryTheory.Limits.binaryCofanZeroLeftIsColimit",
+            "CategoryTheory.Limits.zeroProdIso"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 16,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso",
+            "CategoryTheory.Limits.binaryFanZeroRight",
+            "CategoryTheory.Limits.binaryFanZeroLeft",
+            "CategoryTheory.Limits.binaryFanZeroRightIsLimit",
+            "CategoryTheory.Limits.binaryFanZeroLeftIsLimit",
+            "CategoryTheory.Limits.binaryCofanZeroLeftIsColimit",
+            "CategoryTheory.Limits.zeroProdIso",
+            "CategoryTheory.Limits.prodZeroIso",
+            "CategoryTheory.Limits.coprodComparisonNatIso",
+            "CategoryTheory.Limits.opHomCompWhiskeringLimYonedaIsoCocones",
+            "CategoryTheory.Limits.zeroProdIso_inv_snd",
+            "CategoryTheory.Limits.prodZeroIso_iso_inv_snd",
+            "CategoryTheory.Limits.WalkingCospan.Hom.inr",
+            "CategoryTheory.Limits.pushoutCoconeOfRightIso_inr"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 18,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso",
+            "CategoryTheory.Limits.binaryFanZeroRight",
+            "CategoryTheory.Limits.binaryFanZeroLeft",
+            "CategoryTheory.Limits.binaryFanZeroRightIsLimit",
+            "CategoryTheory.Limits.binaryFanZeroLeftIsLimit",
+            "CategoryTheory.Limits.binaryCofanZeroLeftIsColimit",
+            "CategoryTheory.Limits.zeroProdIso",
+            "CategoryTheory.Limits.prodZeroIso",
+            "CategoryTheory.Limits.coprodComparisonNatIso",
+            "CategoryTheory.Limits.opHomCompWhiskeringLimYonedaIsoCocones",
+            "CategoryTheory.Limits.zeroProdIso_inv_snd",
+            "CategoryTheory.Limits.prodZeroIso_iso_inv_snd",
+            "CategoryTheory.Limits.WalkingCospan.Hom.inr",
+            "CategoryTheory.Limits.pushoutCoconeOfRightIso_inr",
+            "CategoryTheory.Limits.coprod.desc_inl_inr",
+            "CategoryTheory.Limits.coprod.mapIso"
+          ]
+        },
+        {
+          "action": "simp_core",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso",
+            "CategoryTheory.Limits.binaryFanZeroRight",
+            "CategoryTheory.Limits.binaryFanZeroLeft",
+            "CategoryTheory.Limits.binaryFanZeroRightIsLimit",
+            "CategoryTheory.Limits.binaryFanZeroLeftIsLimit",
+            "CategoryTheory.Limits.binaryCofanZeroLeftIsColimit",
+            "CategoryTheory.Limits.zeroProdIso"
+          ]
+        },
+        {
+          "action": "simpa_core",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Limits.binaryCofanZeroLeft",
+            "CategoryTheory.Limits.coprod.inr",
+            "CategoryTheory.Limits.zeroCoprodIso",
+            "CategoryTheory.Limits.binaryFanZeroRight",
+            "CategoryTheory.Limits.binaryFanZeroLeft",
+            "CategoryTheory.Limits.binaryFanZeroRightIsLimit",
+            "CategoryTheory.Limits.binaryFanZeroLeftIsLimit",
+            "CategoryTheory.Limits.binaryCofanZeroLeftIsColimit",
+            "CategoryTheory.Limits.zeroProdIso"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst",
+      "theorem": "CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst",
+      "file_path": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+      "families": [
+        "hammerCore"
+      ],
+      "verified_actions": [
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 11,
+          "simp_count": 10,
+          "facts": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Iso.inv_comp_eq",
+            "CategoryTheory.Limits.HasPullback",
+            "CategoryTheory.Limits.pullback.fst",
+            "CategoryTheory.Limits.pullback.snd",
+            "CategoryTheory.Limits.pullbackSymmetry",
+            "CategoryTheory.Limits.hasPullback_symmetry",
+            "CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst",
+            "CategoryTheory.Limits.PullbackCone.flip_snd",
+            "CategoryTheory.Limits.PullbackCone.flip_fst",
+            "CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd"
+          ],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Iso.inv_comp_eq",
+            "CategoryTheory.Limits.HasPullback",
+            "CategoryTheory.Limits.pullback.fst",
+            "CategoryTheory.Limits.pullback.snd",
+            "CategoryTheory.Limits.pullbackSymmetry",
+            "CategoryTheory.Limits.pullback",
+            "CategoryTheory.Limits.pullbackIsPullback",
+            "CategoryTheory.Limits.PullbackCone.fst",
+            "CategoryTheory.Limits.pullback.cone"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned16",
+          "kind": "hammerCore",
+          "fact_count": 11,
+          "simp_count": 18,
+          "facts": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Iso.inv_comp_eq",
+            "CategoryTheory.Limits.HasPullback",
+            "CategoryTheory.Limits.pullback.fst",
+            "CategoryTheory.Limits.pullback.snd",
+            "CategoryTheory.Limits.pullbackSymmetry",
+            "CategoryTheory.Limits.hasPullback_symmetry",
+            "CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst",
+            "CategoryTheory.Limits.PullbackCone.flip_snd",
+            "CategoryTheory.Limits.PullbackCone.flip_fst",
+            "CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd"
+          ],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Iso.inv_comp_eq",
+            "CategoryTheory.Limits.HasPullback",
+            "CategoryTheory.Limits.pullback.fst",
+            "CategoryTheory.Limits.pullback.snd",
+            "CategoryTheory.Limits.pullbackSymmetry",
+            "CategoryTheory.Limits.pullback",
+            "CategoryTheory.Limits.pullbackIsPullback",
+            "CategoryTheory.Limits.PullbackCone.fst",
+            "CategoryTheory.Limits.pullback.cone",
+            "CategoryTheory.Limits.pullbackComparison",
+            "CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst",
+            "CategoryTheory.Limits.pullback.isLimit",
+            "CategoryTheory.Limits.pullback.lift",
+            "CategoryTheory.Limits.PullbackCone.flip_snd",
+            "CategoryTheory.Limits.pullback.congrHom",
+            "CategoryTheory.Limits.PullbackCone.flip_fst",
+            "CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned32",
+          "kind": "hammerCore",
+          "fact_count": 11,
+          "simp_count": 19,
+          "facts": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Iso.inv_comp_eq",
+            "CategoryTheory.Limits.HasPullback",
+            "CategoryTheory.Limits.pullback.fst",
+            "CategoryTheory.Limits.pullback.snd",
+            "CategoryTheory.Limits.pullbackSymmetry",
+            "CategoryTheory.Limits.hasPullback_symmetry",
+            "CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst",
+            "CategoryTheory.Limits.PullbackCone.flip_snd",
+            "CategoryTheory.Limits.PullbackCone.flip_fst",
+            "CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd"
+          ],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Iso.inv_comp_eq",
+            "CategoryTheory.Limits.HasPullback",
+            "CategoryTheory.Limits.pullback.fst",
+            "CategoryTheory.Limits.pullback.snd",
+            "CategoryTheory.Limits.pullbackSymmetry",
+            "CategoryTheory.Limits.pullback",
+            "CategoryTheory.Limits.pullbackIsPullback",
+            "CategoryTheory.Limits.PullbackCone.fst",
+            "CategoryTheory.Limits.pullback.cone",
+            "CategoryTheory.Limits.pullbackComparison",
+            "CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst",
+            "CategoryTheory.Limits.pullback.isLimit",
+            "CategoryTheory.Limits.pullback.lift",
+            "CategoryTheory.Limits.PullbackCone.flip_snd",
+            "CategoryTheory.Limits.pullback.congrHom",
+            "CategoryTheory.Limits.PullbackCone.flip_fst",
+            "CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd",
+            "CategoryTheory.Limits.pullback.desc'"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::ENNReal.mul_div_right_comm",
+      "theorem": "ENNReal.mul_div_right_comm",
+      "file_path": "Mathlib/Data/ENNReal/Inv.lean",
+      "families": [
+        "hammerCore",
+        "solve_by_elim"
+      ],
+      "verified_actions": [
+        {
+          "action": "hammerCore_core",
+          "kind": "hammerCore",
+          "fact_count": 1,
+          "simp_count": 1,
+          "facts": [
+            "mul_right_comm"
+          ],
+          "simps": [
+            "mul_right_comm"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 8,
+          "simp_count": 5,
+          "facts": [
+            "mul_right_comm",
+            "ENNReal.top_mul_top",
+            "mul_div_right_comm",
+            "ENNReal.top_mul",
+            "ENNReal.coe_mul",
+            "ENNReal.mul_lt_top",
+            "ENNReal.mul_top'",
+            "div_mul_div_comm"
+          ],
+          "simps": [
+            "mul_right_comm",
+            "ENNReal.top_mul",
+            "ENNReal.coe_mul",
+            "ENNReal.coe_div",
+            "ENNReal.toNNReal_mul"
+          ]
+        },
+        {
+          "action": "solve_by_elim_core",
+          "kind": "solve_by_elim",
+          "fact_count": 1,
+          "simp_count": 0,
+          "facts": [
+            "mul_right_comm"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned",
+          "kind": "solve_by_elim",
+          "fact_count": 8,
+          "simp_count": 0,
+          "facts": [
+            "mul_right_comm",
+            "ENNReal.top_mul_top",
+            "mul_div_right_comm",
+            "ENNReal.top_mul",
+            "ENNReal.coe_mul",
+            "ENNReal.mul_lt_top",
+            "ENNReal.mul_top'",
+            "div_mul_div_comm"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned16",
+          "kind": "solve_by_elim",
+          "fact_count": 15,
+          "simp_count": 0,
+          "facts": [
+            "mul_right_comm",
+            "ENNReal.top_mul_top",
+            "mul_div_right_comm",
+            "ENNReal.top_mul",
+            "ENNReal.coe_mul",
+            "ENNReal.mul_lt_top",
+            "ENNReal.mul_top'",
+            "div_mul_div_comm",
+            "eq_one_div_of_mul_eq_one_right",
+            "ENNReal.toReal_mul_top",
+            "ENNReal.coe_div",
+            "ENNReal.toNNReal_mul",
+            "ENNReal.le_sub_of_add_le_right",
+            "ENNReal.add_lt_add_right",
+            "ENNReal.inv_mul_cancel"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned32",
+          "kind": "solve_by_elim",
+          "fact_count": 15,
+          "simp_count": 0,
+          "facts": [
+            "mul_right_comm",
+            "ENNReal.top_mul_top",
+            "mul_div_right_comm",
+            "ENNReal.top_mul",
+            "ENNReal.coe_mul",
+            "ENNReal.mul_lt_top",
+            "ENNReal.mul_top'",
+            "div_mul_div_comm",
+            "eq_one_div_of_mul_eq_one_right",
+            "ENNReal.toReal_mul_top",
+            "ENNReal.coe_div",
+            "ENNReal.toNNReal_mul",
+            "ENNReal.le_sub_of_add_le_right",
+            "ENNReal.add_lt_add_right",
+            "ENNReal.inv_mul_cancel"
+          ],
+          "simps": []
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::Equiv.Perm.swap_isSwap_iff",
+      "theorem": "Equiv.Perm.swap_isSwap_iff",
+      "file_path": "Mathlib/GroupTheory/Perm/Cycle/Basic.lean",
+      "families": [
+        "hammerCore"
+      ],
+      "verified_actions": [
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 10,
+          "simp_count": 8,
+          "facts": [
+            "Equiv.Perm.IsSwap",
+            "Equiv.swap",
+            "Equiv.Perm.isCycle_inv",
+            "Equiv.Perm.not_isCycle_one",
+            "Equiv.Perm.sign_swap",
+            "Equiv.Perm.sign_swap'",
+            "Equiv.Perm.card_support_swap",
+            "Equiv.swap_apply_ne_self_iff",
+            "Equiv.Perm.signAux_swap",
+            "equivalence_iff_isEquiv"
+          ],
+          "simps": [
+            "Equiv.Perm.IsSwap",
+            "Equiv.swap",
+            "Equiv.Perm.IsCycle",
+            "Equiv.Perm.swapFactors",
+            "Equiv.Perm.isCycle_inv",
+            "Equiv.Perm.not_isCycle_one",
+            "Equiv.Perm.truncSwapFactors",
+            "Equiv.Perm.sign_swap'"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned16",
+          "kind": "hammerCore",
+          "fact_count": 14,
+          "simp_count": 11,
+          "facts": [
+            "Equiv.Perm.IsSwap",
+            "Equiv.swap",
+            "Equiv.Perm.isCycle_inv",
+            "Equiv.Perm.not_isCycle_one",
+            "Equiv.Perm.sign_swap",
+            "Equiv.Perm.sign_swap'",
+            "Equiv.Perm.card_support_swap",
+            "Equiv.swap_apply_ne_self_iff",
+            "Equiv.Perm.signAux_swap",
+            "equivalence_iff_isEquiv",
+            "Equiv.Perm.support_swap_mul_swap",
+            "Equiv.Perm.disjoint_inv_left_iff",
+            "Equiv.Perm.disjoint_inv_right_iff",
+            "Equiv.Perm.ne_and_ne_of_swap_mul_apply_ne_self"
+          ],
+          "simps": [
+            "Equiv.Perm.IsSwap",
+            "Equiv.swap",
+            "Equiv.Perm.IsCycle",
+            "Equiv.Perm.swapFactors",
+            "Equiv.Perm.isCycle_inv",
+            "Equiv.Perm.not_isCycle_one",
+            "Equiv.Perm.truncSwapFactors",
+            "Equiv.Perm.sign_swap'",
+            "Equiv.Perm.swapFactorsAux",
+            "Equiv.Perm.disjoint_inv_left_iff",
+            "Equiv.Perm.disjoint_inv_right_iff"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned32",
+          "kind": "hammerCore",
+          "fact_count": 14,
+          "simp_count": 11,
+          "facts": [
+            "Equiv.Perm.IsSwap",
+            "Equiv.swap",
+            "Equiv.Perm.isCycle_inv",
+            "Equiv.Perm.not_isCycle_one",
+            "Equiv.Perm.sign_swap",
+            "Equiv.Perm.sign_swap'",
+            "Equiv.Perm.card_support_swap",
+            "Equiv.swap_apply_ne_self_iff",
+            "Equiv.Perm.signAux_swap",
+            "equivalence_iff_isEquiv",
+            "Equiv.Perm.support_swap_mul_swap",
+            "Equiv.Perm.disjoint_inv_left_iff",
+            "Equiv.Perm.disjoint_inv_right_iff",
+            "Equiv.Perm.ne_and_ne_of_swap_mul_apply_ne_self"
+          ],
+          "simps": [
+            "Equiv.Perm.IsSwap",
+            "Equiv.swap",
+            "Equiv.Perm.IsCycle",
+            "Equiv.Perm.swapFactors",
+            "Equiv.Perm.isCycle_inv",
+            "Equiv.Perm.not_isCycle_one",
+            "Equiv.Perm.truncSwapFactors",
+            "Equiv.Perm.sign_swap'",
+            "Equiv.Perm.swapFactorsAux",
+            "Equiv.Perm.disjoint_inv_left_iff",
+            "Equiv.Perm.disjoint_inv_right_iff"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::Finsupp.card_Iio",
+      "theorem": "Finsupp.card_Iio",
+      "file_path": "Mathlib/Data/Finsupp/Interval.lean",
+      "families": [
+        "aesop",
+        "hammerCore",
+        "simp",
+        "simp_all",
+        "simpa"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 9,
+          "simp_count": 8,
+          "facts": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.coe_rangeIcc",
+            "Finset.Iio_subset_Iic_self",
+            "Finsupp.support_mono",
+            "Finsupp.mem_rangeIcc_apply_iff",
+            "Finsupp.mem_rangeSingleton_apply_iff",
+            "Set.Iio_subset_Iic_self",
+            "Finsupp.support_zero"
+          ],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.rangeSingleton",
+            "Finsupp.ofSupportFinite",
+            "Finsupp.rangeIcc",
+            "Finsupp.support_zero",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 16,
+          "simp_count": 8,
+          "facts": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.coe_rangeIcc",
+            "Finset.Iio_subset_Iic_self",
+            "Finsupp.support_mono",
+            "Finsupp.mem_rangeIcc_apply_iff",
+            "Finsupp.mem_rangeSingleton_apply_iff",
+            "Set.Iio_subset_Iic_self",
+            "Finsupp.support_zero",
+            "Finsupp.support_indicator_subset",
+            "Finsupp.support_single_ne_bot",
+            "Set.Iio_subset_Iic_union_Ioo",
+            "Finsupp.support_single_subset",
+            "Set.Iio_subset_Iic",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.rangeSingleton",
+            "Finsupp.ofSupportFinite",
+            "Finsupp.rangeIcc",
+            "Finsupp.support_zero",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ]
+        },
+        {
+          "action": "hammerCore_core",
+          "kind": "hammerCore",
+          "fact_count": 2,
+          "simp_count": 2,
+          "facts": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic"
+          ],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 9,
+          "simp_count": 8,
+          "facts": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.coe_rangeIcc",
+            "Finset.Iio_subset_Iic_self",
+            "Finsupp.support_mono",
+            "Finsupp.mem_rangeIcc_apply_iff",
+            "Finsupp.mem_rangeSingleton_apply_iff",
+            "Set.Iio_subset_Iic_self",
+            "Finsupp.support_zero"
+          ],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.rangeSingleton",
+            "Finsupp.ofSupportFinite",
+            "Finsupp.rangeIcc",
+            "Finsupp.support_zero",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned16",
+          "kind": "hammerCore",
+          "fact_count": 16,
+          "simp_count": 8,
+          "facts": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.coe_rangeIcc",
+            "Finset.Iio_subset_Iic_self",
+            "Finsupp.support_mono",
+            "Finsupp.mem_rangeIcc_apply_iff",
+            "Finsupp.mem_rangeSingleton_apply_iff",
+            "Set.Iio_subset_Iic_self",
+            "Finsupp.support_zero",
+            "Finsupp.support_indicator_subset",
+            "Finsupp.support_single_ne_bot",
+            "Set.Iio_subset_Iic_union_Ioo",
+            "Finsupp.support_single_subset",
+            "Set.Iio_subset_Iic",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.rangeSingleton",
+            "Finsupp.ofSupportFinite",
+            "Finsupp.rangeIcc",
+            "Finsupp.support_zero",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned32",
+          "kind": "hammerCore",
+          "fact_count": 16,
+          "simp_count": 8,
+          "facts": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.coe_rangeIcc",
+            "Finset.Iio_subset_Iic_self",
+            "Finsupp.support_mono",
+            "Finsupp.mem_rangeIcc_apply_iff",
+            "Finsupp.mem_rangeSingleton_apply_iff",
+            "Set.Iio_subset_Iic_self",
+            "Finsupp.support_zero",
+            "Finsupp.support_indicator_subset",
+            "Finsupp.support_single_ne_bot",
+            "Set.Iio_subset_Iic_union_Ioo",
+            "Finsupp.support_single_subset",
+            "Set.Iio_subset_Iic",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.rangeSingleton",
+            "Finsupp.ofSupportFinite",
+            "Finsupp.rangeIcc",
+            "Finsupp.support_zero",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ]
+        },
+        {
+          "action": "simp_all_core",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 2,
+          "facts": [],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.rangeSingleton",
+            "Finsupp.ofSupportFinite",
+            "Finsupp.rangeIcc",
+            "Finsupp.support_zero",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.rangeSingleton",
+            "Finsupp.ofSupportFinite",
+            "Finsupp.rangeIcc",
+            "Finsupp.support_zero",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.rangeSingleton",
+            "Finsupp.ofSupportFinite",
+            "Finsupp.rangeIcc",
+            "Finsupp.support_zero",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ]
+        },
+        {
+          "action": "simp_core",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 2,
+          "facts": [],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.rangeSingleton",
+            "Finsupp.ofSupportFinite",
+            "Finsupp.rangeIcc",
+            "Finsupp.support_zero",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ]
+        },
+        {
+          "action": "simpa_core",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 2,
+          "facts": [],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Finset.card_Iio_eq_card_Iic_sub_one",
+            "Finsupp.card_Iic",
+            "Finsupp.rangeSingleton",
+            "Finsupp.ofSupportFinite",
+            "Finsupp.rangeIcc",
+            "Finsupp.support_zero",
+            "Finsupp.rangeIcc_support",
+            "Set.Iic_union_Ico_eq_Iio"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::Ideal.span_pair_abs",
+      "theorem": "Ideal.span_pair_abs",
+      "file_path": "Mathlib/RingTheory/Ideal/Span.lean",
+      "families": [
+        "aesop",
+        "hammerCore",
+        "simp",
+        "simp_all",
+        "simpa"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 12,
+          "simp_count": 8,
+          "facts": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.isCompactElement_top",
+            "Ideal.zero_ne_one_of_proper",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_zero",
+            "Ideal.span_empty",
+            "Ideal.span_eq",
+            "Ideal.subset_span",
+            "Ideal.span_one"
+          ],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.ofRel",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_one",
+            "Ideal.span_singleton_one"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 16,
+          "simp_count": 8,
+          "facts": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.isCompactElement_top",
+            "Ideal.zero_ne_one_of_proper",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_zero",
+            "Ideal.span_empty",
+            "Ideal.span_eq",
+            "Ideal.subset_span",
+            "Ideal.span_one",
+            "Ideal.span_singleton_zero",
+            "Ideal.span_singleton_one",
+            "Ideal.span_le",
+            "Ideal.span_sdiff_singleton_zero"
+          ],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.ofRel",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_one",
+            "Ideal.span_singleton_one"
+          ]
+        },
+        {
+          "action": "hammerCore_core",
+          "kind": "hammerCore",
+          "fact_count": 4,
+          "simp_count": 4,
+          "facts": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder"
+          ],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 12,
+          "simp_count": 8,
+          "facts": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.isCompactElement_top",
+            "Ideal.zero_ne_one_of_proper",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_zero",
+            "Ideal.span_empty",
+            "Ideal.span_eq",
+            "Ideal.subset_span",
+            "Ideal.span_one"
+          ],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.ofRel",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_one",
+            "Ideal.span_singleton_one"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned16",
+          "kind": "hammerCore",
+          "fact_count": 16,
+          "simp_count": 8,
+          "facts": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.isCompactElement_top",
+            "Ideal.zero_ne_one_of_proper",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_zero",
+            "Ideal.span_empty",
+            "Ideal.span_eq",
+            "Ideal.subset_span",
+            "Ideal.span_one",
+            "Ideal.span_singleton_zero",
+            "Ideal.span_singleton_one",
+            "Ideal.span_le",
+            "Ideal.span_sdiff_singleton_zero"
+          ],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.ofRel",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_one",
+            "Ideal.span_singleton_one"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned32",
+          "kind": "hammerCore",
+          "fact_count": 16,
+          "simp_count": 8,
+          "facts": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.isCompactElement_top",
+            "Ideal.zero_ne_one_of_proper",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_zero",
+            "Ideal.span_empty",
+            "Ideal.span_eq",
+            "Ideal.subset_span",
+            "Ideal.span_one",
+            "Ideal.span_singleton_zero",
+            "Ideal.span_singleton_one",
+            "Ideal.span_le",
+            "Ideal.span_sdiff_singleton_zero"
+          ],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.ofRel",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_one",
+            "Ideal.span_singleton_one"
+          ]
+        },
+        {
+          "action": "simp_all_core",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 4,
+          "facts": [],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.ofRel",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_one",
+            "Ideal.span_singleton_one"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.ofRel",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_one",
+            "Ideal.span_singleton_one"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.ofRel",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_one",
+            "Ideal.span_singleton_one"
+          ]
+        },
+        {
+          "action": "simp_core",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 4,
+          "facts": [],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.ofRel",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_one",
+            "Ideal.span_singleton_one"
+          ]
+        },
+        {
+          "action": "simpa_core",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 4,
+          "facts": [],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Ideal.span",
+            "Ideal.span_insert_abs",
+            "Ideal.span_pair_comm",
+            "LinearOrder",
+            "Ideal.ofRel",
+            "Ideal.span_singleton_abs",
+            "Ideal.span_one",
+            "Ideal.span_singleton_one"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::Matrix.dotProductᵣ_eq",
+      "theorem": "Matrix.dotProductᵣ_eq",
+      "file_path": "Mathlib/Data/Matrix/Reflection.lean",
+      "families": [
+        "aesop",
+        "simp",
+        "simp_all",
+        "simpa"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 9,
+          "simp_count": 9,
+          "facts": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct",
+            "dotProduct_comm",
+            "Matrix.exists_iff",
+            "Matrix.forall_iff",
+            "Matrix.transposeᵣ_eq",
+            "Matrix.mul_fin_two"
+          ],
+          "simps": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct",
+            "Matrix.Forall",
+            "Matrix.Exists",
+            "Matrix.transposeᵣ",
+            "Matrix.addMonoidHomMulLeft",
+            "Matrix.addMonoidHomMulRight"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 9,
+          "simp_count": 10,
+          "facts": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct",
+            "dotProduct_comm",
+            "Matrix.exists_iff",
+            "Matrix.forall_iff",
+            "Matrix.transposeᵣ_eq",
+            "Matrix.mul_fin_two"
+          ],
+          "simps": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct",
+            "Matrix.Forall",
+            "Matrix.Exists",
+            "Matrix.transposeᵣ",
+            "Matrix.addMonoidHomMulLeft",
+            "Matrix.addMonoidHomMulRight",
+            "Matrix.transposeᵣ_eq"
+          ]
+        },
+        {
+          "action": "simp_all_core",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 4,
+          "facts": [],
+          "simps": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct",
+            "Matrix.Forall",
+            "Matrix.Exists",
+            "Matrix.transposeᵣ",
+            "Matrix.addMonoidHomMulLeft",
+            "Matrix.addMonoidHomMulRight"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 10,
+          "facts": [],
+          "simps": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct",
+            "Matrix.Forall",
+            "Matrix.Exists",
+            "Matrix.transposeᵣ",
+            "Matrix.addMonoidHomMulLeft",
+            "Matrix.addMonoidHomMulRight",
+            "Matrix.transposeᵣ_eq"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 10,
+          "facts": [],
+          "simps": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct",
+            "Matrix.Forall",
+            "Matrix.Exists",
+            "Matrix.transposeᵣ",
+            "Matrix.addMonoidHomMulLeft",
+            "Matrix.addMonoidHomMulRight",
+            "Matrix.transposeᵣ_eq"
+          ]
+        },
+        {
+          "action": "simp_core",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 4,
+          "facts": [],
+          "simps": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct",
+            "Matrix.Forall",
+            "Matrix.Exists",
+            "Matrix.transposeᵣ",
+            "Matrix.addMonoidHomMulLeft",
+            "Matrix.addMonoidHomMulRight"
+          ]
+        },
+        {
+          "action": "simpa_core",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 4,
+          "facts": [],
+          "simps": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "FinVec.map_eq",
+            "FinVec.seq_eq",
+            "Matrix.dotProductᵣ",
+            "dotProduct",
+            "Matrix.Forall",
+            "Matrix.Exists",
+            "Matrix.transposeᵣ",
+            "Matrix.addMonoidHomMulLeft",
+            "Matrix.addMonoidHomMulRight"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::MeasureTheory.Measure.AbsolutelyContinuous.add_right'",
+      "theorem": "MeasureTheory.Measure.AbsolutelyContinuous.add_right'",
+      "file_path": "Mathlib/MeasureTheory/Measure/AbsolutelyContinuous.lean",
+      "families": [
+        "aesop",
+        "hammer",
+        "simp_all"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 7,
+          "simp_count": 3,
+          "facts": [
+            "MeasureTheory.Measure",
+            "MeasureTheory.Measure.AbsolutelyContinuous.add_right",
+            "MeasureTheory.Measure.le_add_right",
+            "MeasureTheory.Measure.absolutelyContinuous_of_eq",
+            "MeasureTheory.Measure.absolutelyContinuous_of_le",
+            "MeasureTheory.Measure.AbsolutelyContinuous.rfl",
+            "MeasureTheory.Measure.AbsolutelyContinuous.mk"
+          ],
+          "simps": [
+            "MeasureTheory.Measure",
+            "MeasureTheory.Measure.AbsolutelyContinuous.add_right",
+            "MeasureTheory.Measure.AbsolutelyContinuous"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 7,
+          "simp_count": 3,
+          "facts": [
+            "MeasureTheory.Measure",
+            "MeasureTheory.Measure.AbsolutelyContinuous.add_right",
+            "MeasureTheory.Measure.le_add_right",
+            "MeasureTheory.Measure.absolutelyContinuous_of_eq",
+            "MeasureTheory.Measure.absolutelyContinuous_of_le",
+            "MeasureTheory.Measure.AbsolutelyContinuous.rfl",
+            "MeasureTheory.Measure.AbsolutelyContinuous.mk"
+          ],
+          "simps": [
+            "MeasureTheory.Measure",
+            "MeasureTheory.Measure.AbsolutelyContinuous.add_right",
+            "MeasureTheory.Measure.AbsolutelyContinuous"
+          ]
+        },
+        {
+          "action": "hammer_core_plus_learned",
+          "kind": "hammer",
+          "fact_count": 7,
+          "simp_count": 0,
+          "facts": [
+            "MeasureTheory.Measure",
+            "MeasureTheory.Measure.AbsolutelyContinuous.add_right",
+            "MeasureTheory.Measure.le_add_right",
+            "MeasureTheory.Measure.absolutelyContinuous_of_eq",
+            "MeasureTheory.Measure.absolutelyContinuous_of_le",
+            "MeasureTheory.Measure.AbsolutelyContinuous.rfl",
+            "MeasureTheory.Measure.AbsolutelyContinuous.mk"
+          ],
+          "simps": []
+        },
+        {
+          "action": "hammer_core_plus_learned16",
+          "kind": "hammer",
+          "fact_count": 7,
+          "simp_count": 0,
+          "facts": [
+            "MeasureTheory.Measure",
+            "MeasureTheory.Measure.AbsolutelyContinuous.add_right",
+            "MeasureTheory.Measure.le_add_right",
+            "MeasureTheory.Measure.absolutelyContinuous_of_eq",
+            "MeasureTheory.Measure.absolutelyContinuous_of_le",
+            "MeasureTheory.Measure.AbsolutelyContinuous.rfl",
+            "MeasureTheory.Measure.AbsolutelyContinuous.mk"
+          ],
+          "simps": []
+        },
+        {
+          "action": "hammer_core_plus_learned32",
+          "kind": "hammer",
+          "fact_count": 7,
+          "simp_count": 0,
+          "facts": [
+            "MeasureTheory.Measure",
+            "MeasureTheory.Measure.AbsolutelyContinuous.add_right",
+            "MeasureTheory.Measure.le_add_right",
+            "MeasureTheory.Measure.absolutelyContinuous_of_eq",
+            "MeasureTheory.Measure.absolutelyContinuous_of_le",
+            "MeasureTheory.Measure.AbsolutelyContinuous.rfl",
+            "MeasureTheory.Measure.AbsolutelyContinuous.mk"
+          ],
+          "simps": []
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure",
+            "MeasureTheory.Measure.AbsolutelyContinuous.add_right",
+            "MeasureTheory.Measure.AbsolutelyContinuous"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure",
+            "MeasureTheory.Measure.AbsolutelyContinuous.add_right",
+            "MeasureTheory.Measure.AbsolutelyContinuous"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure",
+            "MeasureTheory.Measure.AbsolutelyContinuous.add_right",
+            "MeasureTheory.Measure.AbsolutelyContinuous"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::MeasureTheory.Measure.compProd_apply_univ",
+      "theorem": "MeasureTheory.Measure.compProd_apply_univ",
+      "file_path": "Mathlib/Probability/Kernel/Composition/MeasureCompProd.lean",
+      "families": [
+        "aesop",
+        "simp",
+        "simp_all",
+        "simpa"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core",
+          "kind": "aesop",
+          "fact_count": 2,
+          "simp_count": 2,
+          "facts": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite"
+          ],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 10,
+          "simp_count": 6,
+          "facts": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.exists_ae_eq_isMarkovKernel",
+            "ProbabilityTheory.Kernel.comp_apply_univ_le",
+            "ProbabilityTheory.Kernel.IsMarkovKernel.map",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.measurable_kernel_prodMk_left_of_finite"
+          ],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 10,
+          "simp_count": 6,
+          "facts": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.exists_ae_eq_isMarkovKernel",
+            "ProbabilityTheory.Kernel.comp_apply_univ_le",
+            "ProbabilityTheory.Kernel.IsMarkovKernel.map",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.measurable_kernel_prodMk_left_of_finite"
+          ],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned32",
+          "kind": "aesop",
+          "fact_count": 10,
+          "simp_count": 6,
+          "facts": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.exists_ae_eq_isMarkovKernel",
+            "ProbabilityTheory.Kernel.comp_apply_univ_le",
+            "ProbabilityTheory.Kernel.IsMarkovKernel.map",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.measurable_kernel_prodMk_left_of_finite"
+          ],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned32_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_core_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 2,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite"
+          ]
+        },
+        {
+          "action": "aesop_learned16",
+          "kind": "aesop",
+          "fact_count": 8,
+          "simp_count": 6,
+          "facts": [
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.exists_ae_eq_isMarkovKernel",
+            "ProbabilityTheory.Kernel.comp_apply_univ_le",
+            "ProbabilityTheory.Kernel.IsMarkovKernel.map",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.measurable_kernel_prodMk_left_of_finite"
+          ],
+          "simps": [
+            "MeasureTheory.SFinite",
+            "MeasureTheory.Measure.compProd",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_learned16_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.SFinite",
+            "MeasureTheory.Measure.compProd",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_learned32",
+          "kind": "aesop",
+          "fact_count": 8,
+          "simp_count": 6,
+          "facts": [
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.exists_ae_eq_isMarkovKernel",
+            "ProbabilityTheory.Kernel.comp_apply_univ_le",
+            "ProbabilityTheory.Kernel.IsMarkovKernel.map",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.measurable_kernel_prodMk_left_of_finite"
+          ],
+          "simps": [
+            "MeasureTheory.SFinite",
+            "MeasureTheory.Measure.compProd",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_learned32_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.SFinite",
+            "MeasureTheory.Measure.compProd",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_learned8",
+          "kind": "aesop",
+          "fact_count": 8,
+          "simp_count": 6,
+          "facts": [
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.exists_ae_eq_isMarkovKernel",
+            "ProbabilityTheory.Kernel.comp_apply_univ_le",
+            "ProbabilityTheory.Kernel.IsMarkovKernel.map",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.measurable_kernel_prodMk_left_of_finite"
+          ],
+          "simps": [
+            "MeasureTheory.SFinite",
+            "MeasureTheory.Measure.compProd",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "aesop_learned8_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.SFinite",
+            "MeasureTheory.Measure.compProd",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "simp_all_core",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 2,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "simp_core",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 2,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        },
+        {
+          "action": "simpa_core",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 2,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 6,
+          "facts": [],
+          "simps": [
+            "MeasureTheory.Measure.compProd",
+            "MeasureTheory.SFinite",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_right",
+            "ProbabilityTheory.Kernel.parallelComp_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_left",
+            "ProbabilityTheory.Kernel.compProd_of_not_isSFiniteKernel_right"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::MeasureTheory.average_const",
+      "theorem": "MeasureTheory.average_const",
+      "file_path": "Mathlib/MeasureTheory/Integral/Average.lean",
+      "families": [
+        "aesop",
+        "simp",
+        "simp_all",
+        "simpa"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 10,
+          "simp_count": 9,
+          "facts": [
+            "ENNReal.toReal_one",
+            "MeasureTheory.IsFiniteMeasure",
+            "MeasureTheory.Measure",
+            "MeasureTheory.integral_const",
+            "MeasureTheory.measureReal_def",
+            "MeasureTheory.laverage_zero",
+            "MeasureTheory.average_zero",
+            "MeasureTheory.laverage_zero_measure",
+            "MeasureTheory.laverage_eq",
+            "MeasureTheory.average_neg"
+          ],
+          "simps": [
+            "ENNReal.toReal_one",
+            "MeasureTheory.IsFiniteMeasure",
+            "MeasureTheory.Measure",
+            "MeasureTheory.integral_const",
+            "MeasureTheory.measureReal_def",
+            "MeasureTheory.average",
+            "MeasureTheory.laverage_zero",
+            "MeasureTheory.average_zero",
+            "MeasureTheory.laverage_zero_measure"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 18,
+          "simp_count": 12,
+          "facts": [
+            "ENNReal.toReal_one",
+            "MeasureTheory.IsFiniteMeasure",
+            "MeasureTheory.Measure",
+            "MeasureTheory.integral_const",
+            "MeasureTheory.measureReal_def",
+            "MeasureTheory.laverage_zero",
+            "MeasureTheory.average_zero",
+            "MeasureTheory.laverage_zero_measure",
+            "MeasureTheory.laverage_eq",
+            "MeasureTheory.average_neg",
+            "MeasureTheory.laverage_eq'",
+            "MeasureTheory.average_zero_measure",
+            "MeasureTheory.laverage_mono_ae",
+            "MeasureTheory.Measure.measure_univ_ne_zero",
+            "MeasureTheory.laverage_lt_top",
+            "MeasureTheory.laverage_congr",
+            "MeasureTheory.laverage_le_essSup",
+            "MeasureTheory.measureReal_univ_ne_zero"
+          ],
+          "simps": [
+            "ENNReal.toReal_one",
+            "MeasureTheory.IsFiniteMeasure",
+            "MeasureTheory.Measure",
+            "MeasureTheory.integral_const",
+            "MeasureTheory.measureReal_def",
+            "MeasureTheory.average",
+            "MeasureTheory.laverage_zero",
+            "MeasureTheory.average_zero",
+            "MeasureTheory.laverage_zero_measure",
+            "MeasureTheory.average_neg",
+            "MeasureTheory.average_zero_measure",
+            "MeasureTheory.laverage_const"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "ENNReal.toReal_one",
+            "MeasureTheory.IsFiniteMeasure",
+            "MeasureTheory.Measure",
+            "MeasureTheory.integral_const",
+            "MeasureTheory.measureReal_def",
+            "MeasureTheory.average",
+            "MeasureTheory.laverage_zero",
+            "MeasureTheory.average_zero",
+            "MeasureTheory.laverage_zero_measure"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 12,
+          "facts": [],
+          "simps": [
+            "ENNReal.toReal_one",
+            "MeasureTheory.IsFiniteMeasure",
+            "MeasureTheory.Measure",
+            "MeasureTheory.integral_const",
+            "MeasureTheory.measureReal_def",
+            "MeasureTheory.average",
+            "MeasureTheory.laverage_zero",
+            "MeasureTheory.average_zero",
+            "MeasureTheory.laverage_zero_measure",
+            "MeasureTheory.average_neg",
+            "MeasureTheory.average_zero_measure",
+            "MeasureTheory.laverage_const"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 12,
+          "facts": [],
+          "simps": [
+            "ENNReal.toReal_one",
+            "MeasureTheory.IsFiniteMeasure",
+            "MeasureTheory.Measure",
+            "MeasureTheory.integral_const",
+            "MeasureTheory.measureReal_def",
+            "MeasureTheory.average",
+            "MeasureTheory.laverage_zero",
+            "MeasureTheory.average_zero",
+            "MeasureTheory.laverage_zero_measure",
+            "MeasureTheory.average_neg",
+            "MeasureTheory.average_zero_measure",
+            "MeasureTheory.laverage_const"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "ENNReal.toReal_one",
+            "MeasureTheory.IsFiniteMeasure",
+            "MeasureTheory.Measure",
+            "MeasureTheory.integral_const",
+            "MeasureTheory.measureReal_def",
+            "MeasureTheory.average",
+            "MeasureTheory.laverage_zero",
+            "MeasureTheory.average_zero",
+            "MeasureTheory.laverage_zero_measure"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "ENNReal.toReal_one",
+            "MeasureTheory.IsFiniteMeasure",
+            "MeasureTheory.Measure",
+            "MeasureTheory.integral_const",
+            "MeasureTheory.measureReal_def",
+            "MeasureTheory.average",
+            "MeasureTheory.laverage_zero",
+            "MeasureTheory.average_zero",
+            "MeasureTheory.laverage_zero_measure"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::Nat.Primes.PNat.Prime.ne_one",
+      "theorem": "Nat.Primes.PNat.Prime.ne_one",
+      "file_path": "Mathlib/Data/PNat/Prime.lean",
+      "families": [
+        "aesop",
+        "hammer"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 6,
+          "simp_count": 2,
+          "facts": [
+            "Nat.Prime.ne_one",
+            "Nat.not_prime_one",
+            "Prime.ne_one",
+            "Nat.prime_one_false",
+            "Nat.AtLeastTwo.ne_one",
+            "Nat.cast_add_one_ne_zero"
+          ],
+          "simps": [
+            "Nat.Prime.ne_one",
+            "Nat.Primes.toPNat"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 6,
+          "simp_count": 2,
+          "facts": [
+            "Nat.Prime.ne_one",
+            "Nat.not_prime_one",
+            "Prime.ne_one",
+            "Nat.prime_one_false",
+            "Nat.AtLeastTwo.ne_one",
+            "Nat.cast_add_one_ne_zero"
+          ],
+          "simps": [
+            "Nat.Prime.ne_one",
+            "Nat.Primes.toPNat"
+          ]
+        },
+        {
+          "action": "hammer_core_plus_learned",
+          "kind": "hammer",
+          "fact_count": 6,
+          "simp_count": 0,
+          "facts": [
+            "Nat.Prime.ne_one",
+            "Nat.not_prime_one",
+            "Prime.ne_one",
+            "Nat.prime_one_false",
+            "Nat.AtLeastTwo.ne_one",
+            "Nat.cast_add_one_ne_zero"
+          ],
+          "simps": []
+        },
+        {
+          "action": "hammer_core_plus_learned16",
+          "kind": "hammer",
+          "fact_count": 6,
+          "simp_count": 0,
+          "facts": [
+            "Nat.Prime.ne_one",
+            "Nat.not_prime_one",
+            "Prime.ne_one",
+            "Nat.prime_one_false",
+            "Nat.AtLeastTwo.ne_one",
+            "Nat.cast_add_one_ne_zero"
+          ],
+          "simps": []
+        },
+        {
+          "action": "hammer_core_plus_learned32",
+          "kind": "hammer",
+          "fact_count": 6,
+          "simp_count": 0,
+          "facts": [
+            "Nat.Prime.ne_one",
+            "Nat.not_prime_one",
+            "Prime.ne_one",
+            "Nat.prime_one_false",
+            "Nat.AtLeastTwo.ne_one",
+            "Nat.cast_add_one_ne_zero"
+          ],
+          "simps": []
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::NormedAddCommGroup.summable_imp_tendsto_of_complete",
+      "theorem": "NormedAddCommGroup.summable_imp_tendsto_of_complete",
+      "file_path": "Mathlib/Analysis/Normed/Group/Completeness.lean",
+      "families": [
+        "aesop"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 12,
+          "simp_count": 6,
+          "facts": [
+            "CompleteSpace",
+            "Filter.Tendsto",
+            "Filter.atTop",
+            "Finset.range",
+            "cauchySeq_of_summable_dist",
+            "cauchySeq_tendsto_of_complete",
+            "NormedAddCommGroup.completeSpace_of_summable_imp_tendsto",
+            "tendsto_atTop_of_geom_le",
+            "not_summable_iff_tendsto_nat_atTop_of_nonneg",
+            "summable_iff_not_tendsto_nat_atTop_of_nonneg",
+            "tendsto_atTop_of_antitone",
+            "tendsto_atTop_of_eventually_const"
+          ],
+          "simps": [
+            "CompleteSpace",
+            "Filter.Tendsto",
+            "Filter.atTop",
+            "Finset.range",
+            "cauchySeq_of_summable_dist",
+            "cauchySeq_tendsto_of_complete"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 15,
+          "simp_count": 6,
+          "facts": [
+            "CompleteSpace",
+            "Filter.Tendsto",
+            "Filter.atTop",
+            "Finset.range",
+            "cauchySeq_of_summable_dist",
+            "cauchySeq_tendsto_of_complete",
+            "NormedAddCommGroup.completeSpace_of_summable_imp_tendsto",
+            "tendsto_atTop_of_geom_le",
+            "not_summable_iff_tendsto_nat_atTop_of_nonneg",
+            "summable_iff_not_tendsto_nat_atTop_of_nonneg",
+            "tendsto_atTop_of_antitone",
+            "tendsto_atTop_of_eventually_const",
+            "tendsto_atTop_of_monotone",
+            "tendsto_one_div_add_atTop_nhds_zero_nat",
+            "tendsto_natCast_div_add_atTop"
+          ],
+          "simps": [
+            "CompleteSpace",
+            "Filter.Tendsto",
+            "Filter.atTop",
+            "Finset.range",
+            "cauchySeq_of_summable_dist",
+            "cauchySeq_tendsto_of_complete"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::NumberField.rootDiscr_def",
+      "theorem": "NumberField.rootDiscr_def",
+      "file_path": "Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean",
+      "families": [
+        "aesop",
+        "hammerCore",
+        "simp",
+        "simp_all",
+        "simpa",
+        "solve_by_elim"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 9,
+          "simp_count": 8,
+          "facts": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.discr_ne_zero",
+            "IntermediateField.finrank_bot'",
+            "NumberField.coe_discr",
+            "NumberField.sign_discr",
+            "NumberField.isInfinitePlace_iff",
+            "NumberField.InfinitePlace.mult_pos"
+          ],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.canonicalEmbedding",
+            "NumberField.mixedEmbedding",
+            "NumberField.InfinitePlace.embedding",
+            "NumberField.InfinitePlace.IsRamified",
+            "NumberField.InfinitePlace.mk"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 9,
+          "simp_count": 12,
+          "facts": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.discr_ne_zero",
+            "IntermediateField.finrank_bot'",
+            "NumberField.coe_discr",
+            "NumberField.sign_discr",
+            "NumberField.isInfinitePlace_iff",
+            "NumberField.InfinitePlace.mult_pos"
+          ],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.canonicalEmbedding",
+            "NumberField.mixedEmbedding",
+            "NumberField.InfinitePlace.embedding",
+            "NumberField.InfinitePlace.IsRamified",
+            "NumberField.InfinitePlace.mk",
+            "IntermediateField.finrank_bot'",
+            "NumberField.equivReindex",
+            "NumberField.mixedEmbedding.minkowskiBound",
+            "NumberField.mixedEmbedding.convexBodySumFactor"
+          ]
+        },
+        {
+          "action": "hammerCore_core",
+          "kind": "hammerCore",
+          "fact_count": 3,
+          "simp_count": 3,
+          "facts": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr"
+          ],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 9,
+          "simp_count": 8,
+          "facts": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.discr_ne_zero",
+            "IntermediateField.finrank_bot'",
+            "NumberField.coe_discr",
+            "NumberField.sign_discr",
+            "NumberField.isInfinitePlace_iff",
+            "NumberField.InfinitePlace.mult_pos"
+          ],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.canonicalEmbedding",
+            "NumberField.mixedEmbedding",
+            "NumberField.InfinitePlace.embedding",
+            "NumberField.InfinitePlace.IsRamified",
+            "NumberField.InfinitePlace.mk"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned16",
+          "kind": "hammerCore",
+          "fact_count": 9,
+          "simp_count": 12,
+          "facts": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.discr_ne_zero",
+            "IntermediateField.finrank_bot'",
+            "NumberField.coe_discr",
+            "NumberField.sign_discr",
+            "NumberField.isInfinitePlace_iff",
+            "NumberField.InfinitePlace.mult_pos"
+          ],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.canonicalEmbedding",
+            "NumberField.mixedEmbedding",
+            "NumberField.InfinitePlace.embedding",
+            "NumberField.InfinitePlace.IsRamified",
+            "NumberField.InfinitePlace.mk",
+            "IntermediateField.finrank_bot'",
+            "NumberField.equivReindex",
+            "NumberField.mixedEmbedding.minkowskiBound",
+            "NumberField.mixedEmbedding.convexBodySumFactor"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned32",
+          "kind": "hammerCore",
+          "fact_count": 9,
+          "simp_count": 12,
+          "facts": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.discr_ne_zero",
+            "IntermediateField.finrank_bot'",
+            "NumberField.coe_discr",
+            "NumberField.sign_discr",
+            "NumberField.isInfinitePlace_iff",
+            "NumberField.InfinitePlace.mult_pos"
+          ],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.canonicalEmbedding",
+            "NumberField.mixedEmbedding",
+            "NumberField.InfinitePlace.embedding",
+            "NumberField.InfinitePlace.IsRamified",
+            "NumberField.InfinitePlace.mk",
+            "IntermediateField.finrank_bot'",
+            "NumberField.equivReindex",
+            "NumberField.mixedEmbedding.minkowskiBound",
+            "NumberField.mixedEmbedding.convexBodySumFactor"
+          ]
+        },
+        {
+          "action": "simp_all_core",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.canonicalEmbedding",
+            "NumberField.mixedEmbedding",
+            "NumberField.InfinitePlace.embedding",
+            "NumberField.InfinitePlace.IsRamified",
+            "NumberField.InfinitePlace.mk"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 12,
+          "facts": [],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.canonicalEmbedding",
+            "NumberField.mixedEmbedding",
+            "NumberField.InfinitePlace.embedding",
+            "NumberField.InfinitePlace.IsRamified",
+            "NumberField.InfinitePlace.mk",
+            "IntermediateField.finrank_bot'",
+            "NumberField.equivReindex",
+            "NumberField.mixedEmbedding.minkowskiBound",
+            "NumberField.mixedEmbedding.convexBodySumFactor"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 12,
+          "facts": [],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.canonicalEmbedding",
+            "NumberField.mixedEmbedding",
+            "NumberField.InfinitePlace.embedding",
+            "NumberField.InfinitePlace.IsRamified",
+            "NumberField.InfinitePlace.mk",
+            "IntermediateField.finrank_bot'",
+            "NumberField.equivReindex",
+            "NumberField.mixedEmbedding.minkowskiBound",
+            "NumberField.mixedEmbedding.convexBodySumFactor"
+          ]
+        },
+        {
+          "action": "simp_core",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.canonicalEmbedding",
+            "NumberField.mixedEmbedding",
+            "NumberField.InfinitePlace.embedding",
+            "NumberField.InfinitePlace.IsRamified",
+            "NumberField.InfinitePlace.mk"
+          ]
+        },
+        {
+          "action": "simpa_core",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 8,
+          "facts": [],
+          "simps": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.canonicalEmbedding",
+            "NumberField.mixedEmbedding",
+            "NumberField.InfinitePlace.embedding",
+            "NumberField.InfinitePlace.IsRamified",
+            "NumberField.InfinitePlace.mk"
+          ]
+        },
+        {
+          "action": "solve_by_elim_core",
+          "kind": "solve_by_elim",
+          "fact_count": 3,
+          "simp_count": 0,
+          "facts": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned",
+          "kind": "solve_by_elim",
+          "fact_count": 9,
+          "simp_count": 0,
+          "facts": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.discr_ne_zero",
+            "IntermediateField.finrank_bot'",
+            "NumberField.coe_discr",
+            "NumberField.sign_discr",
+            "NumberField.isInfinitePlace_iff",
+            "NumberField.InfinitePlace.mult_pos"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned16",
+          "kind": "solve_by_elim",
+          "fact_count": 9,
+          "simp_count": 0,
+          "facts": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.discr_ne_zero",
+            "IntermediateField.finrank_bot'",
+            "NumberField.coe_discr",
+            "NumberField.sign_discr",
+            "NumberField.isInfinitePlace_iff",
+            "NumberField.InfinitePlace.mult_pos"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned32",
+          "kind": "solve_by_elim",
+          "fact_count": 9,
+          "simp_count": 0,
+          "facts": [
+            "Module.finrank",
+            "NumberField.discr",
+            "NumberField.rootDiscr",
+            "NumberField.discr_ne_zero",
+            "IntermediateField.finrank_bot'",
+            "NumberField.coe_discr",
+            "NumberField.sign_discr",
+            "NumberField.isInfinitePlace_iff",
+            "NumberField.InfinitePlace.mult_pos"
+          ],
+          "simps": []
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::Polynomial.evalEval_intCast",
+      "theorem": "Polynomial.evalEval_intCast",
+      "file_path": "Mathlib/Algebra/Polynomial/Bivariate.lean",
+      "families": [
+        "aesop",
+        "simp",
+        "simp_all",
+        "simpa"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 10,
+          "simp_count": 9,
+          "facts": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast",
+            "Polynomial.X_sub_C_dvd_sub_C_eval",
+            "Polynomial.eval₂_eq_eval_map",
+            "Polynomial.taylor_eval_sub",
+            "intCast_mem",
+            "Polynomial.eval₂_eq_sum",
+            "Polynomial.eval_mul_X_sub_C",
+            "Polynomial.natCast_comp",
+            "Polynomial.eval_multisetSum"
+          ],
+          "simps": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast",
+            "Polynomial.CC",
+            "Polynomial.eval₂AddMonoidHom",
+            "MvPolynomial.eval",
+            "MvPolynomial.eval₂AlgHom",
+            "intCast_mem",
+            "Polynomial.natCast_comp",
+            "Polynomial.coe_aeval_eq_eval"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 15,
+          "simp_count": 12,
+          "facts": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast",
+            "Polynomial.X_sub_C_dvd_sub_C_eval",
+            "Polynomial.eval₂_eq_eval_map",
+            "Polynomial.taylor_eval_sub",
+            "intCast_mem",
+            "Polynomial.eval₂_eq_sum",
+            "Polynomial.eval_mul_X_sub_C",
+            "Polynomial.natCast_comp",
+            "Polynomial.eval_multisetSum",
+            "Polynomial.coe_aeval_eq_eval",
+            "Polynomial.evalEval_X",
+            "Polynomial.intCast_comp",
+            "Polynomial.natCast_mul_comp",
+            "Polynomial.C_eq_intCast"
+          ],
+          "simps": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast",
+            "Polynomial.CC",
+            "Polynomial.eval₂AddMonoidHom",
+            "MvPolynomial.eval",
+            "MvPolynomial.eval₂AlgHom",
+            "intCast_mem",
+            "Polynomial.natCast_comp",
+            "Polynomial.coe_aeval_eq_eval",
+            "Polynomial.evalEval_X",
+            "Polynomial.intCast_comp",
+            "Polynomial.natCast_mul_comp"
+          ]
+        },
+        {
+          "action": "simp_all_core",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 2,
+          "facts": [],
+          "simps": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast",
+            "Polynomial.CC",
+            "Polynomial.eval₂AddMonoidHom",
+            "MvPolynomial.eval",
+            "MvPolynomial.eval₂AlgHom",
+            "intCast_mem",
+            "Polynomial.natCast_comp",
+            "Polynomial.coe_aeval_eq_eval"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 12,
+          "facts": [],
+          "simps": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast",
+            "Polynomial.CC",
+            "Polynomial.eval₂AddMonoidHom",
+            "MvPolynomial.eval",
+            "MvPolynomial.eval₂AlgHom",
+            "intCast_mem",
+            "Polynomial.natCast_comp",
+            "Polynomial.coe_aeval_eq_eval",
+            "Polynomial.evalEval_X",
+            "Polynomial.intCast_comp",
+            "Polynomial.natCast_mul_comp"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 12,
+          "facts": [],
+          "simps": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast",
+            "Polynomial.CC",
+            "Polynomial.eval₂AddMonoidHom",
+            "MvPolynomial.eval",
+            "MvPolynomial.eval₂AlgHom",
+            "intCast_mem",
+            "Polynomial.natCast_comp",
+            "Polynomial.coe_aeval_eq_eval",
+            "Polynomial.evalEval_X",
+            "Polynomial.intCast_comp",
+            "Polynomial.natCast_mul_comp"
+          ]
+        },
+        {
+          "action": "simp_core",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 2,
+          "facts": [],
+          "simps": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast",
+            "Polynomial.CC",
+            "Polynomial.eval₂AddMonoidHom",
+            "MvPolynomial.eval",
+            "MvPolynomial.eval₂AlgHom",
+            "intCast_mem",
+            "Polynomial.natCast_comp",
+            "Polynomial.coe_aeval_eq_eval"
+          ]
+        },
+        {
+          "action": "simpa_core",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 2,
+          "facts": [],
+          "simps": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "Polynomial.evalEval",
+            "Polynomial.eval_intCast",
+            "Polynomial.CC",
+            "Polynomial.eval₂AddMonoidHom",
+            "MvPolynomial.eval",
+            "MvPolynomial.eval₂AlgHom",
+            "intCast_mem",
+            "Polynomial.natCast_comp",
+            "Polynomial.coe_aeval_eq_eval"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::Projectivization.logHeight_nonneg",
+      "theorem": "Projectivization.logHeight_nonneg",
+      "file_path": "Mathlib/NumberTheory/Height/Projectivization.lean",
+      "families": [
+        "hammerCore"
+      ],
+      "verified_actions": [
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 12,
+          "simp_count": 8,
+          "facts": [
+            "Projectivization",
+            "Projectivization.logHeight",
+            "Projectivization.logHeight_eq_log_mulHeight",
+            "Real.log_nonneg",
+            "Projectivization.ind",
+            "Projectivization.mulHeight_mk",
+            "Projectivization.mulHeight_ne_zero",
+            "Projectivization.mulHeight_pos",
+            "Real.log_neg_iff",
+            "Projectivization.one_le_mulHeight",
+            "Real.continuousAt_log",
+            "Real.log_neg"
+          ],
+          "simps": [
+            "Projectivization",
+            "Projectivization.logHeight",
+            "Projectivization.logHeight_eq_log_mulHeight",
+            "Real.log_nonneg",
+            "Projectivization.mk''",
+            "Projectivization.mulHeight",
+            "Height.logHeight₁",
+            "Finsupp.logHeight"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::RatFunc.InftyValuation.map_mul'",
+      "theorem": "RatFunc.InftyValuation.map_mul'",
+      "file_path": "Mathlib/FieldTheory/RatFunc/Valuation.lean",
+      "families": [
+        "aesop"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 10,
+          "simp_count": 9,
+          "facts": [
+            "RatFunc",
+            "RatFunc.inftyValuationDef",
+            "RatFunc.intDegree_mul",
+            "RatFunc.denom_div_dvd",
+            "Valuation.map_mul",
+            "RatFunc.mk_eq_div",
+            "RatFunc.num_mul_dvd",
+            "RatFunc.intDegree_polynomial",
+            "RatFunc.smul_eq_C_mul",
+            "RatFunc.mul_inv_cancel"
+          ],
+          "simps": [
+            "RatFunc",
+            "RatFunc.inftyValuationDef",
+            "RatFunc.intDegree_mul",
+            "RatFunc.C",
+            "RatFunc.toFractionRingRingEquiv",
+            "RatFunc.toFractionRingAlgEquiv",
+            "RatFunc.denom_div_dvd",
+            "RatFunc.mk_eq_div",
+            "RatFunc.intDegree_polynomial"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 10,
+          "simp_count": 11,
+          "facts": [
+            "RatFunc",
+            "RatFunc.inftyValuationDef",
+            "RatFunc.intDegree_mul",
+            "RatFunc.denom_div_dvd",
+            "Valuation.map_mul",
+            "RatFunc.mk_eq_div",
+            "RatFunc.num_mul_dvd",
+            "RatFunc.intDegree_polynomial",
+            "RatFunc.smul_eq_C_mul",
+            "RatFunc.mul_inv_cancel"
+          ],
+          "simps": [
+            "RatFunc",
+            "RatFunc.inftyValuationDef",
+            "RatFunc.intDegree_mul",
+            "RatFunc.C",
+            "RatFunc.toFractionRingRingEquiv",
+            "RatFunc.toFractionRingAlgEquiv",
+            "RatFunc.denom_div_dvd",
+            "RatFunc.mk_eq_div",
+            "RatFunc.intDegree_polynomial",
+            "RatFunc.mapAlgHom",
+            "RatFunc.liftMonoidWithZeroHom"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::Real.sign_apply_eq",
+      "theorem": "Real.sign_apply_eq",
+      "file_path": "Mathlib/Data/Real/Sign.lean",
+      "families": [
+        "aesop"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 6,
+          "simp_count": 6,
+          "facts": [
+            "Real.sign",
+            "Real.sign_of_neg",
+            "Real.sign_of_pos",
+            "Real.sign_zero",
+            "lt_trichotomy",
+            "Real.sign_one"
+          ],
+          "simps": [
+            "Real.sign",
+            "Real.sign_of_neg",
+            "Real.sign_of_pos",
+            "Real.sign_zero",
+            "lt_trichotomy",
+            "Real.sign_one"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 6,
+          "simp_count": 6,
+          "facts": [
+            "Real.sign",
+            "Real.sign_of_neg",
+            "Real.sign_of_pos",
+            "Real.sign_zero",
+            "lt_trichotomy",
+            "Real.sign_one"
+          ],
+          "simps": [
+            "Real.sign",
+            "Real.sign_of_neg",
+            "Real.sign_of_pos",
+            "Real.sign_zero",
+            "lt_trichotomy",
+            "Real.sign_one"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::SkewMonoidAlgebra.sum_mul",
+      "theorem": "SkewMonoidAlgebra.sum_mul",
+      "file_path": "Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean",
+      "families": [
+        "solve_by_elim"
+      ],
+      "verified_actions": [
+        {
+          "action": "solve_by_elim_core",
+          "kind": "solve_by_elim",
+          "fact_count": 4,
+          "simp_count": 0,
+          "facts": [
+            "Finset.sum_mul",
+            "NonUnitalNonAssocSemiring",
+            "SkewMonoidAlgebra",
+            "SkewMonoidAlgebra.sum"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned",
+          "kind": "solve_by_elim",
+          "fact_count": 10,
+          "simp_count": 0,
+          "facts": [
+            "Finset.sum_mul",
+            "NonUnitalNonAssocSemiring",
+            "SkewMonoidAlgebra",
+            "SkewMonoidAlgebra.sum",
+            "SkewMonoidAlgebra.coeff_one_one",
+            "SkewMonoidAlgebra.coeff_zero",
+            "SkewMonoidAlgebra.single_eq_zero",
+            "SkewMonoidAlgebra.ofFinsupp_eq_zero",
+            "SkewMonoidAlgebra.sum_zero",
+            "SkewMonoidAlgebra.coeff_injective"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned16",
+          "kind": "solve_by_elim",
+          "fact_count": 10,
+          "simp_count": 0,
+          "facts": [
+            "Finset.sum_mul",
+            "NonUnitalNonAssocSemiring",
+            "SkewMonoidAlgebra",
+            "SkewMonoidAlgebra.sum",
+            "SkewMonoidAlgebra.coeff_one_one",
+            "SkewMonoidAlgebra.coeff_zero",
+            "SkewMonoidAlgebra.single_eq_zero",
+            "SkewMonoidAlgebra.ofFinsupp_eq_zero",
+            "SkewMonoidAlgebra.sum_zero",
+            "SkewMonoidAlgebra.coeff_injective"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned32",
+          "kind": "solve_by_elim",
+          "fact_count": 10,
+          "simp_count": 0,
+          "facts": [
+            "Finset.sum_mul",
+            "NonUnitalNonAssocSemiring",
+            "SkewMonoidAlgebra",
+            "SkewMonoidAlgebra.sum",
+            "SkewMonoidAlgebra.coeff_one_one",
+            "SkewMonoidAlgebra.coeff_zero",
+            "SkewMonoidAlgebra.single_eq_zero",
+            "SkewMonoidAlgebra.ofFinsupp_eq_zero",
+            "SkewMonoidAlgebra.sum_zero",
+            "SkewMonoidAlgebra.coeff_injective"
+          ],
+          "simps": []
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::Stirling.stirlingSeq_one",
+      "theorem": "Stirling.stirlingSeq_one",
+      "file_path": "Mathlib/Analysis/SpecialFunctions/Stirling.lean",
+      "families": [
+        "aesop",
+        "hammerCore"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 9,
+          "simp_count": 8,
+          "facts": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one",
+            "Stirling.stirlingSeq_zero",
+            "WithZero.exp_eq_one"
+          ],
+          "simps": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one",
+            "Stirling.stirlingSeq_zero"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 9,
+          "simp_count": 9,
+          "facts": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one",
+            "Stirling.stirlingSeq_zero",
+            "WithZero.exp_eq_one"
+          ],
+          "simps": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one",
+            "Stirling.stirlingSeq_zero",
+            "WithZero.exp_eq_one"
+          ]
+        },
+        {
+          "action": "hammerCore_core",
+          "kind": "hammerCore",
+          "fact_count": 7,
+          "simp_count": 7,
+          "facts": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one"
+          ],
+          "simps": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 9,
+          "simp_count": 8,
+          "facts": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one",
+            "Stirling.stirlingSeq_zero",
+            "WithZero.exp_eq_one"
+          ],
+          "simps": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one",
+            "Stirling.stirlingSeq_zero"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned16",
+          "kind": "hammerCore",
+          "fact_count": 9,
+          "simp_count": 9,
+          "facts": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one",
+            "Stirling.stirlingSeq_zero",
+            "WithZero.exp_eq_one"
+          ],
+          "simps": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one",
+            "Stirling.stirlingSeq_zero",
+            "WithZero.exp_eq_one"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned32",
+          "kind": "hammerCore",
+          "fact_count": 9,
+          "simp_count": 9,
+          "facts": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one",
+            "Stirling.stirlingSeq_zero",
+            "WithZero.exp_eq_one"
+          ],
+          "simps": [
+            "Nat.cast_one",
+            "Nat.factorial_one",
+            "Stirling.stirlingSeq",
+            "mul_one",
+            "mul_one_div",
+            "one_div_div",
+            "pow_one",
+            "Stirling.stirlingSeq_zero",
+            "WithZero.exp_eq_one"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::TopCat.pullbackIsoProdSubtype_inv_snd",
+      "theorem": "TopCat.pullbackIsoProdSubtype_inv_snd",
+      "file_path": "Mathlib/Topology/Category/TopCat/Limits/Pullbacks.lean",
+      "families": [
+        "aesop",
+        "simp",
+        "simp_all",
+        "simpa"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 9,
+          "simp_count": 11,
+          "facts": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd",
+            "TopCat.pullbackIsoProdSubtype_inv_fst",
+            "TopCat.inv_hom_id_apply",
+            "TopCat.pullbackFst_apply",
+            "TopCat.pullbackIsoProdSubtype_inv_fst_apply"
+          ],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd",
+            "TopCat.pullbackFst",
+            "TopCat.prodFst",
+            "TopCat.initialIsoPEmpty",
+            "TopCat.prodBinaryFan",
+            "TopCat.prodSnd",
+            "TopCat.isoOfHomeo"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 9,
+          "simp_count": 17,
+          "facts": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd",
+            "TopCat.pullbackIsoProdSubtype_inv_fst",
+            "TopCat.inv_hom_id_apply",
+            "TopCat.pullbackFst_apply",
+            "TopCat.pullbackIsoProdSubtype_inv_fst_apply"
+          ],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd",
+            "TopCat.pullbackFst",
+            "TopCat.prodFst",
+            "TopCat.initialIsoPEmpty",
+            "TopCat.prodBinaryFan",
+            "TopCat.prodSnd",
+            "TopCat.isoOfHomeo",
+            "TopCat.piIsoPi",
+            "TopCat.homeoOfIso",
+            "TopCat.prodBinaryFanIsLimit",
+            "TopCat.prodIsoProd",
+            "TopCat.pullbackIsoProdSubtype_inv_fst",
+            "TopCat.pullbackConeIsLimit"
+          ]
+        },
+        {
+          "action": "simp_all_core",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 5,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 11,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd",
+            "TopCat.pullbackFst",
+            "TopCat.prodFst",
+            "TopCat.initialIsoPEmpty",
+            "TopCat.prodBinaryFan",
+            "TopCat.prodSnd",
+            "TopCat.isoOfHomeo"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 17,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd",
+            "TopCat.pullbackFst",
+            "TopCat.prodFst",
+            "TopCat.initialIsoPEmpty",
+            "TopCat.prodBinaryFan",
+            "TopCat.prodSnd",
+            "TopCat.isoOfHomeo",
+            "TopCat.piIsoPi",
+            "TopCat.homeoOfIso",
+            "TopCat.prodBinaryFanIsLimit",
+            "TopCat.prodIsoProd",
+            "TopCat.pullbackIsoProdSubtype_inv_fst",
+            "TopCat.pullbackConeIsLimit"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 18,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd",
+            "TopCat.pullbackFst",
+            "TopCat.prodFst",
+            "TopCat.initialIsoPEmpty",
+            "TopCat.prodBinaryFan",
+            "TopCat.prodSnd",
+            "TopCat.isoOfHomeo",
+            "TopCat.piIsoPi",
+            "TopCat.homeoOfIso",
+            "TopCat.prodBinaryFanIsLimit",
+            "TopCat.prodIsoProd",
+            "TopCat.pullbackIsoProdSubtype_inv_fst",
+            "TopCat.pullbackConeIsLimit",
+            "WithTop.subtypeOrderIso"
+          ]
+        },
+        {
+          "action": "simp_core",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 5,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 11,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd",
+            "TopCat.pullbackFst",
+            "TopCat.prodFst",
+            "TopCat.initialIsoPEmpty",
+            "TopCat.prodBinaryFan",
+            "TopCat.prodSnd",
+            "TopCat.isoOfHomeo"
+          ]
+        },
+        {
+          "action": "simpa_core",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 5,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 11,
+          "facts": [],
+          "simps": [
+            "CategoryTheory.Iso.inv",
+            "CategoryTheory.Limits.pullback.snd",
+            "TopCat.pullbackCone",
+            "TopCat.pullbackIsoProdSubtype",
+            "TopCat.pullbackSnd",
+            "TopCat.pullbackFst",
+            "TopCat.prodFst",
+            "TopCat.initialIsoPEmpty",
+            "TopCat.prodBinaryFan",
+            "TopCat.prodSnd",
+            "TopCat.isoOfHomeo"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::Units.inv_mul_cancel_left",
+      "theorem": "Units.inv_mul_cancel_left",
+      "file_path": "Mathlib/Algebra/Group/Units/Defs.lean",
+      "families": [
+        "hammerCore"
+      ],
+      "verified_actions": [
+        {
+          "action": "hammerCore_core",
+          "kind": "hammerCore",
+          "fact_count": 3,
+          "simp_count": 3,
+          "facts": [
+            "Units.inv_mul",
+            "mul_assoc",
+            "one_mul"
+          ],
+          "simps": [
+            "Units.inv_mul",
+            "mul_assoc",
+            "one_mul"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 7,
+          "simp_count": 5,
+          "facts": [
+            "Units.inv_mul",
+            "mul_assoc",
+            "one_mul",
+            "Units.inv_eq_val_inv",
+            "Units.commute_inv_coe",
+            "mul_left_cancel_iff",
+            "mul_left_cancel"
+          ],
+          "simps": [
+            "Units.inv_mul",
+            "mul_assoc",
+            "one_mul",
+            "Units.Simps.val_inv",
+            "Units.inv_eq_val_inv"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned16",
+          "kind": "hammerCore",
+          "fact_count": 7,
+          "simp_count": 5,
+          "facts": [
+            "Units.inv_mul",
+            "mul_assoc",
+            "one_mul",
+            "Units.inv_eq_val_inv",
+            "Units.commute_inv_coe",
+            "mul_left_cancel_iff",
+            "mul_left_cancel"
+          ],
+          "simps": [
+            "Units.inv_mul",
+            "mul_assoc",
+            "one_mul",
+            "Units.Simps.val_inv",
+            "Units.inv_eq_val_inv"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned32",
+          "kind": "hammerCore",
+          "fact_count": 7,
+          "simp_count": 5,
+          "facts": [
+            "Units.inv_mul",
+            "mul_assoc",
+            "one_mul",
+            "Units.inv_eq_val_inv",
+            "Units.commute_inv_coe",
+            "mul_left_cancel_iff",
+            "mul_left_cancel"
+          ],
+          "simps": [
+            "Units.inv_mul",
+            "mul_assoc",
+            "one_mul",
+            "Units.Simps.val_inv",
+            "Units.inv_eq_val_inv"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::WeierstrassCurve.j_eq_zero_iff'",
+      "theorem": "WeierstrassCurve.j_eq_zero_iff'",
+      "file_path": "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+      "families": [
+        "aesop",
+        "hammerCore",
+        "simp",
+        "simp_all",
+        "simpa",
+        "solve_by_elim"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 9,
+          "simp_count": 9,
+          "facts": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.isUnit_Δ",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.b_relation",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆"
+          ],
+          "simps": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.b₄",
+            "WeierstrassCurve.b₆",
+            "WeierstrassCurve.c₄",
+            "WeierstrassCurve.Δ'",
+            "WeierstrassCurve.c₆",
+            "WeierstrassCurve.twoTorsionPolynomial",
+            "WeierstrassCurve.j",
+            "WeierstrassCurve.map"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 10,
+          "simp_count": 16,
+          "facts": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.isUnit_Δ",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.b_relation",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆",
+            "WeierstrassCurve.c_relation"
+          ],
+          "simps": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.b₄",
+            "WeierstrassCurve.b₆",
+            "WeierstrassCurve.c₄",
+            "WeierstrassCurve.Δ'",
+            "WeierstrassCurve.c₆",
+            "WeierstrassCurve.twoTorsionPolynomial",
+            "WeierstrassCurve.j",
+            "WeierstrassCurve.map",
+            "WeierstrassCurve.Δ",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆"
+          ]
+        },
+        {
+          "action": "hammerCore_core",
+          "kind": "hammerCore",
+          "fact_count": 1,
+          "simp_count": 1,
+          "facts": [
+            "Units.mul_right_eq_zero"
+          ],
+          "simps": [
+            "Units.mul_right_eq_zero"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 9,
+          "simp_count": 9,
+          "facts": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.isUnit_Δ",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.b_relation",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆"
+          ],
+          "simps": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.b₄",
+            "WeierstrassCurve.b₆",
+            "WeierstrassCurve.c₄",
+            "WeierstrassCurve.Δ'",
+            "WeierstrassCurve.c₆",
+            "WeierstrassCurve.twoTorsionPolynomial",
+            "WeierstrassCurve.j",
+            "WeierstrassCurve.map"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned16",
+          "kind": "hammerCore",
+          "fact_count": 10,
+          "simp_count": 16,
+          "facts": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.isUnit_Δ",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.b_relation",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆",
+            "WeierstrassCurve.c_relation"
+          ],
+          "simps": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.b₄",
+            "WeierstrassCurve.b₆",
+            "WeierstrassCurve.c₄",
+            "WeierstrassCurve.Δ'",
+            "WeierstrassCurve.c₆",
+            "WeierstrassCurve.twoTorsionPolynomial",
+            "WeierstrassCurve.j",
+            "WeierstrassCurve.map",
+            "WeierstrassCurve.Δ",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned32",
+          "kind": "hammerCore",
+          "fact_count": 10,
+          "simp_count": 16,
+          "facts": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.isUnit_Δ",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.b_relation",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆",
+            "WeierstrassCurve.c_relation"
+          ],
+          "simps": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.b₄",
+            "WeierstrassCurve.b₆",
+            "WeierstrassCurve.c₄",
+            "WeierstrassCurve.Δ'",
+            "WeierstrassCurve.c₆",
+            "WeierstrassCurve.twoTorsionPolynomial",
+            "WeierstrassCurve.j",
+            "WeierstrassCurve.map",
+            "WeierstrassCurve.Δ",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.b₄",
+            "WeierstrassCurve.b₆",
+            "WeierstrassCurve.c₄",
+            "WeierstrassCurve.Δ'",
+            "WeierstrassCurve.c₆",
+            "WeierstrassCurve.twoTorsionPolynomial",
+            "WeierstrassCurve.j",
+            "WeierstrassCurve.map"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 16,
+          "facts": [],
+          "simps": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.b₄",
+            "WeierstrassCurve.b₆",
+            "WeierstrassCurve.c₄",
+            "WeierstrassCurve.Δ'",
+            "WeierstrassCurve.c₆",
+            "WeierstrassCurve.twoTorsionPolynomial",
+            "WeierstrassCurve.j",
+            "WeierstrassCurve.map",
+            "WeierstrassCurve.Δ",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 16,
+          "facts": [],
+          "simps": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.b₄",
+            "WeierstrassCurve.b₆",
+            "WeierstrassCurve.c₄",
+            "WeierstrassCurve.Δ'",
+            "WeierstrassCurve.c₆",
+            "WeierstrassCurve.twoTorsionPolynomial",
+            "WeierstrassCurve.j",
+            "WeierstrassCurve.map",
+            "WeierstrassCurve.Δ",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.b₄",
+            "WeierstrassCurve.b₆",
+            "WeierstrassCurve.c₄",
+            "WeierstrassCurve.Δ'",
+            "WeierstrassCurve.c₆",
+            "WeierstrassCurve.twoTorsionPolynomial",
+            "WeierstrassCurve.j",
+            "WeierstrassCurve.map"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 9,
+          "facts": [],
+          "simps": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.b₄",
+            "WeierstrassCurve.b₆",
+            "WeierstrassCurve.c₄",
+            "WeierstrassCurve.Δ'",
+            "WeierstrassCurve.c₆",
+            "WeierstrassCurve.twoTorsionPolynomial",
+            "WeierstrassCurve.j",
+            "WeierstrassCurve.map"
+          ]
+        },
+        {
+          "action": "solve_by_elim_core",
+          "kind": "solve_by_elim",
+          "fact_count": 1,
+          "simp_count": 0,
+          "facts": [
+            "Units.mul_right_eq_zero"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned",
+          "kind": "solve_by_elim",
+          "fact_count": 9,
+          "simp_count": 0,
+          "facts": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.isUnit_Δ",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.b_relation",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned16",
+          "kind": "solve_by_elim",
+          "fact_count": 10,
+          "simp_count": 0,
+          "facts": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.isUnit_Δ",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.b_relation",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆",
+            "WeierstrassCurve.c_relation"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned32",
+          "kind": "solve_by_elim",
+          "fact_count": 10,
+          "simp_count": 0,
+          "facts": [
+            "Units.mul_right_eq_zero",
+            "WeierstrassCurve.coe_Δ'",
+            "WeierstrassCurve.isUnit_Δ",
+            "WeierstrassCurve.map_b₆",
+            "WeierstrassCurve.map_b₄",
+            "WeierstrassCurve.map_Δ",
+            "WeierstrassCurve.b_relation",
+            "WeierstrassCurve.map_b₂",
+            "WeierstrassCurve.map_c₆",
+            "WeierstrassCurve.c_relation"
+          ],
+          "simps": []
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::continuousWithinAt_singleton",
+      "theorem": "continuousWithinAt_singleton",
+      "file_path": "Mathlib/Topology/ContinuousOn.lean",
+      "families": [
+        "aesop",
+        "hammerCore",
+        "simp",
+        "simp_all",
+        "simpa"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core",
+          "kind": "aesop",
+          "fact_count": 3,
+          "simp_count": 3,
+          "facts": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 5,
+          "simp_count": 3,
+          "facts": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "continuousWithinAt_of_notMem_closure",
+            "continuousWithinAt_univ"
+          ],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 5,
+          "simp_count": 3,
+          "facts": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "continuousWithinAt_of_notMem_closure",
+            "continuousWithinAt_univ"
+          ],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned32",
+          "kind": "aesop",
+          "fact_count": 5,
+          "simp_count": 3,
+          "facts": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "continuousWithinAt_of_notMem_closure",
+            "continuousWithinAt_univ"
+          ],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned32_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "aesop_core_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "aesop_learned16",
+          "kind": "aesop",
+          "fact_count": 4,
+          "simp_count": 3,
+          "facts": [
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "continuousWithinAt_of_notMem_closure",
+            "continuousWithinAt_univ"
+          ],
+          "simps": [
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "ContinuousWithinAt"
+          ]
+        },
+        {
+          "action": "aesop_learned16_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "ContinuousWithinAt"
+          ]
+        },
+        {
+          "action": "aesop_learned32",
+          "kind": "aesop",
+          "fact_count": 4,
+          "simp_count": 3,
+          "facts": [
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "continuousWithinAt_of_notMem_closure",
+            "continuousWithinAt_univ"
+          ],
+          "simps": [
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "ContinuousWithinAt"
+          ]
+        },
+        {
+          "action": "aesop_learned32_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "ContinuousWithinAt"
+          ]
+        },
+        {
+          "action": "aesop_learned8",
+          "kind": "aesop",
+          "fact_count": 4,
+          "simp_count": 3,
+          "facts": [
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "continuousWithinAt_of_notMem_closure",
+            "continuousWithinAt_univ"
+          ],
+          "simps": [
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "ContinuousWithinAt"
+          ]
+        },
+        {
+          "action": "aesop_learned8_simps",
+          "kind": "aesop",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "ContinuousWithinAt"
+          ]
+        },
+        {
+          "action": "hammerCore_core",
+          "kind": "hammerCore",
+          "fact_count": 3,
+          "simp_count": 3,
+          "facts": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 5,
+          "simp_count": 3,
+          "facts": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "continuousWithinAt_of_notMem_closure",
+            "continuousWithinAt_univ"
+          ],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned16",
+          "kind": "hammerCore",
+          "fact_count": 5,
+          "simp_count": 3,
+          "facts": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "continuousWithinAt_of_notMem_closure",
+            "continuousWithinAt_univ"
+          ],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned32",
+          "kind": "hammerCore",
+          "fact_count": 5,
+          "simp_count": 3,
+          "facts": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds",
+            "continuousWithinAt_of_notMem_closure",
+            "continuousWithinAt_univ"
+          ],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "simp_all_core",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned16",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "simp_all_core_plus_learned32",
+          "kind": "simp_all",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "simp_core",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "simp_core_plus_learned",
+          "kind": "simp",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "simpa_core",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        },
+        {
+          "action": "simpa_core_plus_learned",
+          "kind": "simpa",
+          "fact_count": 0,
+          "simp_count": 3,
+          "facts": [],
+          "simps": [
+            "ContinuousWithinAt",
+            "nhdsWithin_singleton",
+            "tendsto_pure_nhds"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::dist_eq_norm_inv_mul'",
+      "theorem": "dist_eq_norm_inv_mul'",
+      "file_path": "Mathlib/Analysis/Normed/Group/Basic.lean",
+      "families": [
+        "hammerCore"
+      ],
+      "verified_actions": [
+        {
+          "action": "hammerCore_core",
+          "kind": "hammerCore",
+          "fact_count": 2,
+          "simp_count": 2,
+          "facts": [
+            "dist_comm",
+            "dist_eq_norm_inv_mul"
+          ],
+          "simps": [
+            "dist_comm",
+            "dist_eq_norm_inv_mul"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned",
+          "kind": "hammerCore",
+          "fact_count": 2,
+          "simp_count": 2,
+          "facts": [
+            "dist_comm",
+            "dist_eq_norm_inv_mul"
+          ],
+          "simps": [
+            "dist_comm",
+            "dist_eq_norm_inv_mul"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned16",
+          "kind": "hammerCore",
+          "fact_count": 2,
+          "simp_count": 2,
+          "facts": [
+            "dist_comm",
+            "dist_eq_norm_inv_mul"
+          ],
+          "simps": [
+            "dist_comm",
+            "dist_eq_norm_inv_mul"
+          ]
+        },
+        {
+          "action": "hammerCore_core_plus_learned32",
+          "kind": "hammerCore",
+          "fact_count": 2,
+          "simp_count": 2,
+          "facts": [
+            "dist_comm",
+            "dist_eq_norm_inv_mul"
+          ],
+          "simps": [
+            "dist_comm",
+            "dist_eq_norm_inv_mul"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::isMinOn_Ioi_of_deriv",
+      "theorem": "isMinOn_Ioi_of_deriv",
+      "file_path": "Mathlib/Analysis/Calculus/DerivativeTest.lean",
+      "families": [
+        "hammer"
+      ],
+      "verified_actions": [
+        {
+          "action": "hammer_core_plus_learned16",
+          "kind": "hammer",
+          "fact_count": 23,
+          "simp_count": 0,
+          "facts": [
+            "ContinuousAt",
+            "DifferentiableOn",
+            "IsMinOn",
+            "Set.Ioo",
+            "antitoneOn_of_deriv_nonpos",
+            "convex_Ici",
+            "convex_Ioc",
+            "deriv",
+            "isMinOn_Ioi_of_anti_mono",
+            "monotoneOn_of_deriv_nonneg",
+            "deriv_zero_of_not_differentiableAt",
+            "continuousOn_Ici",
+            "inf_eq_of_isMinOn",
+            "continuousOn_Iic",
+            "continuousOn_Icc",
+            "isMinOn_Ioo_of_anti_mono",
+            "not_differentiableWithinAt_of_deriv_tendsto_atTop_Ioi",
+            "not_differentiableWithinAt_of_deriv_tendsto_atTop_Iio",
+            "not_differentiableWithinAt_of_deriv_tendsto_atBot_Ioi",
+            "continuousOn_Ico",
+            "continuousAt_of_monotoneOn_of_exists_between",
+            "continuousOn_Ioc",
+            "isMinOn_Ico_of_anti_mono"
+          ],
+          "simps": []
+        },
+        {
+          "action": "hammer_core_plus_learned32",
+          "kind": "hammer",
+          "fact_count": 27,
+          "simp_count": 0,
+          "facts": [
+            "ContinuousAt",
+            "DifferentiableOn",
+            "IsMinOn",
+            "Set.Ioo",
+            "antitoneOn_of_deriv_nonpos",
+            "convex_Ici",
+            "convex_Ioc",
+            "deriv",
+            "isMinOn_Ioi_of_anti_mono",
+            "monotoneOn_of_deriv_nonneg",
+            "deriv_zero_of_not_differentiableAt",
+            "continuousOn_Ici",
+            "inf_eq_of_isMinOn",
+            "continuousOn_Iic",
+            "continuousOn_Icc",
+            "isMinOn_Ioo_of_anti_mono",
+            "not_differentiableWithinAt_of_deriv_tendsto_atTop_Ioi",
+            "not_differentiableWithinAt_of_deriv_tendsto_atTop_Iio",
+            "not_differentiableWithinAt_of_deriv_tendsto_atBot_Ioi",
+            "continuousOn_Ico",
+            "continuousAt_of_monotoneOn_of_exists_between",
+            "continuousOn_Ioc",
+            "isMinOn_Ico_of_anti_mono",
+            "continuousWithinAt_left_of_monotoneOn_of_closure_image_mem_nhdsWithin",
+            "continuousWithinAt_left_of_monotoneOn_of_exists_between",
+            "continuousWithinAt_right_of_monotoneOn_of_exists_between",
+            "isMinOn_Ioc_of_anti_mono"
+          ],
+          "simps": []
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::mem_balancedCore_iff",
+      "theorem": "mem_balancedCore_iff",
+      "file_path": "Mathlib/Analysis/LocallyConvex/BalancedCoreHull.lean",
+      "families": [
+        "aesop"
+      ],
+      "verified_actions": [
+        {
+          "action": "aesop_core_plus_learned",
+          "kind": "aesop",
+          "fact_count": 8,
+          "simp_count": 7,
+          "facts": [
+            "Balanced",
+            "Set.mem_sUnion",
+            "Set.mem_setOf_eq",
+            "balancedCore",
+            "balancedCore_empty",
+            "balancedCore_subset",
+            "balanced_iff_neg_mem",
+            "SetRel.mem_core"
+          ],
+          "simps": [
+            "Balanced",
+            "Set.mem_sUnion",
+            "Set.mem_setOf_eq",
+            "balancedCore",
+            "balancedHull",
+            "balancedCoreAux",
+            "SetRel.mem_core"
+          ]
+        },
+        {
+          "action": "aesop_core_plus_learned16",
+          "kind": "aesop",
+          "fact_count": 8,
+          "simp_count": 7,
+          "facts": [
+            "Balanced",
+            "Set.mem_sUnion",
+            "Set.mem_setOf_eq",
+            "balancedCore",
+            "balancedCore_empty",
+            "balancedCore_subset",
+            "balanced_iff_neg_mem",
+            "SetRel.mem_core"
+          ],
+          "simps": [
+            "Balanced",
+            "Set.mem_sUnion",
+            "Set.mem_setOf_eq",
+            "balancedCore",
+            "balancedHull",
+            "balancedCoreAux",
+            "SetRel.mem_core"
+          ]
+        }
+      ]
+    },
+    {
+      "goal_id": "mathlib4::rTensor.inverse_comp_rTensor",
+      "theorem": "rTensor.inverse_comp_rTensor",
+      "file_path": "Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean",
+      "families": [
+        "solve_by_elim"
+      ],
+      "verified_actions": [
+        {
+          "action": "solve_by_elim_core",
+          "kind": "solve_by_elim",
+          "fact_count": 3,
+          "simp_count": 0,
+          "facts": [
+            "LinearMap.range",
+            "rTensor.inverse",
+            "rTensor.inverse_of_rightInverse_comp_rTensor"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned",
+          "kind": "solve_by_elim",
+          "fact_count": 11,
+          "simp_count": 0,
+          "facts": [
+            "LinearMap.range",
+            "rTensor.inverse",
+            "rTensor.inverse_of_rightInverse_comp_rTensor",
+            "lTensor_exact",
+            "TensorProduct.map_surjective",
+            "rTensor.inverse_apply",
+            "le_comap_range_rTensor",
+            "lTensor_mkQ",
+            "le_comap_range_lTensor",
+            "lTensor.inverse_apply",
+            "LinearMap.baseChange_surjective"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned16",
+          "kind": "solve_by_elim",
+          "fact_count": 15,
+          "simp_count": 0,
+          "facts": [
+            "LinearMap.range",
+            "rTensor.inverse",
+            "rTensor.inverse_of_rightInverse_comp_rTensor",
+            "lTensor_exact",
+            "TensorProduct.map_surjective",
+            "rTensor.inverse_apply",
+            "le_comap_range_rTensor",
+            "lTensor_mkQ",
+            "le_comap_range_lTensor",
+            "lTensor.inverse_apply",
+            "LinearMap.baseChange_surjective",
+            "LinearMap.lTensor_surjective",
+            "LinearMap.rTensor_surjective",
+            "lTensor.inverse_comp_lTensor",
+            "LinearMap.range_comp_le_range"
+          ],
+          "simps": []
+        },
+        {
+          "action": "solve_by_elim_core_plus_learned32",
+          "kind": "solve_by_elim",
+          "fact_count": 15,
+          "simp_count": 0,
+          "facts": [
+            "LinearMap.range",
+            "rTensor.inverse",
+            "rTensor.inverse_of_rightInverse_comp_rTensor",
+            "lTensor_exact",
+            "TensorProduct.map_surjective",
+            "rTensor.inverse_apply",
+            "le_comap_range_rTensor",
+            "lTensor_mkQ",
+            "le_comap_range_lTensor",
+            "lTensor.inverse_apply",
+            "LinearMap.baseChange_surjective",
+            "LinearMap.lTensor_surjective",
+            "LinearMap.rTensor_surjective",
+            "lTensor.inverse_comp_lTensor",
+            "LinearMap.range_comp_le_range"
+          ],
+          "simps": []
+        }
+      ]
+    }
+  ],
+  "matrix_json": "outputs\\mathlib430_pretheorem_action_matrix_scaled230_aesop_ablation_merged.json"
+}
