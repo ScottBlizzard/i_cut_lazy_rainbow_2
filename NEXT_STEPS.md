@@ -1,12 +1,12 @@
 # NEXT_STEPS
 
-Updated: 2026-06-22
+Updated: 2026-06-23
 
 This file only keeps unfinished work after the Mathlib 4.30 verified pivot. Completed trace-core, bridge, generated Gate 1/2, Mathlib compatibility, cleaning, replay diagnostics, and current proof-action pilots are recorded in `experiment_report.md`.
 
 ## Current Judgment
 
-The route is alive, but not yet paper-strong.
+The route is alive, but the paper must now be framed as action-conditional evidence allocation, not as a learned adaptive-router claim.
 
 - Original-file/pre-theorem replay is feasible at useful scale: `outputs/mathlib430_pretheorem_original_tactic_probe_490.md` verified 230/490 original traced tactic scripts.
 - Hammer-only is weak because the first traced-corpus positive is empty-premise-solvable.
@@ -18,11 +18,13 @@ The route is alive, but not yet paper-strong.
 - Budgeted policy gate is now complete through the Aesop-ablation matrix. OOF fixed greedy K=2 reaches 55/230, K=4 reaches 57/230, and the oracle is 58/230; residual adaptive policies still do not clearly beat the fixed typed portfolio.
 - Fixed typed portfolio is now the strongest verified route: `aesop_core_plus_learned`, `hammerCore_core_plus_learned`, `hammer_core_plus_learned16`, and `solve_by_elim_core` reach 58/230 train-fitted and 57/230 OOF.
 - The extended action run is complete. `aesop_core_plus_learned` is the new best static action with 38/230 verified goals.
-- The focused `aesop` ablation is complete. `facts+simps` solves 38/230, while facts-only solves 5/230 and simps-only solves 4/230; `core+learned32` drops to 7/230 group coverage, so broad insertion is harmful.
+- The focused `aesop` counterfactual control is complete: `analysis/mathlib430_aesop_counterfactual_controls.md` shows `core+learned8` facts+simps solves 38/230, facts-only solves 5/230, simps-only solves 4/230, the single-channel union solves only 7/230, and 34 goals are joint-only. Increasing facts+simps exposure from 8 to 32 names loses 35 goals.
 - Broad candidate insertion still damages reconstruction unless names are filtered and routed through the right interface.
-- `iclr2027/paper.tex` has been rewritten around the typed proof-action portfolio mainline and compiled to `iclr2027/paper.pdf`. The current paper claim is scoped as a verified interface-mechanism result, not as adaptive routing or a full theorem-proving leaderboard.
+- `outputs/mathlib430_typed_allocator_gate_scaled230_aesop_ablation.md` completes the stronger allocator gate: pure logreg/CNB do not beat fixed, and fixed-prefix residual logreg/CNB only match fixed K=4 at 57/230. Learned adaptive allocation remains outside the main claim.
+- `iclr2027/paper.tex` has been rewritten around the action-conditional evidence-allocation mainline. The current paper claim is scoped as a verified interface-mechanism result, not as adaptive routing or a full theorem-proving leaderboard.
 - `analysis/paper_adversarial_review_typed_portfolio.md` records the current reviewer risks, claim-evidence map, and exact next experiments.
 - `analysis/deep_research_report_maintrack_review.md` independently agrees with the current strategic order: do not restart, strengthen the typed interface-mechanism paper, run E1 interface filtering first, run E2 paired stability second, and only attempt E3 adaptive routing if E1 creates new headroom or action diversity.
+- `analysis/deep-research-report (2).md` recommends the stronger framing: treat retrieved names as evidence that must be compiled into typed proof interfaces. This is now adopted in `iclr2027/paper.tex`.
 - E1 strict interface filtering is complete: `analysis/mathlib430_e1_strict_interface_filtering.md` shows filtered-only oracle 4/230, combined oracle still 58/230, and no new oracle goals. The audit is useful because names are mostly available (7321/7497) and target/alias hits are low (24), but strict theorem-like/simp-attr filtering over-cleans the interface and destroys most Aesop successes.
 
 ## P1. Stabilize The Replayable Subset
@@ -55,7 +57,7 @@ Pending:
 1. Do not continue stricter theorem-like/simp-attr filtering variants as a mainline: E1 did not add oracle goals and reduced filtered-only oracle to 4/230.
 2. If filtering is revisited, use it as a more surgical diagnostic, not as another broad strict policy. Candidate declaration spans would be needed before claiming same-file-later leak filtering.
 
-## P3. Improve Proof-Action Routing
+## P3. Action-Conditional Evidence Allocation
 
 Current pilot:
 
@@ -65,25 +67,34 @@ Current pilot:
 - 508 non-empty-premise verified attempts.
 - Oracle 58/230 vs best static 38/230.
 - 29 strict action-dependent goals.
-- Budgeted policy gate: fixed greedy K=2 reaches 55/230 OOF, fixed greedy K=4 reaches 57/230 OOF, train-fitted K=4 reaches 58/230. Residual NB/kNN do not clearly beat the typed portfolio baseline.
+- Budgeted policy gate: fixed greedy K=2 reaches 55/230 OOF, fixed greedy K=4 reaches 57/230 OOF, train-fitted K=4 reaches 58/230. Residual NB/kNN/logreg/CNB do not beat or compress the fixed typed control.
+- Aesop counterfactual gate: facts+simps 38/230, facts-only 5/230, simps-only 4/230, single-channel union 7/230, 34 joint-only goals, and top-32 facts+simps drops to 3/230.
 - 48-goal negative branch remains valid: naive rewrite/simp-only attempts had 0/288 verified.
+
+Completed:
+
+1. Aesop matched source/budget counterfactual controls.
+2. Stronger typed allocator/compression gate with logreg and ComplementNB.
+3. Strict interface filtering boundary audit.
+4. Paper rewrite around action-conditional evidence allocation.
 
 Pending:
 
-1. Keep the paper mainline fixed as `aesop`-augmented typed proof-action portfolios unless a new verified experiment changes the evidence.
-2. Produce a paired portfolio stability table: per-fold K=1/2/3/4, paired wins/losses versus best single action and `hammer_empty`, strict-only coverage, and only-family counts. The lightweight output `outputs/mathlib430_fixed_portfolio_stability_scaled230_e1_filtered.md` already provides the first fixed-greedy per-fold table; extend it with clearer paired win/loss summaries for paper use.
-3. Treat E1 as a robustness boundary: strict filtering is useful evidence against unknown-identifier/target-leak explanations, but it does not improve the method.
+1. Compile and visually check the rewritten paper PDF.
+2. If time permits, create a cleaner paired stability appendix table from `outputs/mathlib430_fixed_portfolio_stability_scaled230_e1_filtered.md`; the current main text already has the necessary K=1/2/4 OOF numbers.
+3. Consider a minimal external anchor only if it can be cleanly scoped as orthogonal to global retrieval. Do not add a weak or unofficial LeanSearch-style proxy to the main table.
 4. Do not continue naive `rw` / `simp only` templates without a typed rewrite-direction selector.
 5. Do not scale `simp_rw` unless a typed rewrite-direction selector is added.
 
-## P4. Traced-Corpus Verified Gate 2
+## P4. External Anchor Or Corpus Expansion
 
-Prerequisite: convert the current oracle headroom, 58/230 vs 38/230, into a policy gain under matched compute.
+Prerequisite: the main action-conditional allocation story is stable.
 
 Pending:
 
-1. Report paired stability for fixed typed portfolios versus oracle, while clearly marking the replayable-subset boundary.
-2. Only add true/masked/shuffled controls if a new policy first beats fixed typed portfolios under matched compute.
+1. Only attempt an external anchor if it is a clean plug-in comparison: same retrieved candidates or a clearly stated upstream retriever, then compare typed evidence allocation downstream.
+2. If a clean external anchor is not feasible quickly, keep the limitation explicit instead of polluting the main table.
+3. Expand replayable coverage beyond 490 cleaned traces only after the paper story is stable or if reviewers/GPTPro identify subset size as the dominant remaining blocker.
 
 ## P5. Verified Failure-Conditioned Policy
 
@@ -99,7 +110,11 @@ Pending:
 Prepared inputs:
 
 - `analysis/deep_research_report_maintrack_review.md`
+- `analysis/deep-research-report (2).md`
+- `analysis/deep_research_report_action_conditional_allocation.md`
 - `analysis/mathlib430_e1_strict_interface_filtering.md`
+- `analysis/mathlib430_aesop_counterfactual_controls.md`
+- `outputs/mathlib430_typed_allocator_gate_scaled230_aesop_ablation.md`
 - `analysis/paper_adversarial_review_typed_portfolio.md`
 - `outputs/mathlib430_replayable490_goal_ids.txt`
 - `outputs/mathlib430_replayable490_splits.json` with 138 train / 46 dev / 46 test goals.

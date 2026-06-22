@@ -24,7 +24,7 @@
 
 \newtheorem{proposition}{Proposition}
 
-\newcommand{\tap}{\textsc{TAP-Hammer}}
+\newcommand{\tap}{\textsc{ACE-Hammer}}
 \newcommand{\far}{\textsc{FAR-Hammer}}
 \newcommand{\fars}{\textsc{FAR}}
 \newcommand{\best}[1]{\textbf{\textcolor{teal!70!black}{#1}}}
@@ -34,34 +34,34 @@
 \newcommand{\metricdown}[1]{#1$\downarrow$}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
-\title{Premise Selection Is Not Enough: Typed Proof-Action Portfolios for Lean}
+\title{Premise Selection Is Not Enough: Action-Conditional Evidence Allocation for Lean}
 \author{Anonymous}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Premise selection is usually treated as the problem of choosing which lemmas to send to a Lean hammer. Our experiments show that this view is incomplete: the same selected names can succeed or fail depending on whether they are exposed as facts, simp lemmas, HammerCore inputs, or Aesop rules. We study \emph{typed proof-action intervention}, where a method chooses both evidence and the Lean interface through which that evidence reaches proof search. We introduce \tap, a compute-budgeted proof-action portfolio over replayable Mathlib theorem contexts, and evaluate it in a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness. On 230 replayable traced-corpus goals, the typed action grid reaches 58/230 kernel-verified proofs versus 38/230 for the best single action; a four-retry fixed portfolio reaches 57/230 out of fold and 58/230 when train-fitted. The mechanism is counterintuitive: Aesop with selected names exposed jointly as facts and simp lemmas solves 38/230 goals, while facts-only solves 5/230, simps-only solves 4/230, and broader 32-name exposure drops sharply. We also report trace-core and bridge experiments showing why failure feedback and premise budgets are useful discovery signals, but the supported main claim is sharper: for bounded Lean proof search, premise selection must be typed by proof action, not merely expanded.
+Premise selection is usually treated as the problem of ranking which lemmas to send to a Lean prover. This view is incomplete: after names are retrieved, they must still be compiled into the proof interface that can consume them. We study \emph{action-conditional evidence allocation}, where a method chooses not only selected names but also whether they enter Lean as Hammer facts, HammerCore inputs, simp lemmas, Aesop facts, Aesop simp rules, or elimination facts. We introduce \tap, a verified typed evidence compiler evaluated in a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness. On 230 replayable traced-corpus goals, the typed action grid reaches 58/230 kernel-verified proofs versus 38/230 for the best single action; a four-retry fixed portfolio, used as the strongest matched-compute control, reaches 57/230 out of fold and 58/230 when train-fitted. The mechanism is counterintuitive: under the same Aesop source budget, facts+simps exposure solves 38/230 goals, while facts-only solves 5/230, simps-only solves 4/230, and the union of the two single-channel controls solves only 7/230. Broader 32-name exposure also loses 35 of the 38 top-8 facts+simps successes. Stronger logistic and ComplementNB allocators do not beat or compress the fixed K=4 control, so we present adaptive routing as a boundary rather than a claim. The supported main conclusion is sharper: for bounded Lean proof search, retrieved evidence has an interface type.
 \end{abstract}
 
 \section{Introduction}
 
-Lean hammers and neural theorem provers depend on premise selection: given a proof goal, the system must choose accessible lemmas that make proof search tractable and reconstructable in Lean. Modern systems therefore focus on retrieving better premises before running a backend prover \citep{yang2023leandojo,zhu2025premise,gao2026leansearch}. This framing hides a second decision that is just as important in Lean: once a name is selected, it must enter a concrete proof interface. A name can be used as a Hammer premise, a HammerCore fact, a simp lemma, an Aesop safe rule, or part of a tactic-specific local context. These interfaces are not interchangeable.
+Lean hammers and neural theorem provers depend on premise selection: given a proof goal, the system must choose accessible lemmas that make proof search tractable and reconstructable in Lean. Modern systems therefore focus on retrieving better premises before running a backend prover \citep{yang2023leandojo,zhu2025premise,gao2026leansearch}. This framing hides a second decision that is just as important in Lean: once a name is selected, it must be assigned to a concrete proof interface. A name can be used as a Hammer premise, a HammerCore fact, a simp lemma, an Aesop fact rule, an Aesop simp rule, or part of a tactic-specific local context. These interfaces are not interchangeable, so a retrieved premise list is not yet an executable proof-search intervention.
 
-The central challenge is that useful evidence is not monotonic under either quantity or interface. Adding more names can improve proof-core coverage, but it can also increase search branching, timeout risk, and reconstruction ambiguity. More subtly, exposing a name through the wrong tactic interface can make it inert or harmful even when the name itself is relevant. Our Mathlib experiments make this visible: Aesop with selected names exposed jointly as facts and simp lemmas proves 38/230 replayable traced-corpus goals, while facts-only exposure proves 5/230 and simps-only exposure proves 4/230. Increasing the selected Aesop pool to 32 names also hurts sharply. The key observation is therefore not simply that ``more premises can hurt'', but that premise evidence must be typed by the proof action that consumes it.
+The central challenge is that useful evidence is not monotonic under either quantity or interface. Adding more names can improve proof-core coverage, but it can also increase search branching, timeout risk, and reconstruction ambiguity. More subtly, exposing the same source of evidence through the wrong tactic interface can make it inert or harmful even when the names are relevant. Our Mathlib experiments make this visible: Aesop with selected names exposed jointly as facts and simp lemmas proves 38/230 replayable traced-corpus goals, while facts-only exposure proves 5/230 and simps-only exposure proves 4/230. The union of the two single-channel controls proves only 7/230, leaving 34 goals that are solved only by joint facts+simps exposure. Increasing the Aesop exposure budget from 8 to 32 names loses 35 of the top-8 successes. The key observation is therefore not simply that ``more premises can hurt'', but that retrieved evidence must be allocated to the interface channels that can consume it.
 
-We propose \tap, a typed proof-action portfolio for bounded Lean proof search. Given a replayable theorem context and a candidate set, \tap{} constructs a small set of proof actions that expose selected names through different Lean mechanisms: Hammer, HammerCore, simplification tactics, \texttt{solve\_by\_elim}, and Aesop variants that distinguish fact and simp channels. The method is deliberately compute-budgeted: every comparison starts from the same empty-premise Hammer attempt and then spends a fixed number of retry actions. This makes the main question reviewer-checkable: how much of the verified oracle headroom can a small typed portfolio recover, and which interfaces explain the gains?
+We propose \tap, an action-conditional evidence allocator for bounded Lean proof search. Given a replayable theorem context and a candidate set, \tap{} compiles selected names into typed proof actions: Hammer facts, HammerCore inputs, simplification lemmas, \texttt{solve\_by\_elim} facts, and Aesop fact/simp channels. The method is deliberately compute-budgeted: every comparison starts from the same empty-premise Hammer attempt and then spends a fixed number of retry actions. This makes the main question reviewer-checkable: how much of the verified oracle headroom comes from assigning evidence to the right interface, and can any learned allocator beat a strong fixed typed control?
 
-The main verified result is on non-generated replayable Mathlib theorem contexts. We migrate traced goals to a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness and identify 230 replayable goals from 490 cleaned traces. On this subset, the typed action grid reaches a 58/230 oracle, compared with 38/230 for the best single action. A fixed portfolio of four typed retry actions after \texttt{hammer\_empty} reaches 57/230 out of fold and 58/230 when train-fitted. The strict action-dependent subset contains 29 goals where the empty-premise attempt fails but some non-empty or non-default typed action succeeds; Aesop covers 20 of these goals and is the only successful family for 6.
+The main verified result is on non-generated replayable Mathlib theorem contexts. We migrate traced goals to a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness and identify 230 replayable goals from 490 cleaned traces. On this subset, the typed action grid reaches a 58/230 oracle, compared with 38/230 for the best single action. A fixed portfolio of four typed retry actions after \texttt{hammer\_empty} reaches 57/230 out of fold and 58/230 when train-fitted. This fixed sequence is not the proposed novelty; it is the hard matched-compute control that shows how large the interface-typing effect is. Stronger logistic and ComplementNB allocators match but do not beat the K=4 fixed control, so adaptive routing remains a future target.
 
-This paper makes three contributions. First, we formulate typed proof-action intervention as a distinct problem from premise retrieval: selected evidence must be routed through a Lean interface, not only ranked. Second, we implement and evaluate \tap{} in a real Mathlib 4.30 + LeanHammer 4.30 replay harness, showing that small typed portfolios recover nearly all current oracle headroom on the replayable subset. Third, we provide mechanism evidence and boundaries: Aesop facts+simps exposure is qualitatively different from facts-only or simps-only exposure, broad 32-name insertion is harmful, naive rewrite expansion has 0/288 verified successes, and low-capacity adaptive routing does not yet beat the fixed typed portfolio. Trace-core failure-feedback experiments remain important discovery evidence, but the current supported main claim is typed proof-action exposure.
+This paper makes three contributions. First, we formulate action-conditional evidence allocation as a distinct problem from premise retrieval: selected evidence must be compiled into a Lean interface, not only ranked. Second, we implement and evaluate \tap{} in a real Mathlib 4.30 + LeanHammer 4.30 replay harness, showing that small typed action sets recover nearly all current oracle headroom on the replayable subset. Third, we provide mechanism evidence and boundaries: Aesop facts+simps exposure is qualitatively different from facts-only or simps-only exposure, broad 32-name insertion is harmful, strict syntactic filtering does not explain the gains, and learned allocators do not yet beat the fixed typed control. Trace-core failure-feedback experiments remain important discovery evidence, but the current supported main claim is action-conditional evidence allocation.
 
 The scope is deliberately narrower than a full theorem-proving leaderboard. We treat fixed typed portfolios as strong matched-compute controls, not as weak baselines, and we do not claim adaptive routing until it beats them. We also distinguish controlled lexical retrieval proxies from full LeanSearch v2 reproductions, and bridge replay from open-ended proof generation. These boundaries keep the paper's claim reviewer-checkable: the contribution is a typed interface mechanism for selected evidence in Lean proof search.
 
 \section{Related Work}
 
 \paragraph{Premise selection for Lean.}
-Premise selection is a long-standing interface between theorem provers and large formal libraries. LeanDojo introduced infrastructure and benchmarks for retrieval-augmented theorem proving in Lean \citep{yang2023leandojo}. Recent work on Lean hammers studies learned premise ranking and ATP integration for Lean \citep{zhu2025premise}, while LeanSearch v2 focuses on global premise retrieval in Lean 4 \citep{gao2026leansearch}. These works motivate our setting and provide the strongest conceptual baselines: retrieve useful premises from a large library before proof search. Our distinction is that \tap{} studies the next interface decision after retrieval. It asks whether selected names should be exposed as Hammer facts, HammerCore inputs, simp lemmas, Aesop rules, or tactic-specific local evidence.
+Premise selection is a long-standing interface between theorem provers and large formal libraries. LeanDojo introduced infrastructure and benchmarks for retrieval-augmented theorem proving in Lean \citep{yang2023leandojo}. Recent work on Lean hammers studies learned premise ranking and ATP integration for Lean \citep{zhu2025premise}, while LeanSearch v2 focuses on global premise retrieval in Lean 4 \citep{gao2026leansearch}. These works motivate our setting and provide the strongest conceptual baselines: retrieve useful premises from a large library before proof search. Our distinction is that \tap{} studies the next interface decision after retrieval. It asks how selected names should be compiled into Hammer facts, HammerCore inputs, simp lemmas, Aesop fact rules, Aesop simp rules, or tactic-specific local evidence.
 
 \paragraph{Proof repair, compiler feedback, and agentic provers.}
 Several recent systems use Lean feedback to repair or generate proof text. APRIL learns to repair Lean proofs from compiler feedback \citep{wang2026repairlean}; APOLLO and OProver frame formal proving as a broader agentic collaboration or whole-proof search problem \citep{ospanov2025apollo,ma2026oprover}. Process-verified reinforcement learning also uses Lean verification as a training signal \citep{kim2026process}. \tap{} is complementary to these systems: it does not edit proof text or search over natural-language proof plans. Its object is the typed action by which selected names are supplied to Lean's existing proof mechanisms.
@@ -71,8 +71,8 @@ Search-guidance methods such as LeanProgress predict proof progress to steer the
 
 \section{Problem Formulation}
 
-\paragraph{Typed proof-action search under a fixed retry budget.}
-Let $g$ be a Lean goal and let $\mathcal{A}(g)$ be the accessible name set induced by imports, namespaces, declarations, and local context. A typed proof action is a pair $a=(\tau,P)$, where $\tau$ is a Lean interface such as Hammer, HammerCore, simplification, \texttt{solve\_by\_elim}, or Aesop, and $P\subset \mathcal{A}(g)$ is the set of names exposed through that interface. A proof-action selector chooses a sequence
+\paragraph{Action-conditional evidence allocation under a fixed retry budget.}
+Let $g$ be a Lean goal and let $\mathcal{A}(g)$ be the accessible name set induced by imports, namespaces, declarations, and local context. A typed proof action is a pair $a=(\tau,P)$, where $\tau$ is a Lean interface such as Hammer, HammerCore, simplification, \texttt{solve\_by\_elim}, or Aesop, and $P\subset \mathcal{A}(g)$ is the set of names exposed through that interface. An evidence allocator chooses a typed evidence program, represented as a sequence
 \[
 a_t=(\tau_t,P_t), \qquad |P_t| \le k_t,
 \]
@@ -80,7 +80,7 @@ and runs each action under a search budget $B_t$. The prover returns either a ke
 \[
 a_{t+1} = \pi(g, a_{\le t}, F_t, H_t),
 \]
-where $H_t$ includes previous attempt history and candidate features. The objective is to maximize verified success under a fixed total retry budget, rather than to maximize static premise recall at a single $k$.
+where $H_t$ includes previous attempt history and candidate features. The objective is to maximize verified success under a fixed total retry budget, rather than to maximize static premise recall at a single $k$. A fixed typed portfolio is one allocator; a learned action router is another. The experiments ask whether interface typing itself creates headroom before claiming that learned routing has solved the allocation problem.
 
 \paragraph{Evaluation axes.}
 We separate three notions that are often conflated. \emph{Kernel-verified proof-action success} means that a patched Lean file containing a candidate proof action checks successfully. This is the main verified metric for \tap{}. \emph{Trace-core success} means that the selected premise set covers the traced proof-core premises for a goal; it is a premise-recovery metric, not a full proving metric. \emph{Bridge verified success} is stricter than trace-core success: trace-core recovery must coincide with successful replay of the original traced tactic script in a real Lean process. Bridge verification is still not a full proof-generation benchmark, because it replays known tactic scripts, but it filters out trace-core cases that drift too far from Lean execution.
@@ -89,7 +89,7 @@ We separate three notions that are often conflated. \emph{Kernel-verified proof-
 
 \subsection{Overview}
 
-\tap{} treats a selected name as incomplete until it is assigned to a proof-action interface. Figure~\ref{fig:pipeline} gives the full loop. The system first builds a candidate pool and runs a shared empty-premise Hammer attempt. It then spends a fixed retry budget on typed actions that expose selected names as Hammer facts, HammerCore inputs, simp lemmas, \texttt{solve\_by\_elim} facts, or Aesop facts/simp rules. The important design choice is that the retry budget is spent across interfaces, not across larger untyped premise lists.
+\tap{} treats a selected name as incomplete until it is assigned to a proof-action interface. Figure~\ref{fig:pipeline} gives the full loop. The system first builds a candidate pool and runs a shared empty-premise Hammer attempt. It then spends a fixed retry budget on typed actions that expose selected names as Hammer facts, HammerCore inputs, simp lemmas, \texttt{solve\_by\_elim} facts, or Aesop facts/simp rules. The important design choice is that the retry budget is spent on compiling evidence into interfaces, not on blindly expanding a single untyped premise list.
 
 \begin{figure}[t]
 \centering
@@ -108,8 +108,8 @@ Shared baseline\\
 \end{tabular}
 &
 \begin{tabular}{c}
-Typed action\\
-portfolio
+Typed evidence\\
+allocator
 \end{tabular}
 &
 \begin{tabular}{c}
@@ -125,23 +125,23 @@ Names are exposed through fact, simp, or tactic-specific channels\\
 Evaluation: verified success, oracle gap, fixed-budget portfolio, and ablations
 \end{tabular}}
 \end{tabular}}
-\caption{\tap{} evaluates typed evidence exposure under a fixed retry budget. The same selected names can be routed through different Lean interfaces, and each routed action is checked by the Lean kernel.}
+\caption{\tap{} evaluates action-conditional evidence allocation under a fixed retry budget. Selected names are compiled into typed Lean interfaces, and each routed action is checked by the Lean kernel.}
 \label{fig:pipeline}
 \end{figure}
 
-\subsection{Typed Proof-Action Portfolio}
+\subsection{Typed Evidence Programs}
 
-The portfolio is built from action families that consume selected names differently. Hammer actions pass names as ordinary premises; HammerCore actions expose a smaller internal proof-search interface; simplification actions use selected names as rewrite/simp lemmas; \texttt{solve\_by\_elim} uses names as local facts; Aesop actions can add names as safe facts, simp rules, or both. For each replayable theorem context, we materialize a patched pre-theorem Lean file for each action and classify the result by running Lean with a fixed timeout.
+The allocator is built from action families that consume selected names differently. Hammer actions pass names as ordinary premises; HammerCore actions expose a smaller internal proof-search interface; simplification actions use selected names as rewrite/simp lemmas; \texttt{solve\_by\_elim} uses names as local facts; Aesop actions can add names as fact rules, simp rules, or both. For each replayable theorem context, we materialize a patched pre-theorem Lean file for each action and classify the result by running Lean with a fixed timeout.
 
-The fixed portfolio is chosen greedily on the training split and evaluated out of fold. Every policy receives the same first action, \texttt{hammer\_empty}, and then a retry budget $K$. This protocol makes the strongest control explicit: an adaptive policy is only useful if it beats the best fixed sequence of typed actions under the same number of Lean calls. In the current matrix, the train-fitted four-action portfolio after \texttt{hammer\_empty} is \texttt{aesop\_core\_plus\_learned}, \texttt{hammerCore\_core\_plus\_learned}, \texttt{hammer\_core\_plus\_learned16}, and \texttt{solve\_by\_elim\_core}.
+The fixed portfolio is chosen greedily on the training split and evaluated out of fold. Every policy receives the same first action, \texttt{hammer\_empty}, and then a retry budget $K$. This protocol makes the strongest control explicit: an adaptive policy is only useful if it beats or compresses the best fixed sequence of typed actions under the same Lean-call budget. In the current matrix, the train-fitted four-action portfolio after \texttt{hammer\_empty} is \texttt{aesop\_core\_plus\_learned}, \texttt{hammerCore\_core\_plus\_learned}, \texttt{hammer\_core\_plus\_learned16}, and \texttt{solve\_by\_elim\_core}.
 
 This design also prevents a common misreading of the method. The fixed portfolio is not intended to prove that a hand-written order is optimal; it is the hard control that any learned action router must beat. Its near-oracle performance is therefore evidence that interface typing itself is a large effect, while the absence of an adaptive win is reported as a boundary rather than hidden as a negative result.
 
 \subsection{Aesop Fact/Simp Exposure}
 
-Aesop is the most important new interface in the verified matrix, so we isolate how selected names enter it. Given a ranked name list, we split available names into fact candidates and simp candidates, then instantiate Aesop in three exposure modes: facts-only, simps-only, and facts+simps. We also vary source pools: core names, learned-only names, and core+learned names at budgets 8, 16, and 32. This ablation tests whether the Aesop gain is merely due to adding more names.
+Aesop is the most important new interface in the verified matrix, so we isolate how selected names enter it. Given a ranked name list, we split available names into fact candidates and simp candidates, then instantiate Aesop in three exposure modes: facts-only, simps-only, and facts+simps. We also vary source pools: core names, learned-only names, and core+learned names at budgets 8, 16, and 32. This gives a matched source/budget control: the goal and candidate source are fixed, while the channel assignment is removed, added, or widened.
 
-The Aesop ablation is not a new oracle-improving action set; its role is explanatory. Facts+simps exposure recovers the strong 38/230 Aesop result, while facts-only and simps-only collapse to 5/230 and 4/230. The 32-name variants are also worse than the 8/16-name variants. This supports the main mechanism claim: successful proof search depends on typed exposure and budgeted interface choice, not on untyped premise expansion.
+The Aesop ablation is not a new oracle-improving action set; its role is explanatory. For the best source, facts+simps exposure recovers the strong 38/230 Aesop result, while facts-only and simps-only collapse to 5/230 and 4/230. The union of the two single-channel controls solves only 7/230, and 34 goals are joint-only: they are solved by facts+simps but by neither single channel. The 32-name facts+simps variant solves only 3/230 and loses 35 of the top-8 successes. This supports the main mechanism claim: successful proof search depends on action-conditional channel assignment, not on untyped premise expansion.
 
 \subsection{Trace-Core Discovery Controllers}
 
@@ -165,7 +165,7 @@ We evaluate two evidence layers. The main verified layer is a Mathlib 4.30 + Lea
 The second layer is trace-core discovery evidence from earlier premise-selection experiments. There, success means that the selected premises cover the proof-core premises extracted from traced proofs. We keep these results because they explain why premise budgets and failure feedback matter, but they are not the main verified claim. BM25 and iterative lexical rows are controlled retrieval policies inside our candidate-pool protocol, not full system-to-system reproductions of the published LeanSearch v2 pipeline.
 
 \begin{table}[t]
-\caption{Main claim-evidence map. The primary evidence is the verified typed proof-action matrix; trace-core and bridge rows are supporting discovery evidence.}
+\caption{Main claim-evidence map. The primary evidence is the verified typed action matrix and Aesop channel counterfactual; trace-core and bridge rows are supporting discovery evidence.}
 \label{tab:main-evidence}
 \centering
 \small
@@ -175,9 +175,10 @@ The second layer is trace-core discovery evidence from earlier premise-selection
 Claim & Strong control & Supported result & Readout \\
 \midrule
 Typed actions matter & Best single action: 38/230 & Oracle typed grid: \best{58/230} & +20 goals \\
-Small portfolios recover headroom & Empty Hammer: 29/230 & Fixed K=4 OOF: \best{57/230} & near oracle \\
-Aesop exposure is typed & Facts-only: 5/230; simps-only: 4/230 & Facts+simps: \best{38/230} & interface effect \\
-Broad insertion can hurt & Core+learned8/16 group: 41/230 & Core+learned32 group: 7/230 & non-monotonic \\
+Small portfolios are hard controls & Empty Hammer: 29/230 & Fixed K=4 OOF: \best{57/230} & near oracle \\
+Aesop exposure is channel-typed & Single-channel union: 7/230 & Facts+simps: \best{38/230}; 34 joint-only & interface effect \\
+Broad insertion can hurt & Core+learned8 facts+simps: 38/230 & Core+learned32 facts+simps: 3/230 & -35 goals \\
+Adaptive allocation is not yet supported & Fixed K=4 OOF: 57/230 & Best learned allocator: 57/230 at K=4 & boundary \\
 Failure feedback is useful discovery evidence & Learned+base fallback: 86.3\% mean & Trace-core final-base8: 92.9\% mean & supporting result \\
 Bridge replay supports premise recovery & Fallback bridge: 44.5\% & Final-base8 bridge: 53.5\% & supporting result \\
 \bottomrule
@@ -207,45 +208,45 @@ Full Aesop-ablation grid & 11500 & \best{582} & \best{38/230} & \best{58/230} \\
 
 The strict action-dependent subset contains 29 goals where \texttt{hammer\_empty} fails but some non-empty or non-default action succeeds. Aesop solves 20/29 strict goals and is the only successful family for 6, HammerCore solves 12/29 and is the only family for 5, and \texttt{solve\_by\_elim} contributes 5/29 with 2 only-family cases. This distribution rules out a Hammer-only interpretation and motivates a typed-interface portfolio.
 
-\subsection{Budgeted Portfolios and Aesop Ablation}
+\subsection{Budgeted Allocators and Aesop Counterfactuals}
 
-Table~\ref{tab:budgeted-portfolio} evaluates fixed and adaptive policies under matched retry budgets after the shared \texttt{hammer\_empty} attempt. The fixed typed portfolio is the strongest current policy: it reaches 55/230 with two retries, 57/230 with four retries out of fold, and 58/230 when the four-action sequence is fit on all training data. Naive NB/kNN routing does not beat this control, so adaptive routing is not a supported main claim.
+Table~\ref{tab:budgeted-portfolio} evaluates fixed and learned allocators under matched retry budgets after the shared \texttt{hammer\_empty} attempt. The fixed typed portfolio is the strongest current policy: it reaches 55/230 with two retries, 57/230 with four retries out of fold, and 58/230 when the four-action sequence is fit on all training data. Stronger text/numeric logistic and ComplementNB allocators, trained out of fold from goal text, first-failure status, and typed fact/simp pool features, do not beat or compress this control. Adaptive allocation is therefore an explicit future target, not a main claim.
 
 \begin{table}[t]
-\caption{Budgeted policy evaluation after \texttt{hammer\_empty}. The fixed typed portfolio is the strongest current control; low-capacity adaptive routing does not beat it.}
+\caption{Budgeted allocator gate after \texttt{hammer\_empty}. Learned allocators match but do not beat or compress the fixed K=4 typed control.}
 \label{tab:budgeted-portfolio}
 \centering
 \small
-\begin{tabular}{rrrrr}
+\begin{tabular}{rrrrrr}
 \toprule
-Retry budget $K$ & Fixed greedy OOF & Residual NB OOF & Residual kNN OOF & Oracle \\
+Retry budget $K$ & Fixed OOF & Pure logreg & Residual logreg & Residual CNB & Oracle \\
 \midrule
-1 & 49/230 & 29/230 & 44/230 & 58/230 \\
-2 & 55/230 & 50/230 & 54/230 & 58/230 \\
-3 & 55/230 & 55/230 & 55/230 & 58/230 \\
+1 & \best{49/230} & 41/230 & 41/230 & 38/230 & 58/230 \\
+2 & \best{55/230} & 41/230 & \best{55/230} & 52/230 & 58/230 \\
+3 & 55/230 & 44/230 & \best{56/230} & 55/230 & 58/230 \\
 \rowcolor{teal!7}
-4 & \best{57/230} & 55/230 & \best{57/230} & 58/230 \\
-6 & 57/230 & 57/230 & 57/230 & 58/230 \\
+4 & \best{57/230} & 47/230 & \best{57/230} & \best{57/230} & 58/230 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:aesop-ablation} isolates the strongest interface. Facts+simps exposure recovers the 38/230 Aesop result, while stripping either channel collapses success. The top-32 variants are also much worse than top-8/16 variants, giving a backend-verified version of the anti-more-premises insight.
+Table~\ref{tab:aesop-ablation} isolates the strongest interface. Facts+simps exposure recovers the 38/230 Aesop result, while stripping either channel collapses success. The single-channel union proves only 7 goals, so the gain is not merely the union of two weak controls. The top-32 variants are also much worse than top-8/16 variants, giving a backend-verified version of the anti-more-premises insight.
 
 \begin{table}[t]
-\caption{Focused Aesop ablation. Aesop gains require exposing selected names through both fact and simp channels; broader insertion is not monotonic.}
+\caption{Aesop channel counterfactual. Aesop gains require joint fact+simp exposure; broader insertion is not monotonic.}
 \label{tab:aesop-ablation}
 \centering
 \small
 \begin{tabular}{lrr}
 \toprule
-Aesop group & Verified goals & Interpretation \\
+Aesop control & Verified goals & Interpretation \\
 \midrule
-\texttt{core+learned8/16}, facts+simps & \best{38/230} & best Aesop action \\
+\texttt{core+learned8}, facts+simps & \best{38/230} & best matched source \\
 facts-only exposure & 5/230 & fact channel alone fails \\
 simps-only exposure & 4/230 & simp channel alone fails \\
-source group \texttt{core+learned8/16} & \best{41/230} & best source coverage \\
-source group \texttt{core+learned32} & 7/230 & broad insertion hurts \\
+single-channel union & 7/230 & joint result is not a union effect \\
+joint-only facts+simps goals & 34/230 & channel interaction \\
+\texttt{core+learned32}, facts+simps & 3/230 & broad insertion hurts \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -347,10 +348,10 @@ Policy & Split mean & Split std & Split FFR & Bridge trace & Bridge verified \\
 
 \subsection{Ablations and Failure Diagnosis}
 
-The ablations in Table~\ref{tab:diagnosis} identify why the final method is shaped as a typed portfolio rather than a larger untyped premise list. The verified Aesop ablation shows that fact and simp channels interact: either channel alone is weak, while their joint exposure is strong. The same table also keeps trace-core discovery ablations showing that failure conditioning and narrow guardrails are useful signals, but these are secondary to the verified typed-interface result.
+The ablations in Table~\ref{tab:diagnosis} identify why the final method is shaped as typed evidence allocation rather than a larger untyped premise list or a learned router claim. The verified Aesop counterfactual shows that fact and simp channels interact: either channel alone is weak, while their joint exposure is strong. Strict interface filtering and learned allocation gates are useful boundaries: they show that the result is not explained by simple syntactic cleanup, and that current learned routers do not yet beat the hard fixed control.
 
 \begin{table}[t]
-\caption{Focused diagnostic results. The main verified insight is typed exposure; trace-core rows provide supporting discovery evidence for non-monotonic premise budgets and failure feedback.}
+\caption{Focused diagnostic results. The main verified insight is action-conditional evidence allocation; trace-core rows provide supporting discovery evidence for non-monotonic premise budgets and failure feedback.}
 \label{tab:diagnosis}
 \centering
 \footnotesize
@@ -358,8 +359,10 @@ The ablations in Table~\ref{tab:diagnosis} identify why the final method is shap
 \toprule
 Question & Evidence & Interpretation \\
 \midrule
-Does Aesop need both exposure channels? & Facts+simps: 38/230; facts-only: 5/230; simps-only: 4/230 & The interface type changes utility. \\
-Does adding more Aesop names help? & Core+learned8/16 group: 41/230; core+learned32 group: 7/230 & Broad insertion can hurt. \\
+Does Aesop need both exposure channels? & Facts+simps: 38/230; facts-only: 5/230; simps-only: 4/230; single-channel union: 7/230 & Channel assignment changes utility. \\
+Does adding more Aesop names help? & Core+learned8 facts+simps: 38/230; core+learned32 facts+simps: 3/230 & Broad insertion can hurt. \\
+Is strict syntactic filtering enough? & Filtered-only oracle: 4/230; combined oracle remains 58/230; new oracle goals: 0 & Cleanup alone is not the mechanism. \\
+Does learned allocation beat fixed K=4? & Fixed K=4 OOF: 57/230; best learned gate: 57/230 at K=4 & Adaptive routing is not a main claim. \\
 Are visible features enough statically? & Static all-feature rerank: 86.5\%; failure-conditioned: 95.7\% & Failure event changes feature utility. \\
 Which visible features matter most? & Name-only \far{}: 95.0\%; full visible \far{}: 95.7\% & Namespace/name morphology is strongest. \\
 Is failure type alone enough? & Failure-type-only: 91.5\%, equal to top-$k$ expansion & Candidate-level conditioning is required. \\
@@ -377,7 +380,7 @@ Let $U$ be the latent utility of exposing a selected name to a Lean proof search
 \end{proposition}
 
 \noindent\textbf{Sketch.}
-This is the standard identity $I(U;\tau\mid g,p,H)=H(U\mid g,p,H)-H(U\mid g,p,H,\tau)$. The proposition clarifies what the verified experiments test: if interface choice matters, a typed proof-action portfolio can beat any single untyped exposure rule under the same Lean-call budget.
+This is the standard identity $I(U;\tau\mid g,p,H)=H(U\mid g,p,H)-H(U\mid g,p,H,\tau)$. The proposition clarifies what the verified experiments test: if interface choice matters, an action-conditional allocator can beat any single untyped exposure rule under the same Lean-call budget.
 
 \begin{proposition}[Premise coverage is not monotonic in premise budget]
 There can exist premise sets $P_1\subset P_2$ such that $P_1$ covers enough useful premises for the backend to succeed under budget $B$, while $P_2$ contains the same useful premises but causes timeout or reconstruction failure under the same budget.
@@ -385,6 +388,13 @@ There can exist premise sets $P_1\subset P_2$ such that $P_1$ covers enough usef
 
 \noindent\textbf{Sketch.}
 Adding premises preserves proof-core coverage but can increase branching, generated clauses, simplification search, or reconstruction ambiguity. Under fixed time/search budget, the prover may fail on the larger set even though the smaller set contains the same proof-relevant lemmas. Tables~\ref{tab:timeout} and~\ref{tab:aesop-ablation} are empirical versions of this proposition: top-$k$ expansion can hurt under timeout pressure, and top-32 Aesop exposure is worse than smaller typed exposure.
+
+\begin{proposition}[Complementary channels can dominate either channel alone]
+Suppose an interface has two evidence channels $\tau_f$ and $\tau_s$ that enable different proof-search transitions, and a goal requires transitions from both channels within budget $B$. Then exposing $P_f$ only through $\tau_f$ or $P_s$ only through $\tau_s$ can fail, while the joint typed action $(\tau_f,P_f)\cup(\tau_s,P_s)$ succeeds under the same outer retry budget.
+\end{proposition}
+
+\noindent\textbf{Sketch.}
+The claim is existential. A fact channel can introduce the relational or propositional facts needed to close branches, while a simp channel can normalize terms or rewrite hypotheses so that those facts become applicable. If either channel is absent, search never reaches the closing state within budget; if both are present, the interface can interleave normalization and rule application. Table~\ref{tab:aesop-ablation} is the empirical counterpart: facts+simps solves 38/230 goals, while the union of facts-only and simps-only controls solves only 7/230.
 
 \begin{proposition}[A guardrail should be narrow when the learned controller is already strong]
 If a learned failure-conditioned scorer improves most retry decisions but occasionally suppresses high-base-score rescue premises, then a small late-stage base guardrail can improve bridge recovery while broad base mixing can reduce success.
@@ -397,13 +407,13 @@ The learned controller and the base retriever encode different biases. A broad m
 
 The main limitation is evaluation scope. The verified typed-action results are kernel-checked, but they are measured on the 230-goal replayable subset of a 490-goal cleaned trace pool, not on every Mathlib theorem and not as an open-ended theorem-proving benchmark. The harness patches original files in a pre-theorem context, which is the right setting for avoiding target-theorem leakage, but it also means non-replayable migrated traces are outside the current main evaluation.
 
-A second limitation is that the current strongest policy is a fixed typed portfolio, not a learned adaptive router. The budgeted policy experiments are useful because they prevent overclaiming: low-capacity NB/kNN routers do not beat the fixed typed portfolio under matched compute. The trace-core experiments use supervised proof-core traces and should be read as discovery evidence for premise budgets and failure feedback, not as the main verified claim. Future work should either train a stronger adaptive action policy that beats the fixed typed portfolio or expand the replayable verified corpus.
+A second limitation is that the current strongest policy is a fixed typed portfolio, not a learned adaptive router. The budgeted policy experiments are useful because they prevent overclaiming: NB/kNN, logistic, and ComplementNB allocators do not beat or compress the fixed typed portfolio under matched compute. The trace-core experiments use supervised proof-core traces and should be read as discovery evidence for premise budgets and failure feedback, not as the main verified claim. Future work should either train a stronger adaptive allocator that beats the fixed typed control or expand the replayable verified corpus.
 
 A third limitation is external comparison. Our controlled BM25 and iterative lexical rows test retrieval behavior inside our candidate-pool protocol, but they are not official reproductions of LeanSearch v2 or other full premise-selection systems. The present verified result is therefore best read as orthogonal to global retrieval: once a retriever proposes names, Lean still needs a typed interface decision for how those names enter proof search.
 
 \section{Conclusion}
 
-This paper argues that Lean premise selection is incomplete without typed proof-action exposure. \tap{} implements this view as a compute-budgeted portfolio over Hammer, HammerCore, simplification, \texttt{solve\_by\_elim}, and Aesop interfaces. On replayable Mathlib theorem contexts, the typed action grid reaches 58/230 verified proofs versus 38/230 for the best single action, and a four-retry fixed portfolio recovers 57/230 out of fold. The strongest insight is counterintuitive: Aesop succeeds when evidence is exposed jointly as facts and simp lemmas, while facts-only, simps-only, and broader 32-name exposure are much weaker. This positions typed evidence exposure as a concrete mechanism for building more reliable Lean hammers, with adaptive failure-conditioned routing remaining the next method target rather than a claim already supported by the current verified results.
+This paper argues that Lean premise selection is incomplete without action-conditional evidence allocation. \tap{} implements this view as a typed evidence compiler over Hammer, HammerCore, simplification, \texttt{solve\_by\_elim}, and Aesop interfaces. On replayable Mathlib theorem contexts, the typed action grid reaches 58/230 verified proofs versus 38/230 for the best single action, and a four-retry fixed typed control recovers 57/230 out of fold. The strongest insight is counterintuitive: Aesop succeeds when evidence is exposed jointly as facts and simp lemmas, while facts-only, simps-only, their single-channel union, and broader 32-name exposure are much weaker. This positions typed evidence allocation as a concrete mechanism for building more reliable Lean hammers, with learned adaptive allocation remaining the next method target rather than a claim already supported by the current verified results.
 
 \bibliography{references}
 \bibliographystyle{iclr2026_conference}
@@ -421,7 +431,10 @@ All numbers in the main tables are copied from canonical JSON or Markdown output
 \begin{itemize}[leftmargin=*,itemsep=1pt]
 \item Verified typed action grid: \url{outputs/mathlib430_pretheorem_action_matrix_scaled230_aesop_ablation_merged.md}.
 \item Budgeted typed portfolio: \url{outputs/mathlib430_budgeted_action_policy_scaled230_aesop_ablation.md}.
+\item Typed allocator gate: \url{outputs/mathlib430_typed_allocator_gate_scaled230_aesop_ablation.md}.
 \item Aesop fact/simp ablation: \url{analysis/mathlib430_aesop_ablation_scaled230.md}.
+\item Aesop counterfactual channel control: \url{analysis/mathlib430_aesop_counterfactual_controls.md}.
+\item Strict interface filtering boundary: \url{analysis/mathlib430_e1_strict_interface_filtering.md}.
 \item Strict interface taxonomy: \url{analysis/mathlib430_strict_action_taxonomy_scaled230_aesop_ablation.md}.
 \item Local trace-core: \url{outputs/phase1_mathlib_trace_core_2000_feature_ablation_a40.json}.
 \item Phase 1 bridge: \url{outputs/phase1_reconstruction_bridge_report_100.md}.
@@ -500,11 +513,11 @@ The final base8 guardrail was selected because broader heuristics were negative.
 \toprule
 Dimension & Current answer & Residual risk \\
 \midrule
-Contribution & Typed proof-action exposure is formulated as distinct from premise ranking, with Aesop fact/simp ablations as mechanism evidence. & A fixed portfolio can look simple unless the interface mechanism remains central. \\
+Contribution & Action-conditional evidence allocation is formulated as distinct from premise ranking, with Aesop channel counterfactuals as mechanism evidence. & A fixed portfolio can look simple unless the interface mechanism remains central. \\
 Writing clarity & Main text now leads with verified typed actions, then uses trace-core as discovery evidence. & Method names are long; final draft may need shorter aliases. \\
-Experiments & Results cover verified replayable Mathlib actions, budgeted portfolios, Aesop ablations, trace-core discovery, and replay bridges. & Replayable subset is 230/490, not all traces. \\
+Experiments & Results cover verified replayable Mathlib actions, budgeted allocators, Aesop counterfactuals, trace-core discovery, and replay bridges. & Replayable subset is 230/490, not all traces. \\
 Evaluation & Kernel-verified action success, oracle headroom, fixed-budget policy, and interface ablations are reported. & Full open-ended theorem proving is out of scope. \\
-Soundness & Negative ablations show broad insertion and naive adaptive routing are not enough. & Adaptive routing does not yet beat fixed typed portfolios. \\
+Soundness & Negative gates show broad insertion, strict syntactic filtering, and learned adaptive allocation are not enough. & Learned allocation does not yet beat the fixed typed control. \\
 \bottomrule
 \end{tabular}
 \end{table}

@@ -1,0 +1,488 @@
+{
+  "matrix_json": "outputs\\mathlib430_pretheorem_action_matrix_scaled230_aesop_ablation_merged.json",
+  "summary": {
+    "n_goals": 230,
+    "sources": [
+      {
+        "source": "core",
+        "actions": {
+          "facts+simps": "aesop_core",
+          "facts-only": "aesop_core_facts",
+          "simps-only": "aesop_core_simps"
+        },
+        "facts_simps": 4,
+        "facts_only": 5,
+        "simps_only": 4,
+        "single_channel_union": 7,
+        "single_channel_intersection": 2,
+        "joint_only": [],
+        "facts_only_not_joint": [
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "simps_only_not_joint": [],
+        "any_single_only_not_joint": [
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "joint_and_single": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::MeasureTheory.Measure.compProd_apply_univ",
+          "mathlib4::Units.map_neg_one",
+          "mathlib4::continuousWithinAt_singleton"
+        ],
+        "joint_minus_single_union": -3,
+        "joint_gain_over_best_single": -1
+      },
+      {
+        "source": "core+learned8",
+        "actions": {
+          "facts+simps": "aesop_core_plus_learned",
+          "facts-only": "aesop_core_plus_learned_facts",
+          "simps-only": "aesop_core_plus_learned_simps"
+        },
+        "facts_simps": 38,
+        "facts_only": 5,
+        "simps_only": 4,
+        "single_channel_union": 7,
+        "single_channel_intersection": 2,
+        "joint_only": [
+          "mathlib4::Affine.Simplex.face_restrict",
+          "mathlib4::Algebra.Presentation.aeval_comp_val_eq",
+          "mathlib4::AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms",
+          "mathlib4::BoxIntegral.Box.MeasureTheory.Measure.BoxIntegral.Box.volume_apply",
+          "mathlib4::BoxIntegral.TaggedPrepartition.Prepartition.TaggedPrepartition.forall_mem_single",
+          "mathlib4::CategoryTheory.Core.Functor.Iso.coreWhiskerLeft",
+          "mathlib4::CategoryTheory.Limits.inr_zeroCoprodIso_hom",
+          "mathlib4::Equiv.Perm.apply_mem_support",
+          "mathlib4::Finset.Fin.prod_Ioo_cast",
+          "mathlib4::Finset.biUnion_inter",
+          "mathlib4::Finset.insert_inter",
+          "mathlib4::Finset.max'_singleton",
+          "mathlib4::Finsupp.card_Iio",
+          "mathlib4::Ideal.span_pair_abs",
+          "mathlib4::Matrix.dotProductᵣ_eq",
+          "mathlib4::Matroid.uniqueBaseOn_self",
+          "mathlib4::MeasureTheory.Measure.AbsolutelyContinuous.add_right'",
+          "mathlib4::MeasureTheory.average_const",
+          "mathlib4::MonomialOrder.leadingTerm_zero",
+          "mathlib4::MvPolynomial.MvPolynomial.rename_comp_toMvPolynomial",
+          "mathlib4::Nat.Primes.PNat.Prime.ne_one",
+          "mathlib4::NormedAddCommGroup.summable_imp_tendsto_of_complete",
+          "mathlib4::NumberField.rootDiscr_def",
+          "mathlib4::Path.map_coe",
+          "mathlib4::Path.refl_reparam",
+          "mathlib4::Polynomial.evalEval_intCast",
+          "mathlib4::Rat.Nat.dist_cast_rat",
+          "mathlib4::RatFunc.InftyValuation.map_mul'",
+          "mathlib4::Real.sign_apply_eq",
+          "mathlib4::Seminorm.ball_sup",
+          "mathlib4::Stirling.stirlingSeq_one",
+          "mathlib4::TopCat.pullbackIsoProdSubtype_inv_snd",
+          "mathlib4::WeierstrassCurve.j_eq_zero_iff'",
+          "mathlib4::mem_balancedCore_iff"
+        ],
+        "facts_only_not_joint": [
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "simps_only_not_joint": [],
+        "any_single_only_not_joint": [
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "joint_and_single": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::MeasureTheory.Measure.compProd_apply_univ",
+          "mathlib4::Units.map_neg_one",
+          "mathlib4::continuousWithinAt_singleton"
+        ],
+        "joint_minus_single_union": 31,
+        "joint_gain_over_best_single": 33
+      },
+      {
+        "source": "core+learned16",
+        "actions": {
+          "facts+simps": "aesop_core_plus_learned16",
+          "facts-only": "aesop_core_plus_learned16_facts",
+          "simps-only": "aesop_core_plus_learned16_simps"
+        },
+        "facts_simps": 37,
+        "facts_only": 5,
+        "simps_only": 3,
+        "single_channel_union": 7,
+        "single_channel_intersection": 1,
+        "joint_only": [
+          "mathlib4::Affine.Simplex.face_restrict",
+          "mathlib4::Algebra.Presentation.aeval_comp_val_eq",
+          "mathlib4::AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms",
+          "mathlib4::BoxIntegral.Box.MeasureTheory.Measure.BoxIntegral.Box.volume_apply",
+          "mathlib4::BoxIntegral.TaggedPrepartition.Prepartition.TaggedPrepartition.forall_mem_single",
+          "mathlib4::CategoryTheory.Core.Functor.Iso.coreWhiskerLeft",
+          "mathlib4::CategoryTheory.Limits.inr_zeroCoprodIso_hom",
+          "mathlib4::Equiv.Perm.apply_mem_support",
+          "mathlib4::Finset.Fin.prod_Ioo_cast",
+          "mathlib4::Finset.biUnion_inter",
+          "mathlib4::Finset.insert_inter",
+          "mathlib4::Finset.max'_singleton",
+          "mathlib4::Finsupp.card_Iio",
+          "mathlib4::Ideal.span_pair_abs",
+          "mathlib4::Matrix.dotProductᵣ_eq",
+          "mathlib4::Matroid.uniqueBaseOn_self",
+          "mathlib4::MeasureTheory.Measure.AbsolutelyContinuous.add_right'",
+          "mathlib4::MeasureTheory.average_const",
+          "mathlib4::MonomialOrder.leadingTerm_zero",
+          "mathlib4::MvPolynomial.MvPolynomial.rename_comp_toMvPolynomial",
+          "mathlib4::Nat.Primes.PNat.Prime.ne_one",
+          "mathlib4::NormedAddCommGroup.summable_imp_tendsto_of_complete",
+          "mathlib4::NumberField.rootDiscr_def",
+          "mathlib4::Path.map_coe",
+          "mathlib4::Path.refl_reparam",
+          "mathlib4::Polynomial.evalEval_intCast",
+          "mathlib4::Rat.Nat.dist_cast_rat",
+          "mathlib4::RatFunc.InftyValuation.map_mul'",
+          "mathlib4::Real.sign_apply_eq",
+          "mathlib4::Seminorm.ball_sup",
+          "mathlib4::Stirling.stirlingSeq_one",
+          "mathlib4::TopCat.pullbackIsoProdSubtype_inv_snd",
+          "mathlib4::WeierstrassCurve.j_eq_zero_iff'",
+          "mathlib4::mem_balancedCore_iff"
+        ],
+        "facts_only_not_joint": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "simps_only_not_joint": [],
+        "any_single_only_not_joint": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "joint_and_single": [
+          "mathlib4::MeasureTheory.Measure.compProd_apply_univ",
+          "mathlib4::Units.map_neg_one",
+          "mathlib4::continuousWithinAt_singleton"
+        ],
+        "joint_minus_single_union": 30,
+        "joint_gain_over_best_single": 32
+      },
+      {
+        "source": "core+learned32",
+        "actions": {
+          "facts+simps": "aesop_core_plus_learned32",
+          "facts-only": "aesop_core_plus_learned32_facts",
+          "simps-only": "aesop_core_plus_learned32_simps"
+        },
+        "facts_simps": 3,
+        "facts_only": 5,
+        "simps_only": 3,
+        "single_channel_union": 7,
+        "single_channel_intersection": 1,
+        "joint_only": [],
+        "facts_only_not_joint": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "simps_only_not_joint": [],
+        "any_single_only_not_joint": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "joint_and_single": [
+          "mathlib4::MeasureTheory.Measure.compProd_apply_univ",
+          "mathlib4::Units.map_neg_one",
+          "mathlib4::continuousWithinAt_singleton"
+        ],
+        "joint_minus_single_union": -4,
+        "joint_gain_over_best_single": -2
+      },
+      {
+        "source": "learned8",
+        "actions": {
+          "facts+simps": "aesop_learned8",
+          "facts-only": "aesop_learned8_facts",
+          "simps-only": "aesop_learned8_simps"
+        },
+        "facts_simps": 4,
+        "facts_only": 5,
+        "simps_only": 4,
+        "single_channel_union": 7,
+        "single_channel_intersection": 2,
+        "joint_only": [],
+        "facts_only_not_joint": [
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "simps_only_not_joint": [],
+        "any_single_only_not_joint": [
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "joint_and_single": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::MeasureTheory.Measure.compProd_apply_univ",
+          "mathlib4::Units.map_neg_one",
+          "mathlib4::continuousWithinAt_singleton"
+        ],
+        "joint_minus_single_union": -3,
+        "joint_gain_over_best_single": -1
+      },
+      {
+        "source": "learned16",
+        "actions": {
+          "facts+simps": "aesop_learned16",
+          "facts-only": "aesop_learned16_facts",
+          "simps-only": "aesop_learned16_simps"
+        },
+        "facts_simps": 3,
+        "facts_only": 5,
+        "simps_only": 3,
+        "single_channel_union": 7,
+        "single_channel_intersection": 1,
+        "joint_only": [],
+        "facts_only_not_joint": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "simps_only_not_joint": [],
+        "any_single_only_not_joint": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "joint_and_single": [
+          "mathlib4::MeasureTheory.Measure.compProd_apply_univ",
+          "mathlib4::Units.map_neg_one",
+          "mathlib4::continuousWithinAt_singleton"
+        ],
+        "joint_minus_single_union": -4,
+        "joint_gain_over_best_single": -2
+      },
+      {
+        "source": "learned32",
+        "actions": {
+          "facts+simps": "aesop_learned32",
+          "facts-only": "aesop_learned32_facts",
+          "simps-only": "aesop_learned32_simps"
+        },
+        "facts_simps": 3,
+        "facts_only": 5,
+        "simps_only": 3,
+        "single_channel_union": 7,
+        "single_channel_intersection": 1,
+        "joint_only": [],
+        "facts_only_not_joint": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "simps_only_not_joint": [],
+        "any_single_only_not_joint": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::Module.rank_tensorProduct'",
+          "mathlib4::Set.image2_iUnion₂_right",
+          "mathlib4::Set.preimage_iInter"
+        ],
+        "joint_and_single": [
+          "mathlib4::MeasureTheory.Measure.compProd_apply_univ",
+          "mathlib4::Units.map_neg_one",
+          "mathlib4::continuousWithinAt_singleton"
+        ],
+        "joint_minus_single_union": -4,
+        "joint_gain_over_best_single": -2
+      }
+    ],
+    "non_monotonicity": [
+      {
+        "family": "core+learned",
+        "exposure": "facts+simps",
+        "k8": 38,
+        "k16": 37,
+        "k32": 3,
+        "lost_8_to_16": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f"
+        ],
+        "gained_8_to_16": [],
+        "lost_16_to_32": [
+          "mathlib4::Affine.Simplex.face_restrict",
+          "mathlib4::Algebra.Presentation.aeval_comp_val_eq",
+          "mathlib4::AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms",
+          "mathlib4::BoxIntegral.Box.MeasureTheory.Measure.BoxIntegral.Box.volume_apply",
+          "mathlib4::BoxIntegral.TaggedPrepartition.Prepartition.TaggedPrepartition.forall_mem_single",
+          "mathlib4::CategoryTheory.Core.Functor.Iso.coreWhiskerLeft",
+          "mathlib4::CategoryTheory.Limits.inr_zeroCoprodIso_hom",
+          "mathlib4::Equiv.Perm.apply_mem_support",
+          "mathlib4::Finset.Fin.prod_Ioo_cast",
+          "mathlib4::Finset.biUnion_inter",
+          "mathlib4::Finset.insert_inter",
+          "mathlib4::Finset.max'_singleton",
+          "mathlib4::Finsupp.card_Iio",
+          "mathlib4::Ideal.span_pair_abs",
+          "mathlib4::Matrix.dotProductᵣ_eq",
+          "mathlib4::Matroid.uniqueBaseOn_self",
+          "mathlib4::MeasureTheory.Measure.AbsolutelyContinuous.add_right'",
+          "mathlib4::MeasureTheory.average_const",
+          "mathlib4::MonomialOrder.leadingTerm_zero",
+          "mathlib4::MvPolynomial.MvPolynomial.rename_comp_toMvPolynomial",
+          "mathlib4::Nat.Primes.PNat.Prime.ne_one",
+          "mathlib4::NormedAddCommGroup.summable_imp_tendsto_of_complete",
+          "mathlib4::NumberField.rootDiscr_def",
+          "mathlib4::Path.map_coe",
+          "mathlib4::Path.refl_reparam",
+          "mathlib4::Polynomial.evalEval_intCast",
+          "mathlib4::Rat.Nat.dist_cast_rat",
+          "mathlib4::RatFunc.InftyValuation.map_mul'",
+          "mathlib4::Real.sign_apply_eq",
+          "mathlib4::Seminorm.ball_sup",
+          "mathlib4::Stirling.stirlingSeq_one",
+          "mathlib4::TopCat.pullbackIsoProdSubtype_inv_snd",
+          "mathlib4::WeierstrassCurve.j_eq_zero_iff'",
+          "mathlib4::mem_balancedCore_iff"
+        ],
+        "gained_16_to_32": [],
+        "lost_8_to_32": [
+          "mathlib4::Affine.Simplex.face_restrict",
+          "mathlib4::Algebra.Presentation.aeval_comp_val_eq",
+          "mathlib4::AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms",
+          "mathlib4::BoxIntegral.Box.MeasureTheory.Measure.BoxIntegral.Box.volume_apply",
+          "mathlib4::BoxIntegral.TaggedPrepartition.Prepartition.TaggedPrepartition.forall_mem_single",
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f",
+          "mathlib4::CategoryTheory.Core.Functor.Iso.coreWhiskerLeft",
+          "mathlib4::CategoryTheory.Limits.inr_zeroCoprodIso_hom",
+          "mathlib4::Equiv.Perm.apply_mem_support",
+          "mathlib4::Finset.Fin.prod_Ioo_cast",
+          "mathlib4::Finset.biUnion_inter",
+          "mathlib4::Finset.insert_inter",
+          "mathlib4::Finset.max'_singleton",
+          "mathlib4::Finsupp.card_Iio",
+          "mathlib4::Ideal.span_pair_abs",
+          "mathlib4::Matrix.dotProductᵣ_eq",
+          "mathlib4::Matroid.uniqueBaseOn_self",
+          "mathlib4::MeasureTheory.Measure.AbsolutelyContinuous.add_right'",
+          "mathlib4::MeasureTheory.average_const",
+          "mathlib4::MonomialOrder.leadingTerm_zero",
+          "mathlib4::MvPolynomial.MvPolynomial.rename_comp_toMvPolynomial",
+          "mathlib4::Nat.Primes.PNat.Prime.ne_one",
+          "mathlib4::NormedAddCommGroup.summable_imp_tendsto_of_complete",
+          "mathlib4::NumberField.rootDiscr_def",
+          "mathlib4::Path.map_coe",
+          "mathlib4::Path.refl_reparam",
+          "mathlib4::Polynomial.evalEval_intCast",
+          "mathlib4::Rat.Nat.dist_cast_rat",
+          "mathlib4::RatFunc.InftyValuation.map_mul'",
+          "mathlib4::Real.sign_apply_eq",
+          "mathlib4::Seminorm.ball_sup",
+          "mathlib4::Stirling.stirlingSeq_one",
+          "mathlib4::TopCat.pullbackIsoProdSubtype_inv_snd",
+          "mathlib4::WeierstrassCurve.j_eq_zero_iff'",
+          "mathlib4::mem_balancedCore_iff"
+        ],
+        "gained_8_to_32": []
+      },
+      {
+        "family": "core+learned",
+        "exposure": "facts-only",
+        "k8": 5,
+        "k16": 5,
+        "k32": 5,
+        "lost_8_to_16": [],
+        "gained_8_to_16": [],
+        "lost_16_to_32": [],
+        "gained_16_to_32": [],
+        "lost_8_to_32": [],
+        "gained_8_to_32": []
+      },
+      {
+        "family": "core+learned",
+        "exposure": "simps-only",
+        "k8": 4,
+        "k16": 3,
+        "k32": 3,
+        "lost_8_to_16": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f"
+        ],
+        "gained_8_to_16": [],
+        "lost_16_to_32": [],
+        "gained_16_to_32": [],
+        "lost_8_to_32": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f"
+        ],
+        "gained_8_to_32": []
+      },
+      {
+        "family": "learned",
+        "exposure": "facts+simps",
+        "k8": 4,
+        "k16": 3,
+        "k32": 3,
+        "lost_8_to_16": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f"
+        ],
+        "gained_8_to_16": [],
+        "lost_16_to_32": [],
+        "gained_16_to_32": [],
+        "lost_8_to_32": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f"
+        ],
+        "gained_8_to_32": []
+      },
+      {
+        "family": "learned",
+        "exposure": "facts-only",
+        "k8": 5,
+        "k16": 5,
+        "k32": 5,
+        "lost_8_to_16": [],
+        "gained_8_to_16": [],
+        "lost_16_to_32": [],
+        "gained_16_to_32": [],
+        "lost_8_to_32": [],
+        "gained_8_to_32": []
+      },
+      {
+        "family": "learned",
+        "exposure": "simps-only",
+        "k8": 4,
+        "k16": 3,
+        "k32": 3,
+        "lost_8_to_16": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f"
+        ],
+        "gained_8_to_16": [],
+        "lost_16_to_32": [],
+        "gained_16_to_32": [],
+        "lost_8_to_32": [
+          "mathlib4::CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f"
+        ],
+        "gained_8_to_32": []
+      }
+    ],
+    "headline": {
+      "best_source": "core+learned8",
+      "facts_simps": 38,
+      "facts_only": 5,
+      "simps_only": 4,
+      "single_channel_union": 7,
+      "joint_only": 34,
+      "single_only_not_joint": 3,
+      "joint_gain_over_best_single": 33
+    }
+  }
+}

@@ -8,10 +8,11 @@
 
 Verified-pivot update:
 
-- The strongest current verified mainline is no longer the old trace-core-only failure-conditioned controller. The paper-level route should now be framed as typed proof-action intervention on replayable Mathlib 4.30 theorem contexts.
-- The strongest completed verified evidence is the scaled230 typed action portfolio: oracle 58/230 vs best static 38/230; strict action-dependent goals 29; fixed typed portfolios reach 55/230 OOF at K=2 and 57/230 OOF at K=4, with train-fitted K=4 reaching the 58/230 oracle.
-- The focused Aesop ablation does not raise the 58/230 oracle, but it strengthens the mechanism story: `facts+simps` exposure solves 38/230, while facts-only solves 5/230 and simps-only solves 4/230; adding 32 learned names hurts rather than helps.
-- Current verified evidence favors a compute-budgeted typed proof-action portfolio. Failure-conditioned adaptive routing remains an open target, not a supported main claim.
+- The strongest current verified mainline is no longer the old trace-core-only failure-conditioned controller. The paper-level route should now be framed as action-conditional evidence allocation on replayable Mathlib 4.30 theorem contexts.
+- The strongest completed verified evidence is the scaled230 typed action matrix: oracle 58/230 vs best static 38/230; strict action-dependent goals 29; fixed typed controls reach 55/230 OOF at K=2 and 57/230 OOF at K=4, with train-fitted K=4 reaching the 58/230 oracle.
+- The focused Aesop counterfactual control strengthens the mechanism story: under the same source/budget, `facts+simps` exposure solves 38/230, facts-only solves 5/230, simps-only solves 4/230, the single-channel union solves only 7/230, and 34 goals are joint-only. Increasing facts+simps exposure to 32 names drops to 3/230 and loses 35 of the top-8 successes.
+- E1 strict filtering is a robustness boundary, not an improvement: filtered-only oracle is 4/230, combined oracle stays 58/230, and no new oracle goals are added.
+- The stronger typed allocator gate is negative for adaptive claims: pure logreg/CNB do not beat fixed, and fixed-prefix residual logreg/CNB only match fixed K=4 at 57/230. Current verified evidence favors a typed evidence-allocation mechanism with fixed typed controls as hard baselines; learned adaptive allocation remains an open target, not a supported main claim.
 
 当前最强 verified 论文主线是：证明失败后的有效干预不只是“多加 premise”，而是必须把同一批证据通过正确的 Lean 接口暴露给搜索/重构机制。当前最硬的主结果应围绕 `aesop`、`hammerCore`、`hammer` 和 `solve_by_elim` 的 compute-budgeted typed proof-action portfolio；failure-conditioned controller 仍作为目标和后续路线，但不能在当前 verified 结果里作为已经成立的主 claim。
 
@@ -26,7 +27,7 @@ Verified-pivot update:
 - Verified pivot：LeanHammer 4.30 + Mathlib 4.30 路线已打通；Mathlib-context Gate 1 premise smoke 通过，100-goal verified action-grid theorem-family pilot 中 oracle/true feedback 为 80.0%，best static 为 40.0%。
 - Traced-corpus proof-action pilot：230 个 replayable Mathlib theorem context 上，typed action grid 从原始 51/230 oracle 扩展到 58/230 oracle；best static 为 `aesop_core_plus_learned` 的 38/230；严格 action-dependent goals 为 29。
 - Budgeted portfolio：在 `hammer_empty` 后，固定 typed portfolio 的 OOF K=2 为 55/230，OOF K=4 为 57/230；train-fitted K=4 达到 58/230 oracle。
-- Aesop 机制消融：`facts+simps` 远强于 facts-only/simps-only，且 `core+learned8/16` 明显强于 `core+learned32`，支持“接口类型和证据暴露方式”而不是“premise 越多越好”的主线。
+- Aesop 机制消融：`facts+simps` 远强于 facts-only/simps-only；single-channel union 只有 7/230，而 facts+simps 有 34 个 joint-only goals；`core+learned8` 明显强于 `core+learned32`，支持“action-conditional evidence allocation”而不是“premise 越多越好”的主线。
 
 当前主要限制：
 
@@ -1383,15 +1384,31 @@ Recommended current wording:
 
 Verified-pivot wording:
 
-> We further validate proof-action interventions in a Mathlib 4.30 + LeanHammer 4.30 environment. On 230 replayable traced-corpus theorem contexts, a typed action grid reaches 58/230 oracle verified proofs versus 38/230 for the best single action. A fixed typed portfolio after `hammer_empty` reaches 55/230 under two retries and 57/230 under four retries out of fold. The strongest single interface is `aesop_core_plus_learned`; focused ablations show that its gains require exposing selected names jointly as facts and simp lemmas, while facts-only, simps-only, and larger 32-name exposure are much weaker. These results support typed proof-action exposure as the current verified mainline; adaptive failure-conditioned routing remains an open target.
+> We further validate action-conditional evidence allocation in a Mathlib 4.30 + LeanHammer 4.30 environment. On 230 replayable traced-corpus theorem contexts, a typed action grid reaches 58/230 oracle verified proofs versus 38/230 for the best single action. A fixed typed portfolio after `hammer_empty` reaches 55/230 under two retries and 57/230 under four retries out of fold, serving as the strongest matched-compute control. The central counterfactual is Aesop: under the same source budget, facts+simps exposure solves 38/230, facts-only solves 5/230, simps-only solves 4/230, and the single-channel union solves only 7/230. Broader 32-name facts+simps exposure drops to 3/230. These results support typed evidence allocation as the current verified mainline; learned adaptive allocation remains an open target.
 
 Paper rewrite status:
 
-- `iclr2027/paper.tex` and `iclr2027/paper.pdf` now use the typed proof-action portfolio as the main paper story.
-- The draft treats fixed typed portfolios as strong matched-compute controls and avoids claiming adaptive routing.
+- `iclr2027/paper.tex` now uses action-conditional evidence allocation as the main paper story: retrieved names must be compiled into Lean proof interfaces, not merely ranked.
+- The draft treats fixed typed portfolios as strong matched-compute controls and avoids claiming learned adaptive allocation.
 - The draft marks controlled lexical retrieval rows as proxies, not LeanSearch v2 reproductions.
 - The draft marks trace-core and bridge experiments as supporting discovery evidence, not full theorem-proving claims.
 - `analysis/paper_adversarial_review_typed_portfolio.md` records the current reviewer risks and next upgrade experiments.
+
+Aesop counterfactual channel-control update:
+
+- `analysis/mathlib430_aesop_counterfactual_controls.md` analyzes matched Aesop source/budget controls from the full scaled230 Aesop-ablation matrix.
+- Best source is `core+learned8`: facts+simps solves 38/230, facts-only solves 5/230, simps-only solves 4/230.
+- The union of the two single-channel controls solves only 7/230; facts+simps has 34 joint-only goals, so the result is not just a union of two weak channels.
+- Exposure is sharply non-monotonic: `core+learned8` facts+simps solves 38/230, but `core+learned32` facts+simps solves 3/230 and loses 35 of the 38 top-8 successes.
+- This is now the central mechanism evidence for the paper: retrieved evidence has to be assigned to the right interface channels.
+
+Typed allocator/compression gate update:
+
+- `outputs/mathlib430_typed_allocator_gate_scaled230_aesop_ablation.md` evaluates stronger learned allocators on the same 230-goal matrix and 5-fold OOF protocol.
+- Fixed greedy remains the strongest practical control: K=2 reaches 55/230 OOF, and K=4 reaches 57/230 OOF.
+- Pure logreg reaches 47/230 at K=4; unbalanced logreg reaches 49/230 at K=4; pure ComplementNB reaches 39/230 at K=4.
+- Fixed-prefix residual logreg/CNB match fixed K=4 at 57/230 but do not beat or compress it to fewer retry slots.
+- Readout: learned adaptive allocation remains outside the main claim; the paper should present fixed typed portfolios as hard controls and action-conditional evidence allocation as the supported mechanism.
 
 E1 strict interface filtering update:
 
