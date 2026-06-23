@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="385.47pt" height="182.41175pt" viewBox="0 0 385.47 182.41175" xmlns="http://www.w3.org/2000/svg" version="1.1">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="385.47pt" height="182.665063pt" viewBox="0 0 385.47 182.665063" xmlns="http://www.w3.org/2000/svg" version="1.1">
  <metadata>
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-06-23T18:42:57.690322</dc:date>
+    <dc:date>2026-06-23T18:54:13.556391</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -21,8 +21,8 @@
  </defs>
  <g id="figure_1">
   <g id="patch_1">
-   <path d="M 0 182.41175 
-L 385.47 182.41175 
+   <path d="M 0 182.665063 
+L 385.47 182.665063 
 L 385.47 0 
 L 0 0 
 z
@@ -42,37 +42,37 @@ z
      <g id="line2d_1">
       <path d="M 12.104009 154.116 
 L 12.104009 7.2 
-" clip-path="url(#p8b7a5edde1)" style="fill: none; stroke: #e8e8e8; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p0849aba30c)" style="fill: none; stroke: #e8e8e8; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_2"/>
      <g id="text_1">
-      <text style="font-size: 8.8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: middle" x="12.104009" y="162.414875" transform="rotate(-0 12.104009 162.414875)">0</text>
+      <text style="font-size: 9px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: middle" x="12.104009" y="162.365375" transform="rotate(-0 12.104009 162.365375)">0</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_3">
       <path d="M 175.570969 154.116 
 L 175.570969 7.2 
-" clip-path="url(#p8b7a5edde1)" style="fill: none; stroke: #e8e8e8; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p0849aba30c)" style="fill: none; stroke: #e8e8e8; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_4"/>
      <g id="text_2">
-      <text style="font-size: 8.8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: middle" x="175.570969" y="162.414875" transform="rotate(-0 175.570969 162.414875)">50%</text>
+      <text style="font-size: 9px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: middle" x="175.570969" y="162.365375" transform="rotate(-0 175.570969 162.365375)">50%</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_5">
       <path d="M 339.03793 154.116 
 L 339.03793 7.2 
-" clip-path="url(#p8b7a5edde1)" style="fill: none; stroke: #e8e8e8; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p0849aba30c)" style="fill: none; stroke: #e8e8e8; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_6"/>
      <g id="text_3">
-      <text style="font-size: 8.8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: middle" x="339.03793" y="162.414875" transform="rotate(-0 339.03793 162.414875)">100%</text>
+      <text style="font-size: 9px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: middle" x="339.03793" y="162.365375" transform="rotate(-0 339.03793 162.365375)">100%</text>
      </g>
     </g>
     <g id="text_4">
-     <text style="font-size: 8.8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: middle" x="192.735" y="173.46275" transform="rotate(-0 192.735 173.46275)">Fraction of tested-action oracle recovered</text>
+     <text style="font-size: 9px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: middle" x="192.735" y="173.539906" transform="rotate(-0 192.735 173.539906)">Fraction of tested-action oracle recovered</text>
     </g>
    </g>
    <g id="matplotlib.axis_2"/>
@@ -82,7 +82,7 @@ L 226.302095 31.303406
 L 226.302095 23.039381 
 L 12.104009 23.039381 
 z
-" clip-path="url(#p8b7a5edde1)" style="fill: #d8d8d8"/>
+" clip-path="url(#p0849aba30c)" style="fill: #d8d8d8"/>
    </g>
    <g id="patch_4">
     <path d="M 12.104009 41.862994 
@@ -90,7 +90,7 @@ L 333.401138 41.862994
 L 333.401138 33.598969 
 L 12.104009 33.598969 
 z
-" clip-path="url(#p8b7a5edde1)" style="fill: #2f8f8c"/>
+" clip-path="url(#p0849aba30c)" style="fill: #2f8f8c"/>
    </g>
    <g id="patch_5">
     <path d="M 12.104009 82.953563 
@@ -98,7 +98,7 @@ L 232.155686 82.953563
 L 232.155686 74.689538 
 L 12.104009 74.689538 
 z
-" clip-path="url(#p8b7a5edde1)" style="fill: #d8d8d8"/>
+" clip-path="url(#p0849aba30c)" style="fill: #d8d8d8"/>
    </g>
    <g id="patch_6">
     <path d="M 12.104009 93.51315 
@@ -106,7 +106,7 @@ L 339.03793 93.51315
 L 339.03793 85.249125 
 L 12.104009 85.249125 
 z
-" clip-path="url(#p8b7a5edde1)" style="fill: #2f8f8c"/>
+" clip-path="url(#p0849aba30c)" style="fill: #2f8f8c"/>
    </g>
    <g id="patch_7">
     <path d="M 12.104009 134.603719 
@@ -114,7 +114,7 @@ L 271.728005 134.603719
 L 271.728005 126.339694 
 L 12.104009 126.339694 
 z
-" clip-path="url(#p8b7a5edde1)" style="fill: #d8d8d8"/>
+" clip-path="url(#p0849aba30c)" style="fill: #d8d8d8"/>
    </g>
    <g id="patch_8">
     <path d="M 12.104009 145.163306 
@@ -122,22 +122,22 @@ L 334.230078 145.163306
 L 334.230078 136.899281 
 L 12.104009 136.899281 
 z
-" clip-path="url(#p8b7a5edde1)" style="fill: #2f8f8c"/>
+" clip-path="url(#p0849aba30c)" style="fill: #2f8f8c"/>
    </g>
    <g id="line2d_7">
     <path d="M 339.03793 44.617669 
 L 339.03793 20.743819 
-" clip-path="url(#p8b7a5edde1)" style="fill: none; stroke: #303030; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p0849aba30c)" style="fill: none; stroke: #303030; stroke-width: 0.8; stroke-linecap: square"/>
    </g>
    <g id="line2d_8">
     <path d="M 339.03793 96.267825 
 L 339.03793 72.393975 
-" clip-path="url(#p8b7a5edde1)" style="fill: none; stroke: #303030; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p0849aba30c)" style="fill: none; stroke: #303030; stroke-width: 0.8; stroke-linecap: square"/>
    </g>
    <g id="line2d_9">
     <path d="M 339.03793 147.917981 
 L 339.03793 124.044131 
-" clip-path="url(#p8b7a5edde1)" style="fill: none; stroke: #303030; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p0849aba30c)" style="fill: none; stroke: #303030; stroke-width: 0.8; stroke-linecap: square"/>
    </g>
    <g id="patch_9">
     <path d="M 7.2 154.116 
@@ -145,48 +145,48 @@ L 378.27 154.116
 " style="fill: none; stroke: #d8d8d8; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_5">
-    <text style="font-size: 9.2px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: start; fill: #303030" x="8.83467" y="20.828756" transform="rotate(-0 8.83467 20.828756)">Mixed-source matrix (230 goals)</text>
+    <text style="font-size: 9.2px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: start; fill: #303030" x="8.83467" y="20.649788" transform="rotate(-0 8.83467 20.649788)">Mixed-source matrix (230 goals)</text>
    </g>
    <g id="text_6">
-    <text style="font-size: 8.3px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: end; fill: #303030" x="219.109549" y="29.319019" transform="rotate(-0 219.109549 29.319019)">single 38/58 (66%)</text>
+    <text style="font-size: 8.3px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: end; fill: #303030" x="219.109549" y="29.157558" transform="rotate(-0 219.109549 29.157558)">single 38/58 (66%)</text>
    </g>
    <g id="text_7">
-    <text style="font-size: 8.3px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: end; fill: #ffffff" x="326.208592" y="39.878606" transform="rotate(-0 326.208592 39.878606)">portfolio 57/58 (98%)</text>
+    <text style="font-size: 8.3px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: end; fill: #ffffff" x="326.208592" y="39.724927" transform="rotate(-0 326.208592 39.724927)">portfolio 57/58 (98%)</text>
    </g>
    <g id="text_8">
-    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #303030" transform="translate(343.941938 31.004344)">oracle</text>
-    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #303030" transform="translate(343.941938 38.034281)">58</text>
+    <text style="font-size: 8px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; fill: #303030" transform="translate(343.941938 30.878813)">oracle</text>
+    <text style="font-size: 8px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; fill: #303030" transform="translate(343.941938 37.867313)">58</text>
    </g>
    <g id="text_9">
-    <text style="font-size: 9.2px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: start; fill: #303030" x="8.83467" y="72.478913" transform="rotate(-0 8.83467 72.478913)">Retrieved-only anchor (230 goals)</text>
+    <text style="font-size: 9.2px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: start; fill: #303030" x="8.83467" y="72.299944" transform="rotate(-0 8.83467 72.299944)">Retrieved-only anchor (230 goals)</text>
    </g>
    <g id="text_10">
-    <text style="font-size: 8.3px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: end; fill: #303030" x="224.96314" y="80.969175" transform="rotate(-0 224.96314 80.969175)">single 35/52 (67%)</text>
+    <text style="font-size: 8.3px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: end; fill: #303030" x="224.96314" y="80.807714" transform="rotate(-0 224.96314 80.807714)">single 35/52 (67%)</text>
    </g>
    <g id="text_11">
-    <text style="font-size: 8.3px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: end; fill: #ffffff" x="331.845383" y="91.528763" transform="rotate(-0 331.845383 91.528763)">portfolio 52/52 (100%)</text>
+    <text style="font-size: 8.3px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: end; fill: #ffffff" x="331.845383" y="91.375083" transform="rotate(-0 331.845383 91.375083)">portfolio 52/52 (100%)</text>
    </g>
    <g id="text_12">
-    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #303030" transform="translate(343.941938 82.6545)">oracle</text>
-    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #303030" transform="translate(343.941938 89.684438)">52</text>
+    <text style="font-size: 8px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; fill: #303030" transform="translate(343.941938 82.528969)">oracle</text>
+    <text style="font-size: 8px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; fill: #303030" transform="translate(343.941938 89.517469)">52</text>
    </g>
    <g id="text_13">
-    <text style="font-size: 9.2px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: start; fill: #303030" x="8.83467" y="124.129069" transform="rotate(-0 8.83467 124.129069)">Frozen fresh holdout (432 goals)</text>
+    <text style="font-size: 9.2px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: start; fill: #303030" x="8.83467" y="123.9501" transform="rotate(-0 8.83467 123.9501)">Frozen fresh holdout (432 goals)</text>
    </g>
    <g id="text_14">
-    <text style="font-size: 8.3px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: end; fill: #303030" x="264.535458" y="132.619331" transform="rotate(-0 264.535458 132.619331)">single 54/68 (79%)</text>
+    <text style="font-size: 8.3px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: end; fill: #303030" x="264.535458" y="132.45787" transform="rotate(-0 264.535458 132.45787)">single 54/68 (79%)</text>
    </g>
    <g id="text_15">
-    <text style="font-size: 8.3px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: end; fill: #ffffff" x="327.037531" y="143.178919" transform="rotate(-0 327.037531 143.178919)">portfolio 67/68 (99%)</text>
+    <text style="font-size: 8.3px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; text-anchor: end; fill: #ffffff" x="327.037531" y="143.025239" transform="rotate(-0 327.037531 143.025239)">portfolio 67/68 (99%)</text>
    </g>
    <g id="text_16">
-    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #303030" transform="translate(343.941938 134.304656)">oracle</text>
-    <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #303030" transform="translate(343.941938 141.334594)">68</text>
+    <text style="font-size: 8px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; fill: #303030" transform="translate(343.941938 134.179125)">oracle</text>
+    <text style="font-size: 8px; font-family: 'Times New Roman', 'Times', 'Nimbus Roman', 'DejaVu Serif', serif; fill: #303030" transform="translate(343.941938 141.167625)">68</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="p8b7a5edde1">
+  <clipPath id="p0849aba30c">
    <rect x="7.2" y="7.2" width="371.07" height="146.916"/>
   </clipPath>
  </defs>

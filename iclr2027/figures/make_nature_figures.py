@@ -22,11 +22,11 @@ PALETTE = {
 
 plt.rcParams.update(
     {
-        "font.family": "sans-serif",
-        "font.sans-serif": ["Arial", "DejaVu Sans", "Liberation Sans"],
+        "font.family": "serif",
+        "font.serif": ["Times New Roman", "Times", "Nimbus Roman", "DejaVu Serif"],
         "svg.fonttype": "none",
         "pdf.fonttype": 42,
-        "font.size": 8.8,
+        "font.size": 9.0,
         "axes.linewidth": 0.7,
         "axes.spines.top": False,
         "axes.spines.right": False,
