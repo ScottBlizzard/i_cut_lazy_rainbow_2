@@ -6,6 +6,8 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
 \usepackage[table]{xcolor}
 \usepackage{multirow}
 \usepackage{enumitem}
@@ -55,7 +57,7 @@ This interface decision is easy to overlook because it is not the same as ordina
 
 We propose \tap, an action-conditional evidence allocator for bounded Lean proof search. Given a replayable theorem context and a candidate set, \tap{} compiles selected names into typed proof actions and checks each action in Lean. Every comparison starts from the same empty-premise Hammer attempt and then spends a fixed retry budget. This protocol turns the main question into a reviewer-checkable intervention study: after names have been proposed, how much verified headroom comes from assigning them to the right proof interface?
 
-The empirical answer is surprisingly strong for simple typed portfolios. In a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness, we identify 230 replayable goals from 490 cleaned traced-corpus goals. A mixed source pool of traced oracle-core names and learned retrieved candidates gives a typed action oracle of 58/230, compared with 38/230 for the best single action. A four-retry fixed typed portfolio after \texttt{hammer\_empty} reaches 57/230 out of fold and 58/230 when fit on all training data. Homogeneous K=4 controls are much weaker: Aesop-only reaches 49/230, HammerCore-only and simplification-only reach 41/230, and Hammer-only reaches 32/230. The effect is therefore typed diversity, not simply more calls to one backend.
+The empirical answer is surprisingly strong for simple typed portfolios. In a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness, we identify 230 replayable goals from 490 cleaned traced-corpus goals. A mixed source pool of traced oracle-core names and learned retrieved candidates gives a typed action oracle of 58/230, compared with 38/230 for the best single action. A four-retry fixed typed portfolio after the empty-Hammer baseline reaches 57/230 out of fold and 58/230 when fit on all training data. Homogeneous K=4 controls are much weaker: Aesop-only reaches 49/230, HammerCore-only and simplification-only reach 41/230, and Hammer-only reaches 32/230. The effect is therefore typed diversity, not simply more calls to one backend.
 
 We then remove the most obvious source of concern: traced proof-core assistance. In a retrieved-only anchor on the same 230 replayable goals, empty Hammer solves 29/230 and the best standalone action solves 35/230, while a fixed typed portfolio reaches the 52/230 typed oracle out of fold. To test whether this is a post-hoc peculiarity of the 230-goal matrix, we freeze the retrieved-only four-action portfolio and evaluate two fresh disjoint folds with zero overlap against the original goals. Across 432 replayable holdout goals, empty Hammer solves 30, the best singleton solves 54, K=3 and K=4 solve 67, and the tested-action oracle is 68. This does not make \tap{} a full theorem-proving leaderboard system, but it does give prospective evidence that typed compilation survives beyond the matrix used to discover it.
 
@@ -103,7 +105,36 @@ We separate three notions that are often conflated. \emph{Kernel-verified proof-
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/ace_pipeline.pdf}
+\begin{tikzpicture}[
+  >=Latex,
+  stage/.style={draw=black!22, fill=black!3, rounded corners=2pt, very thin,
+    align=center, minimum width=2.55cm, minimum height=0.72cm, font=\small},
+  compiler/.style={stage, draw=aceTeal, fill=aceTealLight},
+  channel/.style={draw=aceTeal!75!black, fill=aceTealLight, rounded corners=2pt,
+    very thin, align=center, minimum width=1.82cm, minimum height=0.58cm,
+    font=\footnotesize},
+  note/.style={font=\footnotesize, text=black!55}
+]
+\node[stage] (goal) at (1.35,2.15) {Goal $g$\\candidate names};
+\node[stage] (base) at (4.45,2.15) {Shared baseline\\empty Hammer};
+\node[compiler] (compile) at (7.55,2.15) {\tap{} compiler\\typed allocation};
+\node[stage] (kernel) at (10.85,2.15) {Lean kernel\\verified outcome};
+\draw[->, black!55, line width=0.55pt] (goal) -- (base);
+\draw[->, black!55, line width=0.55pt] (base) -- (compile);
+\draw[->, black!55, line width=0.55pt] (compile) -- (kernel);
+
+\node[channel] (hammer) at (1.95,0.82) {Hammer\\facts};
+\node[channel] (core) at (4.05,0.82) {HammerCore\\inputs};
+\node[channel] (simp) at (6.15,0.82) {Simplifier\\lemmas};
+\node[channel] (local) at (8.25,0.82) {Local\\facts};
+\node[channel] (aesop) at (10.35,0.82) {Aesop\\facts/simps};
+\draw[aceTeal!80!black, line width=0.6pt] (compile.south) -- ++(0,-0.38) -| (hammer.north);
+\draw[aceTeal!80!black, line width=0.6pt] (compile.south) -- ++(0,-0.38) -| (core.north);
+\draw[aceTeal!80!black, line width=0.6pt] (compile.south) -- ++(0,-0.38) -| (simp.north);
+\draw[aceTeal!80!black, line width=0.6pt] (compile.south) -- ++(0,-0.38) -| (local.north);
+\draw[aceTeal!80!black, line width=0.6pt] (compile.south) -- ++(0,-0.38) -| (aesop.north);
+\node[note] at (6.15,0.08) {same candidate names; different executable Lean interfaces; fixed retry budget};
+\end{tikzpicture}
 \vspace{-0.7em}
 \caption{\tap{} evaluates action-conditional evidence allocation under a fixed retry budget. Selected names are compiled into typed Lean interfaces, and each routed action is checked by the Lean kernel.}
 \label{fig:pipeline}
@@ -113,7 +144,7 @@ We separate three notions that are often conflated. \emph{Kernel-verified proof-
 
 The allocator is built from action families that consume selected names differently. Hammer actions pass names as ordinary premises; HammerCore actions expose a smaller internal proof-search interface; simplification actions use selected names as rewrite/simp lemmas; local elimination uses names as local facts; Aesop actions can add names as fact rules, simp rules, or both. For each replayable theorem context, we materialize a patched pre-theorem Lean file for each action and classify the result by running Lean with a fixed timeout.
 
-The fixed portfolio is chosen greedily on the training split and evaluated out of fold. Every policy receives the same first action, \texttt{hammer\_empty}, and then a retry budget $K$. This protocol makes the strongest control explicit: an adaptive policy is only useful if it beats or compresses the best fixed sequence of typed actions under the same Lean-call budget. In the current matrix, the train-fitted four-action portfolio after \texttt{hammer\_empty} combines Aesop, HammerCore, Hammer, and local-elimination actions.
+The fixed portfolio is chosen greedily on the training split and evaluated out of fold. Every policy receives the same first action, empty Hammer, and then a retry budget $K$. This protocol makes the strongest control explicit: an adaptive policy is only useful if it beats or compresses the best fixed sequence of typed actions under the same Lean-call budget. In the current matrix, the train-fitted four-action portfolio after empty Hammer combines Aesop, HammerCore, Hammer, and local-elimination actions.
 
 This design also prevents a common misreading of the method. The fixed portfolio is not intended to prove that a hand-written order is optimal; it is the hard control that any learned action router must beat. Its near-oracle performance is therefore evidence that interface typing itself is a large effect, while the absence of an adaptive win is reported as a boundary rather than hidden as a negative result.
 
@@ -137,7 +168,7 @@ This formulation is intentionally intervention-level rather than only a marginal
 All main results are kernel-verified Lean checks in a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness. We first clean 490 traced-corpus goals and keep the 230 goals whose original tactic script replays before the theorem statement. We then run typed proof actions in Lean and count a success only when the patched file checks. To separate interface allocation from traced proof-core assistance, we repeat the budgeted compiler test with only retrieved candidates. Finally, we freeze the retrieved-only action subset and evaluate two disjoint 500-goal folds with zero overlap against the original 230-goal set; the folds contain 432 replayable goals in total. Trace-core and bridge experiments are retained in Appendix~\ref{tab:appendix-discovery-summary} as discovery evidence for bounded retries, not as the main proving metric.
 
 \begin{table}[t]
-\caption{Core verified evidence. ``Portfolio'' is the fixed typed retry sequence after the shared \texttt{hammer\_empty} call; the fresh-holdout row uses the frozen retrieved-only sequence and an oracle over the predeclared tested actions.}
+\caption{Core verified evidence. ``Portfolio'' is the fixed typed retry sequence after the shared empty-Hammer call; the fresh-holdout row uses the frozen retrieved-only sequence and an oracle over the predeclared tested actions.}
 \label{tab:core-results}
 \centering
 \small
@@ -165,7 +196,7 @@ Table~\ref{tab:core-results} is the main empirical result. On the mixed-source 2
 \end{figure}
 
 \begin{table}[t]
-\caption{Budget path after the shared \texttt{hammer\_empty} call. The same typed-portfolio story holds in the mixed-source matrix, the retrieved-only anchor, and the frozen holdout.}
+\caption{Budget path after the shared empty-Hammer call. The same typed-portfolio story holds in the mixed-source matrix, the retrieved-only anchor, and the frozen holdout.}
 \label{tab:budget-path}
 \centering
 \small
@@ -181,7 +212,7 @@ Frozen holdout 432 & 56/432 & 58/432 & \best{67/432} & \best{67/432} & 68/432 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:budget-path} shows why the fixed sequence is a strong control rather than a weak baseline. In all three settings, the portfolio approaches the tested oracle quickly. On the retrieved-only anchor, K=3 already reaches the oracle. On the frozen holdout, K=3 and K=4 recover 67/68 tested-action opportunities, and the strict after-\texttt{hammer\_empty} coverage is 37/38. The remaining one-goal gap is useful because it shows that the frozen policy is not evaluated against a trivial oracle.
+Table~\ref{tab:budget-path} shows why the fixed sequence is a strong control rather than a weak baseline. In all three settings, the portfolio approaches the tested oracle quickly. On the retrieved-only anchor, K=3 already reaches the oracle. On the frozen holdout, K=3 and K=4 recover 67/68 tested-action opportunities, and the strict after-empty-Hammer coverage is 37/38. The remaining one-goal gap is useful because it shows that the frozen policy is not evaluated against a trivial oracle.
 
 \begin{table}[t]
 \caption{Fresh-holdout fold details. The action subset and order are frozen before evaluation; the two folds have zero overlap with the original 230-goal matrix.}
@@ -253,14 +284,14 @@ Table~\ref{tab:learned-gate} turns a negative result into a boundary on the clai
 \toprule
 Aesop control & Verified goals & Readout \\
 \midrule
-\texttt{empty} Aesop & 29/230 & default baseline \\
-\texttt{retrieved-only}, joint & 34/230 & non-oracle source helps \\
-\texttt{oracle-core-only}, joint & 35/230 & oracle source alone is similar \\
+empty Aesop & 29/230 & default baseline \\
+retrieved-only, joint & 34/230 & non-oracle source helps \\
+oracle-core-only, joint & 35/230 & oracle source alone is similar \\
 \rowcolor{aceTealLight}
-\texttt{oracle-core+retrieved}, joint & \best{38/230} & best Aesop row \\
-\texttt{oracle-core+retrieved}, identity & 36/230 & identity explains much of the lift \\
-\texttt{oracle-core+retrieved}, simps-only & 35/230 & simp exposure is strong \\
-\texttt{oracle-core+retrieved}, facts-only & 32/230 & fact exposure is weaker \\
+oracle-core+retrieved, joint & \best{38/230} & best Aesop row \\
+oracle-core+retrieved, identity & 36/230 & identity explains much of the lift \\
+oracle-core+retrieved, simps-only & 35/230 & simp exposure is strong \\
+oracle-core+retrieved, facts-only & 32/230 & fact exposure is weaker \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -281,7 +312,7 @@ Is this just more calls to one backend? & Full typed K=4: 57/230; Aesop-only: 49
 Is learned routing the contribution? & Best logistic/ComplementNB gates match but do not beat fixed K=4: 57/230. & Fixed portfolio is the hard control. \\
 Is Aesop facts+simps the whole story? & Joint oracle-core+retrieved: 38/230; identity: 36/230; simps-only: 35/230; facts-only: 32/230. & Source/interface sensitivity, not a large pure complementarity. \\
 Does syntactic cleanup explain the gains? & Strict-filtered oracle: 4/230; combined oracle remains 58/230. & Cleanup alone is not the mechanism. \\
-What is the call/time cost? & \texttt{hammer\_empty}: 29/230 at 1.00 calls, 8.31s; train-fitted K=4: 58/230 at 4.18 calls, 40.07s. & Main comparisons are matched by Lean calls; wallclock is transparent. \\
+What is the call/time cost? & Empty Hammer: 29/230 at 1.00 calls, 8.31s; train-fitted K=4: 58/230 at 4.18 calls, 40.07s. & Main comparisons are matched by Lean calls; wallclock is transparent. \\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -376,7 +407,7 @@ The natural next step is to learn an allocator that beats the fixed typed portfo
 
 \section{Conclusion}
 
-This paper argues that Lean premise selection is incomplete without action-conditional evidence allocation. \tap{} implements this view as a typed evidence compiler over Hammer, HammerCore, simplification, local-elimination, and Aesop interfaces. In the mixed-source 230-goal matrix, the typed action grid reaches 58/230 verified proofs versus 38/230 for the best single action, and a four-retry fixed typed control recovers 57/230 out of fold. In the retrieved-only anchor, the same compiler view reaches 52/230 with a fixed portfolio, compared with 29/230 for empty Hammer and 35/230 for the best standalone action. In two frozen fresh-holdout folds, the predeclared K=4 portfolio solves 67/432 replayable goals versus 54/432 for the best singleton and 68/432 for the tested-action oracle. The exact Aesop controls make the mechanism more precise: source and interface assignment matter, but a large pure facts-versus-simps complementarity is not supported. The result is a narrow but concrete lesson for Lean provers: retrieval should hand off not just a list of names, but a typed evidence program that tells Lean how those names should enter proof search. More broadly, the evaluated unit should be a candidate name together with its consuming interface, because the same evidence can help, fail, or hurt under different proof actions.
+This paper argues that Lean premise selection is incomplete without action-conditional evidence allocation. \tap{} implements this as a typed compiler over Hammer, HammerCore, simplification, local-elimination, and Aesop interfaces. Across the verified replay harness, typed allocation closes most tested-oracle headroom: 57/58 on mixed-source, 52/52 retrieved-only, and 67/68 on fresh holdout. Homogeneous retries are weaker, learned gates do not beat the fixed sequence, and exact Aesop controls point to source/interface sensitivity. The lesson is narrow but reusable: a retriever should hand Lean a typed evidence program, not only a ranked name list, because the same evidence can help or hurt depending on its consuming proof interface.
 
 \newpage
 \bibliography{references}
@@ -449,15 +480,15 @@ Does learned imported retrieval survive bridge checks? & Final-base8 averages 92
 \toprule
 Method & Success & FFR & Avg prem. \\
 \midrule
-\texttt{topk\_expansion} & 91.5\% & 79.9\% & 46.9 \\
-\texttt{visible\_feature\_name\_rerank} & 85.3\% & 0.0\% & 42.9 \\
-\texttt{visible\_feature\_statement\_rerank} & 77.6\% & 0.0\% & 42.9 \\
-\texttt{visible\_feature\_decl\_rerank} & 78.3\% & 0.0\% & 42.9 \\
-\texttt{visible\_feature\_rerank} & 86.5\% & 0.0\% & 42.9 \\
-\texttt{rule\_far\_no\_core\_decl\_features} & 92.6\% & 82.4\% & 46.2 \\
-\texttt{rule\_far\_no\_core\_statement\_features} & 92.8\% & 82.9\% & 46.4 \\
-\texttt{rule\_far\_no\_core\_name\_features} & 95.0\% & 88.1\% & 45.4 \\
-\texttt{rule\_far\_no\_core\_tags} & \best{95.7\%} & \best{89.7\%} & 45.1 \\
+Top-$k$ expansion & 91.5\% & 79.9\% & 46.9 \\
+Visible-feature name rerank & 85.3\% & 0.0\% & 42.9 \\
+Visible-feature statement rerank & 77.6\% & 0.0\% & 42.9 \\
+Visible-feature declaration rerank & 78.3\% & 0.0\% & 42.9 \\
+Visible-feature rerank & 86.5\% & 0.0\% & 42.9 \\
+Rule FAR, no core declaration features & 92.6\% & 82.4\% & 46.2 \\
+Rule FAR, no core statement features & 92.8\% & 82.9\% & 46.4 \\
+Rule FAR, no core name features & 95.0\% & 88.1\% & 45.4 \\
+Rule FAR, no core tags & \best{95.7\%} & \best{89.7\%} & 45.1 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -473,21 +504,21 @@ Method & Success & FFR & Avg prem. \\
 \toprule
 Method & Success & FFR & Avg prem. \\
 \midrule
-\texttt{one\_shot} & 1.1\% & 0.0\% & 32.0 \\
-\texttt{same\_file\_prior\_rerank} & 2.1\% & 0.0\% & 56.0 \\
-\texttt{visible\_feature\_rerank} & 2.4\% & 0.0\% & 56.0 \\
-\texttt{bm25\_rerank} & 7.0\% & 0.0\% & 56.0 \\
-\texttt{leansearch\_iterative} & 11.9\% & 8.3\% & 91.9 \\
-\texttt{bm25\_expansion} & 11.9\% & 8.3\% & 92.2 \\
-\texttt{rule\_far\_bm25} & \best{12.2\%} & \best{8.7\%} & 92.2 \\
-\texttt{rule\_far\_full} {\small (oracle ref.)} & 55.7\% & 55.2\% & 86.6 \\
+One-shot & 1.1\% & 0.0\% & 32.0 \\
+Same-file prior rerank & 2.1\% & 0.0\% & 56.0 \\
+Visible-feature rerank & 2.4\% & 0.0\% & 56.0 \\
+BM25 rerank & 7.0\% & 0.0\% & 56.0 \\
+LeanSearch iterative & 11.9\% & 8.3\% & 91.9 \\
+BM25 expansion & 11.9\% & 8.3\% & 92.2 \\
+Rule FAR + BM25 & \best{12.2\%} & \best{8.7\%} & 92.2 \\
+Rule FAR full {\small (oracle ref.)} & 55.7\% & 55.2\% & 86.6 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Bridge Failure Taxonomy}
 
-The 200-goal imported bridge verifies 124/200 original traced tactic scripts. The primary replay failures are 30 unknown-identifier errors, 13 other Lean errors, 8 typeclass failures, 7 unsolved-goal failures, 6 \texttt{simp} no-progress failures, 5 tactic failures, 5 type mismatches, and 2 sorry-context failures. At the policy level, final-base8 has 17 replay-verified trace misses, compared with 19 for the original second-stage controller, 35 for learned+base fallback, and 47 for learned expansion. Negative-case inspection finds 0/17 candidate-pool misses, 2 fallback-selected core drops, 3 expansion-selected core drops, and 15 failure-conditioned rank misses. This supports the limitation that remaining headroom is ranking and calibration, not candidate generation.
+The 200-goal imported bridge verifies 124/200 original traced tactic scripts. The primary replay failures are 30 unknown-identifier errors, 13 other Lean errors, 8 typeclass failures, 7 unsolved-goal failures, 6 simplifier no-progress failures, 5 tactic failures, 5 type mismatches, and 2 sorry-context failures. At the policy level, final-base8 has 17 replay-verified trace misses, compared with 19 for the original second-stage controller, 35 for learned+base fallback, and 47 for learned expansion. Negative-case inspection finds 0/17 candidate-pool misses, 2 fallback-selected core drops, 3 expansion-selected core drops, and 15 failure-conditioned rank misses. This supports the limitation that remaining headroom is ranking and calibration, not candidate generation.
 
 \subsection{Guardrail and Expert-Mixing Ablations}
 
