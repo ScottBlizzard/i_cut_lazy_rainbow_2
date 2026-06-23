@@ -15,11 +15,13 @@ The strongest verified route is not an adaptive learned router. It is a typed pr
 - `hammer_empty` and `aesop_empty` each solve 29/230 goals.
 - Fixed typed portfolios solve 49/230 at K=1, 55/230 at K=2, 55/230 at K=3, and 57/230 at K=4 out of fold.
 - A train-fitted K=4 typed portfolio reaches the 58/230 oracle.
+- The retrieved-only anchor removes traced `proof_core`: empty Hammer solves 29/230, the best standalone action solves 35/230, the typed oracle solves 52/230, and fixed typed K=3/K=4 OOF reaches 52/230.
 
 Important transparency point:
 
 - In the current action names, `core` means traced `proof_core`; in paper wording it must be called `oracle_core` unless explicitly defined otherwise.
-- The main result is therefore a mechanism-isolation result over `oracle_core + retrieved` evidence, not a deployable retriever-only theorem prover.
+- The main matrix remains a mechanism-isolation result over `oracle_core + retrieved` evidence.
+- The separate retrieved-only anchor supports a deployable downstream compiler claim: for the same non-oracle retrieved names, typed Lean-interface allocation still adds verified goals. This is not an official full-system LeanSearch/LeanHammer reproduction.
 
 Canonical files:
 
@@ -30,6 +32,7 @@ Canonical files:
 - `analysis/mathlib430_protocol_freeze_evidence_contract.md`
 - `analysis/mathlib430_evidence_contract_audit.md`
 - `analysis/mathlib430_aesop_exact_controls_summary.md`
+- `analysis/mathlib430_retrieved_only_anchor_summary.md`
 
 ## 1. Replayable Mathlib 4.30 Subset
 
@@ -89,6 +92,56 @@ Interpretation:
 - The useful intervention is not "add more names"; it is choosing the Lean action/interface and the channel through which evidence is consumed.
 - The 38/230 Aesop result is strong but must be compared against `aesop_empty=29/230`, not only against facts-only/simps-only controls.
 
+## 2.5 External Retriever-Only Anchor
+
+Goal: test whether the typed evidence compiler still helps when traced `proof_core` names are removed from the candidate source.
+
+Canonical files:
+
+- `analysis/mathlib430_retrieved_only_anchor_summary.md`
+- `outputs/mathlib430_pretheorem_action_matrix_scaled230_retrieved_only_anchor_merged.md`
+- `outputs/mathlib430_budgeted_action_policy_scaled230_retrieved_only_anchor.md`
+- `outputs/mathlib430_typed_allocator_gate_scaled230_retrieved_only_anchor.md`
+- `outputs/mathlib430_fixed_portfolio_stability_scaled230_retrieved_only_anchor.md`
+- `outputs/retrieved_only_anchor_jsons.tgz`
+- `outputs/retrieved_only_anchor_mds.tgz`
+- `outputs/retrieved_only_anchor_logs.tgz`
+
+Core result:
+
+| Metric | Value |
+|---|---:|
+| Goals | 230 |
+| Attempts | 17,020 |
+| Verified attempts | 1,397 |
+| Non-empty-premise verified attempts | 1,177 |
+| Empty Hammer | 29/230 |
+| Best standalone action | 35/230 |
+| Typed oracle | 52/230 |
+| Fixed OOF K=1 after `hammer_empty` | 47/230 |
+| Fixed OOF K=2 after `hammer_empty` | 50/230 |
+| Fixed OOF K=3 after `hammer_empty` | 52/230 |
+| Fixed OOF K=4 after `hammer_empty` | 52/230 |
+| Strict after-`hammer_empty` goals | 23 |
+
+Best standalone actions:
+
+| Action | Verified goals |
+|---|---:|
+| `aesop_core_plus_learned16` | 35 |
+| `aesop_core_plus_learned32` | 35 |
+| `aesop_learned16` | 35 |
+| `aesop_learned32` | 35 |
+| `aesop_core_plus_learned` | 34 |
+| `aesop_learned8` | 34 |
+
+Interpretation:
+
+- P1 passes: typed compilation improves the same retrieved-only candidate source from 29/230 empty Hammer and 35/230 best standalone action to 52/230 with a fixed K=3/K=4 OOF portfolio.
+- Fixed K=3 covers 23/23 strict after-`hammer_empty` goals and reaches the retrieved-only typed oracle.
+- This supports the paper as a downstream evidence-compiler method, not only an oracle-core mechanism study.
+- The result should still be described as a plug-in retrieved-only anchor, not as an official LeanSearch/LeanHammer full-system reproduction.
+
 ## 3. Aesop Channel/Source Mechanism
 
 Goal: isolate whether Aesop succeeds because of facts, simp lemmas, source composition, or their interaction.
@@ -120,7 +173,7 @@ Matched-triple readout:
 - In the `oracle_core+retrieved` source mode, joint facts+simps is best at 38/230.
 - Exact controls explain most of the old apparent channel-complementarity story: identity is 36/230, simps-only is 35/230, facts-only is 32/230, and joint-only over exact single-channel controls is only 2 goals.
 - Source composition has a modest effect: `retrieved-only` reaches 34/230, `oracle-core-only` reaches 35/230, and the mixed source reaches 38/230.
-- The deployable-source anchor is nonzero (`retrieved-only` 34/230), but it is not yet a full external retriever-only theorem-proving result.
+- The deployable-source Aesop-only anchor is nonzero (`retrieved-only` 34/230). The full retrieved-only typed-grid anchor is stronger: fixed typed K=3/K=4 reaches 52/230.
 
 Interpretation:
 

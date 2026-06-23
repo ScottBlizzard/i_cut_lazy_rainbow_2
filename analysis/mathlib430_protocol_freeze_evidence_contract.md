@@ -11,6 +11,7 @@ This freeze supersedes the earlier adaptive-router framing for the current ICLR_
 - Stable split: `outputs/mathlib430_replayable490_splits.json`
 - Main verified matrix: `outputs/mathlib430_pretheorem_action_matrix_scaled230_aesop_ablation_merged.json`
 - Evidence-contract audit: `analysis/mathlib430_evidence_contract_audit.md`
+- Retrieved-only anchor: `analysis/mathlib430_retrieved_only_anchor_summary.md`
 - Deep external review motivating this freeze: `analysis/deep_research_report_evidence_contract_controls.md`
 
 ## Split Contract
@@ -31,12 +32,13 @@ Allowed wording:
 - "matched Lean-call budget"
 - "empirical runner-wallclock frontier"
 
-Disallowed wording unless a new external anchor is completed:
+Disallowed wording:
 
 - "deployable retriever-only theorem prover"
 - "matched compute" without qualification
 - "learned adaptive allocator beats fixed portfolio"
 - "core" without defining it as traced proof-core evidence
+- "official LeanSearch/LeanHammer reproduction" for the retrieved-only anchor
 
 ## Current Verified Baselines
 
@@ -60,7 +62,27 @@ From `analysis/mathlib430_evidence_contract_audit.md`:
 - Proof-core names already in retrieved top-32: 738 total.
 - Proof-core-only outside retrieved top-32: 137 total.
 
-This means the main evidence pool is mixed: it contains both oracle proof-core names and retrieved names. The current result is useful for mechanism isolation, but it is not yet an external retriever-only result.
+This means the main evidence pool is mixed: it contains both oracle proof-core names and retrieved names. The main mixed matrix is useful for mechanism isolation; the separate P1 anchor below is the retrieved-only downstream compiler result.
+
+## Completed P1 Retrieved-Only Anchor
+
+The downstream compiler anchor removes traced `proof_core` from the candidate source and reruns the full typed action grid with `--candidate-source retrieved_only`.
+
+- Runner: `scripts/run_retrieved_only_anchor_singletons_a40.sh`.
+- Raw singleton archive: `outputs/retrieved_only_anchor_jsons.tgz`.
+- Merged matrix: `outputs/mathlib430_pretheorem_action_matrix_scaled230_retrieved_only_anchor_merged.md`.
+- Budgeted policy: `outputs/mathlib430_budgeted_action_policy_scaled230_retrieved_only_anchor.md`.
+- Typed allocator gate: `outputs/mathlib430_typed_allocator_gate_scaled230_retrieved_only_anchor.md`.
+
+Key result:
+
+- Empty Hammer: 29/230.
+- Best standalone action: 35/230.
+- Typed oracle: 52/230.
+- Fixed typed OOF portfolio after `hammer_empty`: K=1 47/230, K=2 50/230, K=3 52/230, K=4 52/230.
+- Strict after-`hammer_empty` goals: 23; fixed K=3 covers 23/23.
+
+This passes the external-anchor gate for a downstream retrieved-only evidence compiler. It should not be written as an official full-system LeanSearch or LeanHammer reproduction.
 
 ## Completed P0 Offline Controls
 

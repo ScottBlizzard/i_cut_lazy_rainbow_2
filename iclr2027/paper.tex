@@ -41,7 +41,7 @@
 \maketitle
 
 \begin{abstract}
-Premise selection is usually treated as the problem of ranking which lemmas to send to a Lean prover. This view is incomplete: after names are selected, they must still be compiled into the proof interface that can consume them. We study \emph{action-conditional evidence allocation}, where a method chooses not only selected names but also whether they enter Lean as Hammer facts, HammerCore inputs, simp lemmas, Aesop facts, Aesop simp rules, or elimination facts. We introduce \tap, a verified typed evidence compiler evaluated in a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness. On 230 replayable traced-corpus goals, the typed action grid reaches 58/230 kernel-verified proofs versus 38/230 for the best single action; a four-retry fixed portfolio, used as the strongest matched Lean-call control, reaches 57/230 out of fold and 58/230 when train-fitted. Exact Aesop controls sharpen the mechanism: oracle-core plus retrieved joint exposure solves 38/230 goals, but identity exposure solves 36/230, simps-only solves 35/230, retrieved-only joint exposure solves 34/230, and oracle-core-only joint exposure solves 35/230. Thus the robust claim is not a pure facts-versus-simps complementarity; it is that selected evidence has tactic-interface and source-dependent behavior that fixed typed portfolios can exploit. Stronger logistic and ComplementNB allocators do not beat or compress the fixed K=4 control, so we present adaptive routing as a boundary rather than a claim.
+Premise selection is usually treated as the problem of ranking which lemmas to send to a Lean prover. This view is incomplete: after names are selected, they must still be compiled into the proof interface that can consume them. We study \emph{action-conditional evidence allocation}, where a method chooses not only selected names but also whether they enter Lean as Hammer facts, HammerCore inputs, simp lemmas, Aesop facts, Aesop simp rules, or elimination facts. We introduce \tap, a verified typed evidence compiler evaluated in a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness. On 230 replayable traced-corpus goals, the typed action grid reaches 58/230 kernel-verified proofs versus 38/230 for the best single action; a four-retry fixed portfolio reaches 57/230 out of fold and 58/230 when train-fitted. Removing traced proof-core names gives a retrieved-only anchor: empty Hammer solves 29/230, the best standalone action solves 35/230, and a fixed typed portfolio reaches the 52/230 typed oracle out of fold with three retry actions. Exact Aesop controls sharpen the mechanism: oracle-core plus retrieved joint exposure solves 38/230 goals, but identity exposure solves 36/230, simps-only solves 35/230, retrieved-only joint exposure solves 34/230, and oracle-core-only joint exposure solves 35/230. Thus the robust claim is not a pure facts-versus-simps complementarity; selected evidence has tactic-interface and source-dependent behavior that fixed typed portfolios can exploit. Stronger logistic and ComplementNB allocators do not beat or compress the fixed control, so adaptive routing is a boundary rather than a claim.
 \end{abstract}
 
 \section{Introduction}
@@ -52,11 +52,11 @@ The central challenge is that useful evidence is not monotonic under either quan
 
 We propose \tap, an action-conditional evidence allocator for bounded Lean proof search. Given a replayable theorem context and a candidate set, \tap{} compiles selected names into typed proof actions: Hammer facts, HammerCore inputs, simplification lemmas, \texttt{solve\_by\_elim} facts, and Aesop fact/simp channels. The method is deliberately compute-budgeted: every comparison starts from the same empty-premise Hammer attempt and then spends a fixed number of retry actions. This makes the main question reviewer-checkable: how much of the verified oracle headroom comes from assigning evidence to the right interface, and can any learned allocator beat a strong fixed typed control?
 
-The main verified result is on non-generated replayable Mathlib theorem contexts. We migrate traced goals to a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness and identify 230 replayable goals from 490 cleaned traces. On this subset, the typed action grid reaches a 58/230 oracle, compared with 38/230 for the best single action. A fixed portfolio of four typed retry actions after \texttt{hammer\_empty} reaches 57/230 out of fold and 58/230 when train-fitted. This fixed sequence is not the proposed novelty; it is the hard matched Lean-call control that shows how large the interface-typing effect is. Stronger logistic and ComplementNB allocators match but do not beat the K=4 fixed control, so adaptive routing remains a future target.
+The main verified result is on non-generated replayable Mathlib theorem contexts. We migrate traced goals to a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness and identify 230 replayable goals from 490 cleaned traces. On this subset, the typed action grid reaches a 58/230 oracle, compared with 38/230 for the best single action. A fixed portfolio of four typed retry actions after \texttt{hammer\_empty} reaches 57/230 out of fold and 58/230 when train-fitted. To separate this mechanism from traced proof-core assistance, we also run a retrieved-only anchor that removes oracle-core names from the candidate source. There, empty Hammer solves 29/230, the best standalone action solves 35/230, and a fixed typed portfolio reaches the 52/230 typed oracle out of fold with three retry actions. The fixed sequence is not the proposed novelty; it is the hard matched Lean-call control that shows how large the interface-typing effect is. Stronger logistic and ComplementNB allocators match but do not beat the fixed control, so adaptive routing remains a future target.
 
-This paper makes three contributions. First, we formulate action-conditional evidence allocation as a distinct problem from premise retrieval: selected evidence must be compiled into a Lean interface, not only ranked. Second, we implement and evaluate \tap{} in a real Mathlib 4.30 + LeanHammer 4.30 replay harness, showing that small typed action sets recover nearly all current oracle headroom on the replayable subset. Third, we provide mechanism evidence and boundaries: Aesop is sensitive to source and exposure choice, broad 32-name insertion is harmful in the original matrix, strict syntactic filtering does not explain the gains, and learned allocators do not yet beat the fixed typed control. Trace-core failure-feedback experiments remain important discovery evidence, but the current supported main claim is action-conditional evidence allocation.
+This paper makes three contributions. First, we formulate action-conditional evidence allocation as a distinct problem from premise retrieval: selected evidence must be compiled into a Lean interface, not only ranked. Second, we implement and evaluate \tap{} in a real Mathlib 4.30 + LeanHammer 4.30 replay harness, showing that small typed action sets recover nearly all current oracle headroom on the replayable subset, including under a retrieved-only candidate source. Third, we provide mechanism evidence and boundaries: Aesop is sensitive to source and exposure choice, broad 32-name insertion is harmful in the original matrix, strict syntactic filtering does not explain the gains, and learned allocators do not yet beat the fixed typed control. Trace-core failure-feedback experiments remain important discovery evidence, but the current supported main claim is action-conditional evidence allocation.
 
-The scope is deliberately narrower than a full theorem-proving leaderboard. We treat fixed typed portfolios as strong matched Lean-call controls, not as weak baselines, and we do not claim adaptive routing until it beats them. We also distinguish controlled lexical retrieval proxies from full LeanSearch v2 reproductions, and bridge replay from open-ended proof generation. These boundaries keep the paper's claim reviewer-checkable: the contribution is a typed interface mechanism for selected evidence in Lean proof search.
+The scope is deliberately narrower than a full theorem-proving leaderboard. We treat fixed typed portfolios as strong matched Lean-call controls, not as weak baselines, and we do not claim adaptive routing until it beats them. The retrieved-only anchor tests the downstream compiler once names are proposed, but it is not an official reproduction of LeanSearch v2 or another complete premise-selection system. We also distinguish bridge replay from open-ended proof generation. These boundaries keep the paper's claim reviewer-checkable: the contribution is a typed interface mechanism for selected evidence in Lean proof search.
 
 \section{Related Work}
 
@@ -173,7 +173,7 @@ We evaluate two evidence layers. The main verified layer is a Mathlib 4.30 + Lea
 The second layer is trace-core discovery evidence from earlier premise-selection experiments. There, success means that the selected premises cover the proof-core premises extracted from traced proofs. We keep these results because they explain why premise budgets and failure feedback matter, but they are not the main verified claim. BM25 and iterative lexical rows are controlled retrieval policies inside our candidate-pool protocol, not full system-to-system reproductions of the published LeanSearch v2 pipeline.
 
 \begin{table}[t]
-\caption{Main claim-evidence map. The primary evidence is the verified typed action matrix and Aesop channel counterfactual; trace-core and bridge rows are supporting discovery evidence.}
+\caption{Main claim-evidence map. The primary evidence is the verified typed action matrix, retrieved-only anchor, and Aesop channel counterfactual; trace-core and bridge rows are supporting discovery evidence.}
 \label{tab:main-evidence}
 \centering
 \small
@@ -184,6 +184,7 @@ Claim & Strong control & Supported result & Readout \\
 \midrule
 Typed actions matter & Best single action: 38/230 & Oracle typed grid: \best{58/230} & +20 goals \\
 Small portfolios are hard controls & Empty Hammer: 29/230 & Fixed K=4 OOF: \best{57/230} & near oracle \\
+Retrieved-only compilation works & Empty Hammer: 29/230; best standalone: 35/230 & Fixed K=3/K=4 OOF: \best{52/230} & reaches typed oracle \\
 Aesop exposure is source/interface sensitive & Empty Aesop: 29/230; identity: 36/230 & Oracle-core+retrieved joint: \best{38/230}; retrieved-only: 34/230 & modest joint/source effect \\
 Broad insertion can hurt & Oracle-core+retrieved8 facts+simps: 38/230 & Oracle-core+retrieved32 facts+simps: 3/230 in original matrix & negative boundary \\
 Adaptive allocation is not yet supported & Fixed K=4 OOF: 57/230 & Best learned allocator: 57/230 at K=4 & boundary \\
@@ -195,7 +196,7 @@ Bridge replay supports premise recovery & Fallback bridge: 44.5\% & Final-base8 
 
 \subsection{Verified Typed Proof-Action Matrix}
 
-Table~\ref{tab:verified-matrix} reports the main verified experiment. The original scaled matrix already shows action-dependent headroom: 51/230 oracle versus 31/230 for the best single action. Extending the action set with Aesop and additional typed interfaces raises the oracle to 58/230 and the best single action to 38/230. The full Aesop-ablation matrix does not raise the oracle further, which means the ablation is explanatory rather than a ceiling improvement.
+Table~\ref{tab:verified-matrix} reports the main verified experiment. The original scaled matrix already shows action-dependent headroom: 51/230 oracle versus 31/230 for the best single action. Extending the action set with Aesop and additional typed interfaces raises the oracle to 58/230 and the best single action to 38/230. The full Aesop-ablation matrix does not raise the oracle further, which means the ablation is explanatory rather than a ceiling improvement. The retrieved-only anchor removes traced proof-core names from the candidate source; its lower oracle is expected, but the remaining 52/230 typed oracle shows that the compiler effect is not only an oracle-core artifact.
 
 \begin{table}[t]
 \caption{Verified typed proof-action matrix on 230 replayable Mathlib 4.30 traced-corpus theorem contexts. Success means the patched Lean file checks.}
@@ -210,6 +211,7 @@ Original typed grid & 3450 & 246 & 31/230 & 51/230 \\
 Extended typed grid & 7130 & 506 & 38/230 & 58/230 \\
 \rowcolor{teal!7}
 Full Aesop-ablation grid & 11500 & \best{582} & \best{38/230} & \best{58/230} \\
+Retrieved-only anchor grid & 17020 & 1397 & 35/230 & 52/230 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -234,6 +236,26 @@ Retry budget $K$ & Fixed OOF & Pure logreg & Residual logreg & Residual CNB & Or
 3 & 55/230 & 44/230 & \best{56/230} & 55/230 & 58/230 \\
 \rowcolor{teal!7}
 4 & \best{57/230} & 47/230 & \best{57/230} & \best{57/230} & 58/230 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:retrieved-anchor} repeats the budgeted compiler test after removing traced proof-core names from the candidate source. This is the main deployability anchor for the paper: it does not reproduce a full external retriever, but it shows that once a retriever-like candidate list is fixed, typed Lean-interface allocation adds verified proofs under the same outer retry protocol.
+
+\begin{table}[t]
+\caption{Retrieved-only anchor after \texttt{hammer\_empty}. The fixed typed portfolio reaches the retrieved-only typed oracle out of fold with three retry actions.}
+\label{tab:retrieved-anchor}
+\centering
+\small
+\begin{tabular}{rrrr}
+\toprule
+Retry budget $K$ & Fixed OOF & Strict goals & Oracle \\
+\midrule
+1 & 47/230 & 18/23 & 52/230 \\
+2 & 50/230 & 21/23 & 52/230 \\
+\rowcolor{teal!7}
+3 & \best{52/230} & \best{23/23} & 52/230 \\
+4 & \best{52/230} & \best{23/23} & 52/230 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -377,11 +399,11 @@ The main limitation is evaluation scope. The verified typed-action results are k
 
 A second limitation is that the current strongest policy is a fixed typed portfolio, not a learned adaptive router. The budgeted policy experiments are useful because they prevent overclaiming: NB/kNN, logistic, and ComplementNB allocators do not beat or compress the fixed typed portfolio under matched Lean-call budget. The trace-core experiments use supervised proof-core traces and should be read as discovery evidence for premise budgets and failure feedback, not as the main verified claim. Future work should either train a stronger adaptive allocator that beats the fixed typed control or expand the replayable verified corpus.
 
-A third limitation is external comparison. Our controlled BM25 and iterative lexical rows test retrieval behavior inside our candidate-pool protocol, but they are not official reproductions of LeanSearch v2 or other full premise-selection systems. The present verified result is therefore best read as orthogonal to global retrieval: once a retriever proposes names, Lean still needs a typed interface decision for how those names enter proof search.
+A third limitation is external comparison. The retrieved-only anchor removes traced proof-core names and supports the downstream compiler claim, but it is still not an official reproduction of LeanSearch v2 or another complete premise-selection system. The present verified result is therefore best read as orthogonal to global retrieval: once a retriever proposes names, Lean still needs a typed interface decision for how those names enter proof search.
 
 \section{Conclusion}
 
-This paper argues that Lean premise selection is incomplete without action-conditional evidence allocation. \tap{} implements this view as a typed evidence compiler over Hammer, HammerCore, simplification, \texttt{solve\_by\_elim}, and Aesop interfaces. On replayable Mathlib theorem contexts, the typed action grid reaches 58/230 verified proofs versus 38/230 for the best single action, and a four-retry fixed typed control recovers 57/230 out of fold. The exact Aesop controls make the final claim more precise: joint oracle-core plus retrieved exposure is the best Aesop row, but the margin over identity, simps-only, and single-source controls is modest. This positions typed evidence allocation as a concrete mechanism for building more reliable Lean hammers, with learned adaptive allocation and stronger external retriever-only validation remaining the next method targets rather than claims already supported by the current verified results.
+This paper argues that Lean premise selection is incomplete without action-conditional evidence allocation. \tap{} implements this view as a typed evidence compiler over Hammer, HammerCore, simplification, \texttt{solve\_by\_elim}, and Aesop interfaces. On replayable Mathlib theorem contexts, the typed action grid reaches 58/230 verified proofs versus 38/230 for the best single action, and a four-retry fixed typed control recovers 57/230 out of fold. A retrieved-only anchor removes traced proof-core names and still reaches 52/230 with a fixed typed portfolio, compared with 29/230 for empty Hammer and 35/230 for the best standalone action. The exact Aesop controls make the final claim more precise: joint oracle-core plus retrieved exposure is the best Aesop row, but the margin over identity, simps-only, and single-source controls is modest. This positions typed evidence allocation as a concrete mechanism for building more reliable Lean hammers, with learned adaptive allocation remaining the next method target rather than a claim already supported by the current verified results.
 
 \bibliography{references}
 \bibliographystyle{iclr2026_conference}
@@ -400,6 +422,9 @@ All numbers in the main tables are copied from canonical JSON or Markdown output
 \item Verified typed action grid: \url{outputs/mathlib430_pretheorem_action_matrix_scaled230_aesop_ablation_merged.md}.
 \item Budgeted typed portfolio: \url{outputs/mathlib430_budgeted_action_policy_scaled230_aesop_ablation.md}.
 \item Typed allocator gate: \url{outputs/mathlib430_typed_allocator_gate_scaled230_aesop_ablation.md}.
+\item Retrieved-only anchor summary: \url{analysis/mathlib430_retrieved_only_anchor_summary.md}.
+\item Retrieved-only anchor matrix: \url{outputs/mathlib430_pretheorem_action_matrix_scaled230_retrieved_only_anchor_merged.md}.
+\item Retrieved-only fixed stability: \url{outputs/mathlib430_fixed_portfolio_stability_scaled230_retrieved_only_anchor.md}.
 \item Exact Aesop source/channel controls: \url{analysis/mathlib430_aesop_exact_controls_summary.md}.
 \item Initial broad Aesop fact/simp ablation: \url{analysis/mathlib430_aesop_ablation_scaled230.md}.
 \item Initial Aesop counterfactual channel control: \url{analysis/mathlib430_aesop_counterfactual_controls.md}.
