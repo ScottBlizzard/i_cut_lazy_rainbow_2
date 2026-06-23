@@ -13,14 +13,15 @@
 \usepackage{microtype}
 \usepackage{array}
 \usepackage{float}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
+
+\definecolor{aceTeal}{HTML}{2F8F8C}
+\definecolor{aceTealLight}{HTML}{EDF7F7}
 
 \hypersetup{
   colorlinks=true,
-  citecolor=teal!70!black,
-  linkcolor=teal!70!black,
-  urlcolor=teal!70!black,
+  citecolor=aceTeal,
+  linkcolor=aceTeal,
+  urlcolor=aceTeal,
   hypertexnames=false
 }
 
@@ -29,8 +30,8 @@
 \newcommand{\tap}{\textsc{ACE}}
 \newcommand{\far}{\textsc{FAR-Hammer}}
 \newcommand{\fars}{\textsc{FAR}}
-\newcommand{\best}[1]{\textbf{\textcolor{teal!70!black}{#1}}}
-\newcommand{\gain}[1]{\textcolor{teal!70!black}{#1}}
+\newcommand{\best}[1]{\textbf{\textcolor{aceTeal}{#1}}}
+\newcommand{\gain}[1]{\textcolor{aceTeal}{#1}}
 \newcommand{\warn}[1]{\textcolor{orange!80!black}{#1}}
 \newcommand{\metricup}[1]{#1$\uparrow$}
 \newcommand{\metricdown}[1]{#1$\downarrow$}
@@ -102,35 +103,8 @@ We separate three notions that are often conflated. \emph{Kernel-verified proof-
 
 \begin{figure}[t]
 \centering
-\small
-\begin{tikzpicture}[
-font=\small,
-stage/.style={draw=black!45, rounded corners=2pt, fill=black!2, align=center,
-  minimum height=2.7em, text width=2.45cm},
-routebar/.style={draw=teal!60!black, rounded corners=2pt, fill=teal!6, align=center,
-  minimum height=2.35em, text width=9.9cm},
-arrow/.style={-{Latex[length=2mm]}, thick, black!55},
-taparrow/.style={-{Latex[length=1.6mm]}, thick, teal!70!black}
-]
-\node[stage] (goal) at (0,0) {Goal $g$\\candidate names};
-\node[stage] (empty) at (3.25,0) {Shared baseline\\empty Hammer};
-\node[stage, fill=teal!8, draw=teal!65!black] (alloc) at (6.5,0) {\tap{} compiler\\typed allocation};
-\node[stage] (lean) at (9.75,0) {Lean kernel\\verified outcome};
-\draw[arrow] (goal) -- (empty);
-\draw[arrow] (empty) -- (alloc);
-\draw[arrow] (alloc) -- (lean);
-
-\node[routebar] (routes) at (5.0,-1.25)
-  {\begin{tabular}{ccccc}
-  Hammer & HammerCore & Simp & Local & Aesop\\
-  facts & inputs & lemmas & facts & facts/simps
-  \end{tabular}};
-\draw[taparrow] (alloc.south) -- (routes.north);
-\draw[taparrow] (routes.east) -- (lean.south);
-\node[align=center, text=black!65] at (5.0,-1.95)
-  {same names; different executable Lean interfaces; fixed retry budget};
-\end{tikzpicture}
-\vspace{-0.9em}
+\includegraphics[width=\linewidth]{figures/ace_pipeline.pdf}
+\vspace{-0.7em}
 \caption{\tap{} evaluates action-conditional evidence allocation under a fixed retry budget. Selected names are compiled into typed Lean interfaces, and each routed action is checked by the Lean kernel.}
 \label{fig:pipeline}
 \end{figure}
@@ -174,7 +148,7 @@ Setting & Empty & Best single & Portfolio & Oracle & Readout \\
 \midrule
 Mixed-source 230 & 29/230 & 38/230 & \best{57/230} OOF & 58/230 & typed actions create +20 oracle headroom \\
 Retrieved-only 230 & 29/230 & 35/230 & \best{52/230} OOF & 52/230 & removes traced proof-core assistance \\
-\rowcolor{teal!7}
+\rowcolor{aceTealLight}
 Frozen fresh holdout & 30/432 & 54/432 & \best{67/432} & 68/432 & transfers beyond the discovery matrix \\
 \bottomrule
 \end{tabular}}
@@ -184,29 +158,8 @@ Table~\ref{tab:core-results} is the main empirical result. On the mixed-source 2
 
 \begin{figure}[t]
 \centering
-\small
-\begin{tikzpicture}[font=\small, x=0.105cm, y=0.42cm]
-\node[anchor=east] at (0,4.85) {Setting};
-\node[anchor=west, text=black!65] at (3,4.85) {strongest single};
-\node[anchor=west, text=teal!70!black] at (34,4.85) {fixed portfolio};
-\node[anchor=west] at (79,4.85) {oracle};
-
-\foreach \label/\ys/\yp/\single/\port/\snum/\pnum/\onum in {
-Mixed-source 230/3.75/3.35/45.9/68.8/38/57/58,
-Retrieved-only 230/2.35/1.95/47.1/70.0/35/52/52,
-Fresh holdout 432/0.95/0.55/55.6/69.0/54/67/68} {
-  \node[anchor=east, align=right] at (0,\ys-0.25) {\label};
-  \draw[black!25, line width=0.35pt] (3,\ys) -- (73,\ys);
-  \draw[black!25, line width=0.35pt] (3,\yp) -- (73,\yp);
-  \fill[black!16] (3,\ys-0.17) rectangle ++(\single,0.34);
-  \fill[teal!55] (3,\yp-0.17) rectangle ++(\port,0.34);
-  \draw[black!70, line width=0.8pt] (73,\yp-0.38) -- (73,\ys+0.38);
-  \node[anchor=west] at (3+\single+1,\ys) {\snum};
-  \node[anchor=east, text=teal!70!black] at (3+\port-1,\yp) {\pnum};
-  \node[anchor=west] at (79,\ys-0.25) {\onum};
-}
-\end{tikzpicture}
-\vspace{-0.9em}
+\includegraphics[width=\linewidth]{figures/result_ladder.pdf}
+\vspace{-0.7em}
 \caption{Result ladder. Bars are normalized within each setting by the tested-action oracle. Across the mechanism matrix, deployability anchor, and frozen holdout, the fixed typed portfolio recovers most tested oracle headroom rather than merely improving on a weak singleton baseline.}
 \label{fig:result-ladder}
 \end{figure}
@@ -222,7 +175,7 @@ Setting & K=1 & K=2 & K=3 & K=4 & Oracle \\
 \midrule
 Mixed-source 230 & 49/230 & 55/230 & 55/230 & \best{57/230} & 58/230 \\
 Retrieved-only 230 & 47/230 & 50/230 & \best{52/230} & \best{52/230} & 52/230 \\
-\rowcolor{teal!7}
+\rowcolor{aceTealLight}
 Frozen holdout 432 & 56/432 & 58/432 & \best{67/432} & \best{67/432} & 68/432 \\
 \bottomrule
 \end{tabular}
@@ -241,7 +194,7 @@ Fold & Replayable & Empty & Best single & K=3 & K=4 & Oracle \\
 \midrule
 Fold 0 & 208 & 16 & 23 & \best{28} & \best{28} & 28 \\
 Fold 1 & 224 & 14 & 31 & 39 & 39 & \best{40} \\
-\rowcolor{teal!7}
+\rowcolor{aceTealLight}
 Combined & 432 & 30 & 54 & \best{67} & \best{67} & 68 \\
 \bottomrule
 \end{tabular}
@@ -258,7 +211,7 @@ Table~\ref{tab:fresh-folds} is the prospective check that matters most for prese
 \toprule
 Portfolio family & OOF K=4 & Strict goals \\
 \midrule
-\rowcolor{teal!7}
+\rowcolor{aceTealLight}
 Full typed grid & \best{57/230} & \best{28/29} \\
 Aesop-only & 49/230 & 20/29 \\
 HammerCore-only & 41/230 & 12/29 \\
@@ -303,7 +256,7 @@ Aesop control & Verified goals & Readout \\
 \texttt{empty} Aesop & 29/230 & default baseline \\
 \texttt{retrieved-only}, joint & 34/230 & non-oracle source helps \\
 \texttt{oracle-core-only}, joint & 35/230 & oracle source alone is similar \\
-\rowcolor{teal!7}
+\rowcolor{aceTealLight}
 \texttt{oracle-core+retrieved}, joint & \best{38/230} & best Aesop row \\
 \texttt{oracle-core+retrieved}, identity & 36/230 & identity explains much of the lift \\
 \texttt{oracle-core+retrieved}, simps-only & 35/230 & simp exposure is strong \\
