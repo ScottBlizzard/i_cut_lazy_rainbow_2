@@ -13,6 +13,8 @@
 \usepackage{microtype}
 \usepackage{array}
 \usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 
 \hypersetup{
   colorlinks=true,
@@ -41,7 +43,7 @@
 \maketitle
 
 \begin{abstract}
-Premise selection is usually treated as a ranking problem: choose useful lemmas, pass them to a Lean prover, and hope reconstruction succeeds. We argue that this view is missing a second intervention. A selected name must still be compiled into the proof interface that can consume it: Hammer facts, HammerCore inputs, simp lemmas, local elimination facts, Aesop fact rules, or Aesop simp rules. We introduce \tap, a typed evidence compiler for \emph{action-conditional evidence allocation} in Lean. The core finding is counterintuitive but repeatable: once the candidate names are fixed, small typed portfolios can recover nearly all tested oracle headroom, while learned routers do not yet beat the fixed typed control. In a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness, the mixed oracle-core/retrieved action grid solves 58/230 kernel-verified goals versus 38/230 for the best single action; a four-retry fixed portfolio reaches 57/230 out of fold. Removing traced proof-core names still leaves a retrieved-only compiler effect: empty Hammer solves 29/230, the best standalone action solves 35/230, and a fixed portfolio reaches the 52/230 typed oracle. To check that the effect is not only a post-hoc fit to the 230-goal matrix, we freeze the retrieved-only four-action portfolio and evaluate two disjoint fresh folds: on 432 replayable holdout goals, empty Hammer solves 30, the best singleton solves 54, the frozen K=4 portfolio solves 67, and the tested-action oracle is 68. Exact Aesop controls further constrain the mechanism: joint oracle-core plus retrieved exposure is best at 38/230, but identity and simps-only controls reach 36/230 and 35/230, so the supported claim is source/interface sensitivity rather than a large pure facts-versus-simps complementarity. \tap{} is therefore not a new retriever or an adaptive-router victory; it is evidence that premise selection is incomplete until selected names are typed into executable Lean proof actions.
+Premise selection is usually treated as a ranking problem: choose useful lemmas, pass them to a Lean prover, and hope reconstruction succeeds. We argue that this view is missing a \textbf{second intervention}. A selected name must still be compiled into the proof interface that can consume it: Hammer facts, HammerCore inputs, simp lemmas, local elimination facts, Aesop fact rules, or Aesop simp rules. We introduce \tap, a \textbf{typed evidence compiler} for \emph{action-conditional evidence allocation} in Lean. The core finding is counterintuitive but repeatable: once the candidate names are fixed, \textbf{small typed portfolios} can recover nearly all tested oracle headroom, while learned routers do not yet beat the fixed typed control. In a Mathlib 4.30 + LeanHammer 4.30 pre-theorem replay harness, the mixed oracle-core/retrieved action grid solves 58/230 kernel-verified goals versus 38/230 for the best single action; a four-retry fixed portfolio reaches 57/230 out of fold. Removing traced proof-core names still leaves a retrieved-only compiler effect: empty Hammer solves 29/230, the best standalone action solves 35/230, and a fixed portfolio reaches the 52/230 typed oracle. To check that the effect is not only a post-hoc fit to the 230-goal matrix, we freeze the retrieved-only four-action portfolio and evaluate two disjoint fresh folds: on 432 replayable holdout goals, empty Hammer solves 30, the best singleton solves 54, the frozen K=4 portfolio solves 67, and the tested-action oracle is 68. Exact Aesop controls further constrain the mechanism: joint oracle-core plus retrieved exposure is best at 38/230, but identity and simps-only controls reach 36/230 and 35/230, so the supported claim is \textbf{source/interface sensitivity} rather than a large pure facts-versus-simps complementarity. \tap{} is therefore not a new retriever or an adaptive-router victory; it is evidence that premise selection is incomplete until selected names are typed into executable Lean proof actions.
 \end{abstract}
 
 \section{Introduction}
@@ -101,37 +103,34 @@ We separate three notions that are often conflated. \emph{Kernel-verified proof-
 \begin{figure}[t]
 \centering
 \small
-\setlength{\fboxsep}{6pt}
-\fbox{
-\begin{tabular}{c@{\quad$\rightarrow$\quad}c@{\quad$\rightarrow$\quad}c@{\quad$\rightarrow$\quad}c}
-\begin{tabular}{c}
-Goal $g$\\
-candidate names
-\end{tabular}
-&
-\begin{tabular}{c}
-Shared baseline\\
-\texttt{hammer\_empty}
-\end{tabular}
-&
-\begin{tabular}{c}
-Typed evidence\\
-allocator
-\end{tabular}
-&
-\begin{tabular}{c}
-Kernel-verified\\
-Lean checks
-\end{tabular}
-\\[2.5em]
-\multicolumn{4}{c}{$\downarrow$}\\[-0.2em]
-\multicolumn{4}{c}{
-\begin{tabular}{c}
-Retry actions: Hammer, HammerCore, simp/simpa, local elimination, and Aesop\\
-Names are exposed through fact, simp, or tactic-specific channels\\
-Evaluation: verified success, oracle gap, fixed-budget portfolio, and ablations
-\end{tabular}}
-\end{tabular}}
+\begin{tikzpicture}[
+font=\small,
+stage/.style={draw=black!45, rounded corners=2pt, fill=black!2, align=center,
+  minimum height=2.7em, text width=2.45cm},
+routebar/.style={draw=teal!60!black, rounded corners=2pt, fill=teal!6, align=center,
+  minimum height=2.35em, text width=9.9cm},
+arrow/.style={-{Latex[length=2mm]}, thick, black!55},
+taparrow/.style={-{Latex[length=1.6mm]}, thick, teal!70!black}
+]
+\node[stage] (goal) at (0,0) {Goal $g$\\candidate names};
+\node[stage] (empty) at (3.25,0) {Shared baseline\\empty Hammer};
+\node[stage, fill=teal!8, draw=teal!65!black] (alloc) at (6.5,0) {\tap{} compiler\\typed allocation};
+\node[stage] (lean) at (9.75,0) {Lean kernel\\verified outcome};
+\draw[arrow] (goal) -- (empty);
+\draw[arrow] (empty) -- (alloc);
+\draw[arrow] (alloc) -- (lean);
+
+\node[routebar] (routes) at (5.0,-1.25)
+  {\begin{tabular}{ccccc}
+  Hammer & HammerCore & Simp & Local & Aesop\\
+  facts & inputs & lemmas & facts & facts/simps
+  \end{tabular}};
+\draw[taparrow] (alloc.south) -- (routes.north);
+\draw[taparrow] (routes.east) -- (lean.south);
+\node[align=center, text=black!65] at (5.0,-1.95)
+  {same names; different executable Lean interfaces; fixed retry budget};
+\end{tikzpicture}
+\vspace{-0.9em}
 \caption{\tap{} evaluates action-conditional evidence allocation under a fixed retry budget. Selected names are compiled into typed Lean interfaces, and each routed action is checked by the Lean kernel.}
 \label{fig:pipeline}
 \end{figure}
@@ -186,18 +185,29 @@ Table~\ref{tab:core-results} is the main empirical result. On the mixed-source 2
 \begin{figure}[t]
 \centering
 \small
-\setlength{\fboxsep}{6pt}
-\fbox{
-\begin{tabular}{lccc}
-\toprule
-Setting & Single interface & Small typed portfolio & Tested oracle \\
-\midrule
-Mixed-source 230 & 38 & \best{57} & 58 \\
-Retrieved-only 230 & 35 & \best{52} & 52 \\
-Fresh holdout 432 & 54 & \best{67} & 68 \\
-\bottomrule
-\end{tabular}}
-\caption{Result ladder. Across the mechanism matrix, deployability anchor, and frozen holdout, most tested oracle headroom is recovered by a small typed portfolio rather than by the strongest single interface.}
+\begin{tikzpicture}[font=\small, x=0.105cm, y=0.42cm]
+\node[anchor=east] at (0,4.85) {Setting};
+\node[anchor=west, text=black!65] at (3,4.85) {strongest single};
+\node[anchor=west, text=teal!70!black] at (34,4.85) {fixed portfolio};
+\node[anchor=west] at (79,4.85) {oracle};
+
+\foreach \label/\ys/\yp/\single/\port/\snum/\pnum/\onum in {
+Mixed-source 230/3.75/3.35/45.9/68.8/38/57/58,
+Retrieved-only 230/2.35/1.95/47.1/70.0/35/52/52,
+Fresh holdout 432/0.95/0.55/55.6/69.0/54/67/68} {
+  \node[anchor=east, align=right] at (0,\ys-0.25) {\label};
+  \draw[black!25, line width=0.35pt] (3,\ys) -- (73,\ys);
+  \draw[black!25, line width=0.35pt] (3,\yp) -- (73,\yp);
+  \fill[black!16] (3,\ys-0.17) rectangle ++(\single,0.34);
+  \fill[teal!55] (3,\yp-0.17) rectangle ++(\port,0.34);
+  \draw[black!70, line width=0.8pt] (73,\yp-0.38) -- (73,\ys+0.38);
+  \node[anchor=west] at (3+\single+1,\ys) {\snum};
+  \node[anchor=east, text=teal!70!black] at (3+\port-1,\yp) {\pnum};
+  \node[anchor=west] at (79,\ys-0.25) {\onum};
+}
+\end{tikzpicture}
+\vspace{-0.9em}
+\caption{Result ladder. Bars are normalized within each setting by the tested-action oracle. Across the mechanism matrix, deployability anchor, and frozen holdout, the fixed typed portfolio recovers most tested oracle headroom rather than merely improving on a weak singleton baseline.}
 \label{fig:result-ladder}
 \end{figure}
 
@@ -406,15 +416,16 @@ The checklist does not require a new benchmark or a new global retriever. It can
 The main result is an intervention on the proof interface, not a new leaderboard score. The same candidate source can produce different verified outcomes depending on how names enter Lean. This creates a reusable diagnostic for future prover work: when a retriever appears weak, one should ask whether the missing step is retrieval quality or evidence compilation. Conversely, when a large premise set hurts, the remedy may be a different typed action rather than another reranking pass over the same untyped list.
 
 \paragraph{How to read the remaining failures.}
-The unsolved goals are also informative because they are partitioned by a verified intervention protocol. A miss after empty Hammer and after every single typed action is different from a miss after the full portfolio; the former points to candidate quality, while the latter points to missing proof actions, longer reasoning chains, or backend search limits. This is why the paper reports typed oracles, homogeneous controls, strict-goal filters, and retrieved-only anchors together. They turn a raw failure count into a map of where the prover stack should improve next. In that sense, \tap{} is useful even when it does not solve a goal: it makes the failure mode more local than an untyped premise-ranking metric can.
+The unsolved goals are also informative because the intervention protocol localizes them. A miss after every single typed action points to candidate quality; a miss after the full portfolio points to missing proof actions, longer reasoning chains, or backend search limits. Thus the oracle, homogeneous, strict-goal, and retrieved-only controls turn raw failures into a map of where the prover stack should improve next.
 
 \paragraph{What a stronger next system should do.}
-The natural next step is to learn an allocator that beats the fixed typed portfolio while preserving the same accounting discipline: same first attempt, same retry budget, same verified-outcome metric, and the same strong static controls. The present experiments make that target concrete. They identify where the oracle headroom is, show that a simple typed sequence captures most of it, and separate the compiler effect from both traced proof-core assistance and post-hoc portfolio fitting.
+The natural next step is to learn an allocator that beats the fixed typed portfolio while preserving the same accounting discipline: same first attempt, same retry budget, same verified-outcome metric, and the same strong static controls. The present experiments identify where the oracle headroom is, show that a simple typed sequence captures most of it, and separate the compiler effect from both traced proof-core assistance and post-hoc portfolio fitting.
 
 \section{Conclusion}
 
-This paper argues that Lean premise selection is incomplete without action-conditional evidence allocation. \tap{} implements this view as a typed evidence compiler over Hammer, HammerCore, simplification, local-elimination, and Aesop interfaces. In the mixed-source 230-goal matrix, the typed action grid reaches 58/230 verified proofs versus 38/230 for the best single action, and a four-retry fixed typed control recovers 57/230 out of fold. In the retrieved-only anchor, the same compiler view reaches 52/230 with a fixed portfolio, compared with 29/230 for empty Hammer and 35/230 for the best standalone action. In two frozen fresh-holdout folds, the predeclared K=4 portfolio solves 67/432 replayable goals versus 54/432 for the best singleton and 68/432 for the tested-action oracle. The exact Aesop controls make the mechanism more precise: source and interface assignment matter, but a large pure facts-versus-simps complementarity is not supported. The result is a narrow but concrete lesson for Lean provers: retrieval should hand off not just a list of names, but a typed evidence program that tells Lean how those names should enter proof search.
+This paper argues that Lean premise selection is incomplete without action-conditional evidence allocation. \tap{} implements this view as a typed evidence compiler over Hammer, HammerCore, simplification, local-elimination, and Aesop interfaces. In the mixed-source 230-goal matrix, the typed action grid reaches 58/230 verified proofs versus 38/230 for the best single action, and a four-retry fixed typed control recovers 57/230 out of fold. In the retrieved-only anchor, the same compiler view reaches 52/230 with a fixed portfolio, compared with 29/230 for empty Hammer and 35/230 for the best standalone action. In two frozen fresh-holdout folds, the predeclared K=4 portfolio solves 67/432 replayable goals versus 54/432 for the best singleton and 68/432 for the tested-action oracle. The exact Aesop controls make the mechanism more precise: source and interface assignment matter, but a large pure facts-versus-simps complementarity is not supported. The result is a narrow but concrete lesson for Lean provers: retrieval should hand off not just a list of names, but a typed evidence program that tells Lean how those names should enter proof search. More broadly, the evaluated unit should be a candidate name together with its consuming interface, because the same evidence can help, fail, or hurt under different proof actions.
 
+\newpage
 \bibliography{references}
 \bibliographystyle{iclr2026_conference}
 
