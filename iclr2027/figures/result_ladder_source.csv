@@ -1,4 +1,0 @@
-setting,denom,empty,single,portfolio,oracle,single_pct,portfolio_pct
-Mixed-source matrix,230,29,38,57,58,65.51724137931035,98.27586206896552
-Retrieved-only anchor,230,29,35,52,52,67.3076923076923,100.0
-Frozen fresh holdout,432,30,54,67,68,79.41176470588235,98.52941176470588

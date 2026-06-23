@@ -189,9 +189,45 @@ Table~\ref{tab:core-results} is the main empirical result. On the mixed-source 2
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/result_ladder.pdf}
-\vspace{-0.7em}
-\caption{Result ladder. Bars are normalized within each setting by the tested-action oracle. Across the mechanism matrix, deployability anchor, and frozen holdout, the fixed typed portfolio recovers most tested oracle headroom rather than merely improving on a weak singleton baseline.}
+\begin{tikzpicture}[
+  x=0.112cm,y=0.82cm,
+  rowlabel/.style={font=\small,anchor=west},
+  tick/.style={font=\footnotesize,text=black!60},
+  value/.style={font=\footnotesize},
+  legend/.style={font=\footnotesize,anchor=west}
+]
+\foreach \x/\lab in {0/0,25/25,50/50,75/75,100/100} {
+  \draw[black!10,line width=0.35pt] (\x,-0.55) -- (\x,6.65);
+  \node[tick] at (\x,-0.88) {\lab};
+}
+\draw[black!35,line width=0.35pt] (0,-0.55) -- (100,-0.55);
+\node[tick] at (50,-1.28) {Fraction of tested-action oracle recovered (\%)};
+
+\fill[black!18] (0,6.85) rectangle (5,7.08);
+\node[legend] at (6.5,6.965) {best single action};
+\fill[aceTeal] (37,6.85) rectangle (42,7.08);
+\node[legend] at (43.5,6.965) {fixed typed portfolio};
+
+\node[rowlabel] at (0,6.25) {Mixed-source mechanism matrix, oracle = 58};
+\fill[black!18] (0,5.67) rectangle (65.5,6.17);
+\node[value,anchor=east,text=black!80] at (63.8,5.92) {38/58};
+\fill[aceTeal] (0,5.05) rectangle (98.3,5.55);
+\node[value,anchor=east,text=white] at (96.5,5.30) {57/58};
+
+\node[rowlabel] at (0,4.20) {Retrieved-only anchor, oracle = 52};
+\fill[black!18] (0,3.62) rectangle (67.3,4.12);
+\node[value,anchor=east,text=black!80] at (65.6,3.87) {35/52};
+\fill[aceTeal] (0,3.00) rectangle (100,3.50);
+\node[value,anchor=east,text=white] at (98.1,3.25) {52/52};
+
+\node[rowlabel] at (0,2.15) {Frozen fresh holdout, oracle = 68};
+\fill[black!18] (0,1.57) rectangle (79.4,2.07);
+\node[value,anchor=east,text=black!80] at (77.7,1.82) {54/68};
+\fill[aceTeal] (0,0.95) rectangle (98.5,1.45);
+\node[value,anchor=east,text=white] at (96.7,1.20) {67/68};
+\end{tikzpicture}
+\vspace{-0.6em}
+\caption{Oracle recovery across the three main evidence settings. Bars are normalized within each setting by the tested-action oracle. The same fixed typed-portfolio pattern appears in the mixed mechanism matrix, the retrieved-only deployability anchor, and frozen fresh-holdout folds.}
 \label{fig:result-ladder}
 \end{figure}
 
@@ -363,40 +399,215 @@ This paper argues that Lean premise selection is incomplete without action-condi
 
 \appendix
 
-\section{Additional Experimental Details}
+\section{Additional Experimental Evidence}
 
-\subsection{Canonical Output Sources}
+\subsection{Corpus Construction and Replay Checks}
 
-All numbers in the main tables are copied from canonical JSON or Markdown outputs in the project directory:
-\begingroup
-\footnotesize
-\sloppy
-\begin{itemize}[leftmargin=*,itemsep=1pt]
-\item Verified typed action grid: \url{outputs/mathlib430_pretheorem_action_matrix_scaled230_aesop_ablation_merged.md}.
-\item Budgeted typed portfolio: \url{outputs/mathlib430_budgeted_action_policy_scaled230_aesop_ablation.md}.
-\item Typed allocator gate: \url{outputs/mathlib430_typed_allocator_gate_scaled230_aesop_ablation.md}.
-\item Retrieved-only anchor summary: \url{analysis/mathlib430_retrieved_only_anchor_summary.md}.
-\item Retrieved-only anchor matrix: \url{outputs/mathlib430_pretheorem_action_matrix_scaled230_retrieved_only_anchor_merged.md}.
-\item Retrieved-only fixed stability: \url{outputs/mathlib430_fixed_portfolio_stability_scaled230_retrieved_only_anchor.md}.
-\item Frozen fresh-holdout summary: \url{analysis/mathlib430_fresh_holdout_summary.md}.
-\item Fresh-holdout fold summaries: \url{analysis/mathlib430_fresh_holdout_fold0_summary.md} and \url{analysis/mathlib430_fresh_holdout_fold1_summary.md}.
-\item Fresh-holdout merged action outputs: \url{outputs/mathlib430_fresh_holdout_fold0_frozen_actions_merged.md} and \url{outputs/mathlib430_fresh_holdout_fold1_frozen_actions_merged.md}.
-\item Exact Aesop source/channel controls: \url{analysis/mathlib430_aesop_exact_controls_summary.md}.
-\item Initial broad Aesop fact/simp ablation: \url{analysis/mathlib430_aesop_ablation_scaled230.md}.
-\item Initial Aesop counterfactual channel control: \url{analysis/mathlib430_aesop_counterfactual_controls.md}.
-\item Evidence-contract audit and homogeneous controls: \url{analysis/mathlib430_evidence_contract_audit.md}.
-\item Strict interface filtering boundary: \url{analysis/mathlib430_e1_strict_interface_filtering.md}.
-\item Strict interface taxonomy: \url{analysis/mathlib430_strict_action_taxonomy_scaled230_aesop_ablation.md}.
-\item Local trace-core: \url{outputs/phase1_mathlib_trace_core_2000_feature_ablation_a40.json}.
-\item Phase 1 bridge: \url{outputs/phase1_reconstruction_bridge_report_100.md}.
-\item Timeout stress: \url{outputs/phase2_timeout_stress_2000_a40.json}.
-\item Imported-core heldout: \url{outputs/phase3_second_stage_controller_eval_500_a40.json} plus final guardrail deltas.
-\item Split stability: \url{outputs/phase3_split_stability_summary_4x500.md}.
-\item Imported bridge report: \url{outputs/phase3_bridge_report_200.md}.
-\item Imported bridge taxonomy: \url{outputs/phase3_bridge_failure_taxonomy_200.md}.
-\item Imported bridge inspection: \url{outputs/phase3_bridge_negative_case_inspection_200.md}.
-\end{itemize}
-\endgroup
+Table~\ref{tab:appendix-corpus} spells out the replay filtering behind the verified experiments. The main 230-goal matrix is drawn from the 490 clean traced-corpus goals, but every reported success is rechecked by Lean after patching the theorem context. The fresh-holdout folds are disjoint from the 230-goal matrix and use the frozen retrieved-only action subset.
+
+\begin{table}[H]
+\caption{Corpus construction, cleaning, and replayability. ``Replayable'' means that the original proof script or held-out theorem context checks in the pre-theorem harness before any \tap{} intervention is counted.}
+\label{tab:appendix-corpus}
+\centering
+\small
+\begin{tabular}{lrrrrl}
+\toprule
+Evaluation source & Input & Clean & Dropped & Replayable & Main use \\
+\midrule
+Traced subset cleaning & 500 & 490 & 10 & -- & source pool for 230-goal matrix \\
+Replay audit sample & 300 & -- & -- & 143 & failure taxonomy sanity check \\
+Fresh fold 0 & 500 & 483 & 17 & 208 & frozen retrieved-only holdout \\
+Fresh fold 1 & 500 & 483 & 17 & 224 & frozen retrieved-only holdout \\
+Fresh folds combined & 1000 & 966 & 34 & 432 & prospective transfer check \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The 10 dropped traces in the 500-goal cleaning pass consist of 3 missing files, 6 missing theorem declarations, and 1 missing proof-core record. For the 300-goal replay audit, the major non-replayable categories are 59 unknown identifiers, 36 tactic failures, 22 type mismatches, 11 parse errors, 9 typeclass or inference failures, 8 rewrite failures, 7 invalid source spans, 3 simplifier failures, and 2 missing proof markers.
+
+\subsection{Full Action Matrix and Evidence Provenance}
+
+The main paper reports the best singleton, portfolio, and oracle values. Table~\ref{tab:appendix-action-top} gives the leading individual proof actions from the mixed-source grid. The important pattern is that several typed interfaces are viable, but none alone closes the oracle gap.
+
+\begin{table}[H]
+\caption{Leading single actions in the mixed-source 230-goal grid. Mean facts and simp rules are measured over attempted goals for that action.}
+\label{tab:appendix-action-top}
+\centering
+\small
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrl}
+\toprule
+Single action & Verified & Mean facts & Mean simps & Mean time (s) & Interface readout \\
+\midrule
+Aesop, core + retrieved-8 as facts/simps & 38/230 & 9.41 & 7.86 & 8.92 & best singleton \\
+Aesop, core + retrieved-16 as facts/simps & 37/230 & 12.88 & 10.40 & 9.41 & similar Aesop channel \\
+Hammer, core + retrieved-16 facts & 32/230 & 12.88 & 0.00 & 8.56 & strong Hammer fact interface \\
+Hammer, core + retrieved-32 facts & 32/230 & 14.05 & 0.00 & 8.55 & no gain from broader list \\
+Hammer, core + retrieved-8 facts & 31/230 & 9.41 & 0.00 & 8.67 & compact Hammer fact interface \\
+Aesop with no supplied evidence & 29/230 & 0.00 & 0.00 & 7.99 & empty-action baseline \\
+Hammer with no supplied evidence & 29/230 & 0.00 & 0.00 & 8.31 & shared first attempt \\
+HammerCore, core + retrieved-8 inputs & 18/230 & 9.41 & 0.00 & 13.29 & useful but not dominant \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]
+\caption{Candidate provenance in the 230-goal matrix. The retrieved lists overlap with traced proof-core names but do not contain all of them, which is why the retrieved-only anchor is reported separately.}
+\label{tab:appendix-provenance}
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Candidate statistic & Total names & Mean per goal & Median per goal \\
+\midrule
+Traced proof-core names & 875 & 3.80 & 3 \\
+Retrieved top-8 names & 1840 & 8.00 & 8 \\
+Retrieved top-32 names & 7360 & 32.00 & 32 \\
+Proof-core names inside top-8 & 552 & 2.40 & -- \\
+Proof-core names inside top-32 & 738 & 3.21 & -- \\
+Proof-core names outside top-32 & 137 & 0.60 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Budget, Homogeneous Controls, and Compute}
+
+Table~\ref{tab:appendix-homogeneous} expands the main homogeneous-control result with call and wall-clock accounting. The full typed grid is not merely spending more calls: every homogeneous K=4 family uses a comparable retry budget but leaves substantial verified headroom.
+
+\begin{table}[H]
+\caption{Homogeneous K=4 controls on the mixed-source 230-goal grid. Average calls and wall-clock include the shared empty attempt and subsequent typed retries.}
+\label{tab:appendix-homogeneous}
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+K=4 policy family & Verified & Avg calls & Avg wall-clock (s) \\
+\midrule
+Full typed action grid & 57/230 & 4.18 & 39.08 \\
+Aesop-only & 49/230 & 4.23 & 28.06 \\
+HammerCore-only & 41/230 & 4.34 & 50.71 \\
+Simplification-only & 41/230 & 4.34 & 35.41 \\
+Local elimination-only & 34/230 & 4.43 & 41.32 \\
+Hammer-only & 32/230 & 4.47 & 38.89 \\
+Raw arithmetic/normalization-only & 29/230 & 4.50 & 34.77 \\
+Random full-grid K=4, 100 seeds & 41.9/230 mean & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For all-training compute diagnosis, the fitted full-grid frontier has average calls 1.87, 2.66, 3.42, and 4.18 for K=1 through K=4, with average wall-clock 16.36s, 26.37s, 33.12s, and 40.07s. At K=4 the median is 30.71s and the 90th percentile is 86.40s. The first-success leaders are empty Hammer on 29 goals, Aesop core + retrieved evidence on 20 additional goals, and HammerCore core + retrieved evidence on 6 additional goals.
+
+\subsection{Retrieved-Only Anchor}
+
+The retrieved-only anchor removes traced proof-core names from the typed evidence pool. Table~\ref{tab:appendix-retrieved-anchor} shows that the same typed-portfolio pattern survives: the fixed sequence closes the entire tested-action oracle out of fold.
+
+\begin{table}[H]
+\caption{Retrieved-only anchor on the 230-goal matrix. Strict goals are the after-empty goals that require action-dependent evidence rather than the shared empty attempt.}
+\label{tab:appendix-retrieved-anchor}
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Readout & Verified goals & Strict after-empty goals \\
+\midrule
+Empty Hammer & 29/230 & -- \\
+Best standalone retrieved-only action & 35/230 & -- \\
+K=1 fixed portfolio & 47/230 & 18/23 \\
+K=2 fixed portfolio & 50/230 & 21/23 \\
+K=3 fixed portfolio & 52/230 & 23/23 \\
+K=4 fixed portfolio & 52/230 & 23/23 \\
+Typed action oracle & 52/230 & 23/23 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Frozen Fresh-Holdout Details}
+
+The fresh-holdout experiment freezes the retrieved-only action subset before evaluating two disjoint 500-goal folds. Table~\ref{tab:appendix-fresh} gives the per-fold result rather than only the combined main-table number.
+
+\begin{table}[H]
+\caption{Frozen retrieved-only portfolio on two disjoint fresh folds. The combined row is the prospective 432-goal result reported in the main paper.}
+\label{tab:appendix-fresh}
+\centering
+\small
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Fold & Replayable & Empty & Best single & K=1 & K=2 & K=3 & K=4 & Oracle \\
+\midrule
+Fold 0 & 208 & 16 & 23 & 24 & 24 & 28 & 28 & 28 \\
+Fold 1 & 224 & 14 & 31 & 32 & 34 & 39 & 39 & 40 \\
+Combined & 432 & 30 & 54 & 56 & 58 & 67 & 67 & 68 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The frozen four-action subset is Aesop core + retrieved-16, HammerCore core + retrieved, Aesop core + retrieved with swapped exposure, and Aesop core. On the combined holdout, 37 of 38 strict after-empty goals are covered by K=3 and K=4.
+
+\subsection{Aesop Source and Channel Controls}
+
+The broad Aesop ablation initially suggested a strong facts-versus-simps story, but exact controls narrowed that interpretation. Table~\ref{tab:appendix-aesop-broad} gives the broad readout; Table~\ref{tab:appendix-aesop-exact} gives the cleaner matched-control version that the main paper relies on.
+
+\begin{table}[H]
+\caption{Broad Aesop ablation on the 230-goal matrix. Joint core + retrieved exposure is best, but this broad sweep alone does not prove a large pure channel-complementarity effect.}
+\label{tab:appendix-aesop-broad}
+\centering
+\small
+\begin{tabular}{lr}
+\toprule
+Aesop variant & Verified \\
+\midrule
+Core + retrieved-8 as facts and simps & 38/230 \\
+Core + retrieved-16 as facts and simps & 37/230 \\
+Empty Aesop & 29/230 \\
+Facts-only variants, best & 5/230 \\
+Core-only or simps-only variants, best & 4/230 \\
+Retrieved-only channel variants, best & 4/230 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Exact Aesop controls. The supported claim is source/interface sensitivity: joint exposure is useful, but identity and simps-only controls are close enough that the paper should not overclaim a large isolated facts-versus-simps complementarity.}
+\label{tab:appendix-aesop-exact}
+\centering
+\small
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrr}
+\toprule
+Evidence source & Joint & Identity & Swapped & Simps-only & Facts-only & Random split & Joint-only gain \\
+\midrule
+Oracle core only & 35 & 35 & 35 & 33 & 31 & 32 & 1 \\
+Oracle core + retrieved & 38 & 36 & 33 & 35 & 32 & 32 & 2 \\
+Retrieved only & 34 & 31 & 32 & 32 & 30 & 29 & 1 \\
+Empty Aesop & 29 & -- & -- & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsection{Strict Filtering and Candidate Audit}
+
+The strict syntactic filter tests whether the gains are explained by simply removing unsafe or non-theorem-like names. Table~\ref{tab:appendix-strict-filter} shows that this is not the mechanism: filtered-only actions add essentially no oracle headroom and often lose the successful source action.
+
+\begin{table}[H]
+\caption{Strict interface filtering boundary. ``Source'' is the corresponding unfiltered action; ``kept'', ``new'', and ``lost'' compare verified goals against that source action.}
+\label{tab:appendix-strict-filter}
+\centering
+\small
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrr}
+\toprule
+Filtered action & Filtered & Source & Kept & New & Lost \\
+\midrule
+Aesop core + retrieved-16 filtered & 3 & 37 & 1 & 2 & 36 \\
+Aesop core + retrieved-8 filtered & 3 & 38 & 1 & 2 & 37 \\
+Hammer core + retrieved-16 filtered & 3 & 32 & 3 & 0 & 29 \\
+HammerCore core + retrieved filtered & 1 & 18 & 1 & 0 & 17 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+At the oracle level, the unfiltered baseline solves 58/230, the filtered-only oracle solves 4/230, and the combined oracle remains 58/230 with 0 new oracle goals from the filtered-only set. The candidate audit counts 7321 available names, 7360 retrieved candidate placements, 875 proof-core names, 7497 selected placements, 176 unavailable placements, 3268 theorem-like names, 1927 names carrying simplifier attributes, 1880 definition-like names, 161 class-like names, and 137 proof-core-only names outside the retrieved top-32.
 
 \subsection{Trace-Core Discovery Summary}
 
@@ -417,8 +628,6 @@ Does learned imported retrieval survive bridge checks? & Final-base8 averages 92
 \end{tabular}
 \end{table}
 
-\subsection{Feature-Group Ablation}
-
 \begin{table}[H]
 \caption{Feature-group ablation on 2k local trace-core goals. Static visible-feature reranking is weaker than blind expansion; failure-conditioned feature use is the important step.}
 \label{tab:appendix-feature}
@@ -436,15 +645,13 @@ Visible-feature rerank & 86.5\% & 0.0\% & 42.9 \\
 Rule FAR, no core declaration features & 92.6\% & 82.4\% & 46.2 \\
 Rule FAR, no core statement features & 92.8\% & 82.9\% & 46.4 \\
 Rule FAR, no core name features & 95.0\% & 88.1\% & 45.4 \\
-Rule FAR, no core tags & \best{95.7\%} & \best{89.7\%} & 45.1 \\
+Rule FAR, no core tags & 95.7\% & 89.7\% & 45.1 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Imported-Core Stress Before Learned Retrieval}
-
 \begin{table}[H]
-\caption{Initial imported-core stress test on 2k goals. This table is a diagnostic negative result: local and lexical signals are insufficient for global imported-premise recovery.}
+\caption{Initial imported-core stress test on 2k goals. This is a diagnostic negative result: local and lexical signals are insufficient for global imported-premise recovery.}
 \label{tab:appendix-global-stress}
 \centering
 \small
@@ -458,18 +665,110 @@ Visible-feature rerank & 2.4\% & 0.0\% & 56.0 \\
 BM25 rerank & 7.0\% & 0.0\% & 56.0 \\
 LeanSearch iterative & 11.9\% & 8.3\% & 91.9 \\
 BM25 expansion & 11.9\% & 8.3\% & 92.2 \\
-Rule FAR + BM25 & \best{12.2\%} & \best{8.7\%} & 92.2 \\
-Rule FAR full {\small (oracle ref.)} & 55.7\% & 55.2\% & 86.6 \\
+Rule FAR + BM25 & 12.2\% & 8.7\% & 92.2 \\
+Rule FAR full, oracle reference & 55.7\% & 55.2\% & 86.6 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Bridge Failure Taxonomy}
+\subsection{Bridge Replay and Failure Taxonomy}
 
-The 200-goal imported bridge verifies 124/200 original traced tactic scripts. The primary replay failures are 30 unknown-identifier errors, 13 other Lean errors, 8 typeclass failures, 7 unsolved-goal failures, 6 simplifier no-progress failures, 5 tactic failures, 5 type mismatches, and 2 sorry-context failures. At the policy level, final-base8 has 17 replay-verified trace misses, compared with 19 for the original second-stage controller, 35 for learned+base fallback, and 47 for learned expansion. Negative-case inspection finds 0/17 candidate-pool misses, 2 fallback-selected core drops, 3 expansion-selected core drops, and 15 failure-conditioned rank misses. This supports the limitation that remaining headroom is ranking and calibration, not candidate generation.
+The 200-goal imported bridge verifies 124/200 original traced tactic scripts. Table~\ref{tab:appendix-bridge-policy} gives the policy-level bridge result; Table~\ref{tab:appendix-bridge-failures} gives the replay-failure distribution.
 
-\subsection{Guardrail and Expert-Mixing Ablations}
+\begin{table}[H]
+\caption{Imported bridge policy-level diagnostics on 200 goals. Trace-core success and bridge-verified success are intentionally reported separately.}
+\label{tab:appendix-bridge-policy}
+\centering
+\small
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrr}
+\toprule
+Policy & Trace success & Bridge verified & Replay-verified trace misses & Avg prem. \\
+\midrule
+Learned expansion & 60.0\% & 38.5\% & 47 & 72.8 \\
+Learned + base fallback & 67.5\% & 44.5\% & 35 & 69.9 \\
+Rule FAR learned second stage & 81.0\% & 52.5\% & 19 & 66.2 \\
+Final base guardrail-8 & 81.5\% & 53.5\% & 17 & 66.2 \\
+\bottomrule
+\end{tabular}}
+\end{table}
 
-The final base8 guardrail was selected because broader heuristics were negative. Hard base guardrails reduce bridge trace-core success from 72.0\% to 63.0\% or 60.0\%. Soft base-score mixing is inert at low mixing weights and harmful at high weights. Imported-failure multi-expert routing drops bridge trace-core success to 62.0\%. A larger final expert guardrail also underperforms final-base8 on the original split, fold0, and bridge subset. These results justify stopping hand-written expert-mix tuning and treating calibrated expert gating as future work.
+\begin{table}[H]
+\caption{Primary replay outcome taxonomy on the 200-goal imported bridge sample.}
+\label{tab:appendix-bridge-failures}
+\centering
+\small
+\begin{tabular}{lr}
+\toprule
+Replay outcome & Count \\
+\midrule
+Replay verified & 124 \\
+Unknown identifier & 30 \\
+Other Lean error & 13 \\
+Typeclass or inference failure & 8 \\
+Unsolved goals & 7 \\
+Simplifier no progress & 6 \\
+Tactic failed & 5 \\
+Type mismatch & 5 \\
+Sorry context & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Negative-case inspection of the 17 final replay-verified misses finds 0 candidate-pool misses, 2 dropped fallback-selected core premises, 3 dropped expansion-selected core premises, and 15 failure-conditioned rank misses. The best second-stage rank of the missed core premise has median 117, minimum 94, maximum 207, and only 2/17 appear inside the top 96. These failures point to ranking and calibration rather than missing candidate generation.
+
+\subsection{Split Stability and Negative Expert-Mixing Results}
+
+\begin{table}[H]
+\caption{Split stability for the imported trace-core controller. These are discovery diagnostics, not the main verified proving metric.}
+\label{tab:appendix-split-stability}
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Split & Fallback & Second stage & Final guardrail \\
+\midrule
+Original & 87.0\% & 92.4\% & 92.6\% \\
+Fold 0 & 83.6\% & 91.6\% & 91.6\% \\
+Fold 1 & 86.0\% & 92.2\% & 93.4\% \\
+Fold 2 & 88.8\% & 94.0\% & 94.0\% \\
+Mean $\pm$ std & 86.3 $\pm$ 1.9 & 92.5 $\pm$ 0.9 & 92.9 $\pm$ 0.9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Broader hand-written expert mixing was negative. Hard base guardrails reduce bridge trace-core success from 72.0\% to 63.0\% or 60.0\%. Soft base-score mixing is inert at low mixing weights and harmful at high weights. Imported-failure multi-expert routing drops bridge trace-core success to 62.0\%. A larger final expert guardrail also underperforms final-base8 on the original split, fold0, and bridge subset. These results justify stopping manual expert-mix tuning and treating calibrated expert gating as future work.
+
+\subsection{Artifact Index}
+
+All numbers in the main tables and appendix are copied from canonical JSON or Markdown outputs in the project directory:
+\begingroup
+\footnotesize
+\sloppy
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Verified typed action grid: \url{outputs/mathlib430_pretheorem_action_matrix_scaled230_aesop_ablation_merged.md}.
+\item Budgeted typed portfolio: \url{outputs/mathlib430_budgeted_action_policy_scaled230_aesop_ablation.md}.
+\item Typed allocator gate: \url{outputs/mathlib430_typed_allocator_gate_scaled230_aesop_ablation.md}.
+\item Retrieved-only anchor summary: \url{analysis/mathlib430_retrieved_only_anchor_summary.md}.
+\item Retrieved-only anchor matrix: \url{outputs/mathlib430_pretheorem_action_matrix_scaled230_retrieved_only_anchor_merged.md}.
+\item Retrieved-only fixed stability: \url{outputs/mathlib430_fixed_portfolio_stability_scaled230_retrieved_only_anchor.md}.
+\item Frozen fresh-holdout summary: \url{analysis/mathlib430_fresh_holdout_summary.md}.
+\item Fresh-holdout fold summaries: \url{analysis/mathlib430_fresh_holdout_fold0_summary.md} and \url{analysis/mathlib430_fresh_holdout_fold1_summary.md}.
+\item Fresh-holdout merged action outputs: \url{outputs/mathlib430_fresh_holdout_fold0_frozen_actions_merged.md} and \url{outputs/mathlib430_fresh_holdout_fold1_frozen_actions_merged.md}.
+\item Exact Aesop source/channel controls: \url{analysis/mathlib430_aesop_exact_controls_summary.md}.
+\item Initial broad Aesop fact/simp ablation: \url{analysis/mathlib430_aesop_ablation_scaled230.md}.
+\item Evidence-contract audit and homogeneous controls: \url{analysis/mathlib430_evidence_contract_audit.md}.
+\item Strict interface filtering boundary: \url{analysis/mathlib430_e1_strict_interface_filtering.md}.
+\item Strict interface taxonomy: \url{analysis/mathlib430_strict_action_taxonomy_scaled230_aesop_ablation.md}.
+\item Local trace-core: \url{outputs/phase1_mathlib_trace_core_2000_feature_ablation_a40.json}.
+\item Phase 1 bridge: \url{outputs/phase1_reconstruction_bridge_report_100.md}.
+\item Timeout stress: \url{outputs/phase2_timeout_stress_2000_a40.json}.
+\item Imported-core heldout: \url{outputs/phase3_second_stage_controller_eval_500_a40.json} plus final guardrail deltas.
+\item Split stability: \url{outputs/phase3_split_stability_summary_4x500.md}.
+\item Imported bridge report: \url{outputs/phase3_bridge_report_200.md}.
+\item Imported bridge taxonomy: \url{outputs/phase3_bridge_failure_taxonomy_200.md}.
+\item Imported bridge inspection: \url{outputs/phase3_bridge_negative_case_inspection_200.md}.
+\end{itemize}
+\endgroup
 
 \end{document}
