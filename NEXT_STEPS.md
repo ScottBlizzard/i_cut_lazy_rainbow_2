@@ -6,7 +6,7 @@ This file only lists unfinished work. Completed experiments and stable results b
 
 ## Current Gate
 
-The paper route is active as an action-conditional evidence-allocation paper. P0 exact controls rule out the strongest Aesop channel-complementarity wording, while P1 retrieved-only anchor supports the downstream typed-compiler claim without traced `proof_core`.
+The paper route is active as an action-conditional evidence-allocation paper. P0 exact controls rule out the strongest Aesop channel-complementarity wording, P1 retrieved-only anchor supports the downstream typed-compiler claim without traced `proof_core`, and the frozen fresh-holdout gate now passes on two disjoint folds.
 
 Do not claim:
 
@@ -21,24 +21,21 @@ Use this safer mainline:
 - fixed typed portfolios are strong hard controls;
 - homogeneous K=4 controls show typed diversity is better than repeated single-family retries;
 - retrieved-only candidates still benefit from typed compilation: empty Hammer 29/230, best standalone action 35/230, fixed typed K=3/K=4 OOF 52/230;
+- two fresh heldout retrieved-only folds confirm the frozen typed portfolio effect: combined empty Hammer 30/432, best singleton 54/432, frozen K=3/K=4 portfolio 67/432, tested-action oracle 68/432;
 - Aesop provides a modest source/exposure/search-sensitivity diagnostic, not the headline causal result.
 
-## P1. Optional Frozen Fresh Holdout
+## P1. Paper Revision
 
-Run only after the paper text and final action set are frozen.
+The remaining work is writing, not more experiments.
 
-1. Select a new replayable Mathlib 4.30 goal set not used in action design.
-2. Run only the final fixed typed portfolio and the exact controls needed for claim validation.
-3. Do not tune the action set on this holdout.
-4. Report it as prospective validation.
+1. Rewrite Abstract/Introduction around typed evidence allocation and the frozen holdout validation.
+2. Add a compact fresh-holdout table using `analysis/mathlib430_fresh_holdout_summary.md`.
+3. Keep the retrieved-only anchor and fresh holdout distinct:
+   - anchor: larger fixed 230-goal mechanism/deployability check with the full retrieved-only typed grid;
+   - holdout: prospective frozen action-subset validation on two disjoint folds.
+4. Make every headline claim point to either the main matrix, retrieved-only anchor, or fresh holdout table.
 
-Go criterion:
-
-- typed oracle-single gap and fixed K=4 recovery remain visible.
-
-No-go handling:
-
-- present the current 230-goal result as exploratory mechanism evidence and reduce the claimed generality.
+Do not add more experiments unless paper revision reveals a specific unsupported claim. In particular, do not run fold2 just to add volume; fold0 and fold1 already establish the prospective validation direction.
 
 ## P2. Artifact Cleanup Before Submission
 

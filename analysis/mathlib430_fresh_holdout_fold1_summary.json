@@ -1,0 +1,147 @@
+{
+  "tag": "fold1",
+  "matrix_json": "outputs/mathlib430_fresh_holdout_fold1_frozen_actions_merged.json",
+  "n_goals": 224,
+  "candidate_source": "retrieved_only",
+  "tested_actions": [
+    "aesop_core",
+    "aesop_core_plus_learned",
+    "aesop_core_plus_learned16",
+    "aesop_core_plus_learned32",
+    "aesop_core_plus_learned_swapped",
+    "aesop_learned16",
+    "aesop_learned32",
+    "aesop_learned8",
+    "hammerCore_core_plus_learned",
+    "hammer_empty"
+  ],
+  "portfolio_actions": [
+    "aesop_core_plus_learned16",
+    "hammerCore_core_plus_learned",
+    "aesop_core_plus_learned_swapped",
+    "aesop_core"
+  ],
+  "singleton_controls": [
+    "hammer_empty",
+    "aesop_core_plus_learned16",
+    "hammerCore_core_plus_learned",
+    "aesop_core_plus_learned_swapped",
+    "aesop_core",
+    "aesop_core_plus_learned32",
+    "aesop_learned16",
+    "aesop_learned32",
+    "aesop_core_plus_learned",
+    "aesop_learned8"
+  ],
+  "empty_success": 14,
+  "action_success": {
+    "aesop_core": 14,
+    "aesop_core_plus_learned": 30,
+    "aesop_core_plus_learned16": 30,
+    "aesop_core_plus_learned32": 31,
+    "aesop_core_plus_learned_swapped": 22,
+    "aesop_learned16": 30,
+    "aesop_learned32": 31,
+    "aesop_learned8": 30,
+    "hammerCore_core_plus_learned": 4,
+    "hammer_empty": 14
+  },
+  "best_single_action": "aesop_learned32",
+  "best_single_success": 31,
+  "tested_oracle": 40,
+  "strict_after_empty_n": 26,
+  "portfolio": [
+    {
+      "budget": 1,
+      "actions": [
+        "aesop_core_plus_learned16"
+      ],
+      "success": 32,
+      "strict_success": 18,
+      "strict_n": 26
+    },
+    {
+      "budget": 2,
+      "actions": [
+        "aesop_core_plus_learned16",
+        "hammerCore_core_plus_learned"
+      ],
+      "success": 34,
+      "strict_success": 20,
+      "strict_n": 26
+    },
+    {
+      "budget": 3,
+      "actions": [
+        "aesop_core_plus_learned16",
+        "hammerCore_core_plus_learned",
+        "aesop_core_plus_learned_swapped"
+      ],
+      "success": 39,
+      "strict_success": 25,
+      "strict_n": 26
+    },
+    {
+      "budget": 4,
+      "actions": [
+        "aesop_core_plus_learned16",
+        "hammerCore_core_plus_learned",
+        "aesop_core_plus_learned_swapped",
+        "aesop_core"
+      ],
+      "success": 39,
+      "strict_success": 25,
+      "strict_n": 26
+    }
+  ],
+  "paired_vs_best_single": {
+    "wins": [
+      "mathlib4::ContinuousMap.continuousMap_mem_subalgebra_closure_of_separatesPoints",
+      "mathlib4::Finset.mul_prod_Ioo_eq_prod_Ico",
+      "mathlib4::Finsupp.degree_eq_weight_one",
+      "mathlib4::FractionalIdeal.coe_ideal_span_singleton_div_self",
+      "mathlib4::Nat.bitIndices_two_mul_add_one",
+      "mathlib4::Polynomial.natTrailingDegree_le_of_trailingDegree_le",
+      "mathlib4::Set.compl_iUnion₂",
+      "mathlib4::dist_algebraMap'",
+      "mathlib4::kroneckerTMulAlgEquiv_symm_single_tmul"
+    ],
+    "losses": [
+      "mathlib4::FormalMultilinearSeries.leftInv_coeff_one"
+    ],
+    "ties_success": 30,
+    "ties_fail": 184
+  },
+  "paired_vs_empty": {
+    "wins": [
+      "mathlib4::ArithmeticFunction.DirichletCharacter.apply_eq_toArithmeticFunction_apply",
+      "mathlib4::ContinuousMap.continuousMap_mem_subalgebra_closure_of_separatesPoints",
+      "mathlib4::DFinsupp.add_eq_zero_iff",
+      "mathlib4::Finset.mul_prod_Ioo_eq_prod_Ico",
+      "mathlib4::Finsupp.degree_eq_weight_one",
+      "mathlib4::Int.log_natCast",
+      "mathlib4::IsBaseChange.linearMapLeftRightHom_toMatrix",
+      "mathlib4::IsTensorProduct.compr₂_linearEquiv",
+      "mathlib4::List.permutations_nil",
+      "mathlib4::Matrix.dotProduct_star",
+      "mathlib4::Matroid.comap_map",
+      "mathlib4::MeasureTheory.weightedSMul_nonneg",
+      "mathlib4::Module.Basis.tensorProduct_repr_tmul_apply",
+      "mathlib4::Module.finrank_linearMap",
+      "mathlib4::Nat.bitIndices_two_mul_add_one",
+      "mathlib4::PartialOrder.dirSupInaccOn_iff_of_linearOrder",
+      "mathlib4::Polynomial.Monic.ne_zero",
+      "mathlib4::Polynomial.natTrailingDegree_le_of_trailingDegree_le",
+      "mathlib4::Real.inv_sign",
+      "mathlib4::Setoid.classes_ker_subset_fiber_set",
+      "mathlib4::Stream'.Seq.terminates_map_iff",
+      "mathlib4::cross_self",
+      "mathlib4::dist_algebraMap'",
+      "mathlib4::kroneckerTMulAlgEquiv_symm_single_tmul",
+      "mathlib4::pNilradical_eq_bot"
+    ],
+    "losses": [],
+    "ties_success": 14,
+    "ties_fail": 185
+  }
+}

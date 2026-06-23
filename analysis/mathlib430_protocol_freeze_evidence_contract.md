@@ -12,6 +12,7 @@ This freeze supersedes the earlier adaptive-router framing for the current ICLR_
 - Main verified matrix: `outputs/mathlib430_pretheorem_action_matrix_scaled230_aesop_ablation_merged.json`
 - Evidence-contract audit: `analysis/mathlib430_evidence_contract_audit.md`
 - Retrieved-only anchor: `analysis/mathlib430_retrieved_only_anchor_summary.md`
+- Fresh holdout validation: `analysis/mathlib430_fresh_holdout_summary.md`
 - Deep external review motivating this freeze: `analysis/deep_research_report_evidence_contract_controls.md`
 
 ## Split Contract
@@ -39,6 +40,7 @@ Disallowed wording:
 - "learned adaptive allocator beats fixed portfolio"
 - "core" without defining it as traced proof-core evidence
 - "official LeanSearch/LeanHammer reproduction" for the retrieved-only anchor
+- "benchmark-scale population estimate" for the two-fold fresh holdout
 
 ## Current Verified Baselines
 
@@ -83,6 +85,37 @@ Key result:
 - Strict after-`hammer_empty` goals: 23; fixed K=3 covers 23/23.
 
 This passes the external-anchor gate for a downstream retrieved-only evidence compiler. It should not be written as an official full-system LeanSearch or LeanHammer reproduction.
+
+## Completed Fresh Holdout Gate
+
+The frozen prospective validation uses two disjoint folds that have zero overlap with the original 230-goal design/evaluation set. It does not tune actions on the holdout.
+
+- Runner: `scripts/run_fresh_holdout_fold0_a40.sh`.
+- Summary: `analysis/mathlib430_fresh_holdout_summary.md`.
+- Fold summaries: `analysis/mathlib430_fresh_holdout_fold0_summary.md`, `analysis/mathlib430_fresh_holdout_fold1_summary.md`.
+- Raw singleton archives: `outputs/fresh_holdout_fold0_jsons.tgz`, `outputs/fresh_holdout_fold1_jsons.tgz`.
+- Candidate source: `retrieved_only`.
+- Frozen typed portfolio:
+  1. `aesop_core_plus_learned16`
+  2. `hammerCore_core_plus_learned`
+  3. `aesop_core_plus_learned_swapped`
+  4. `aesop_core`
+
+Replayability:
+
+- fold0: 500 input goals, 483 clean goals, 208 original-tactic replayable goals.
+- fold1: 500 input goals, 483 clean goals, 224 original-tactic replayable goals.
+- combined: 432 replayable holdout goals.
+
+Key result:
+
+- Empty Hammer: 30/432 combined.
+- Best predeclared singleton: 54/432 combined.
+- Frozen typed portfolio: K=1 56/432, K=2 58/432, K=3 67/432, K=4 67/432.
+- Tested-action oracle: 68/432.
+- Strict after-`hammer_empty` coverage: 37/38 with K=4.
+
+This passes the prospective-validation gate. The paper can use it to support generalization of the frozen typed-compiler effect, but should not present it as a benchmark-scale estimate or tune any action names based on it.
 
 ## Completed P0 Offline Controls
 
@@ -142,4 +175,4 @@ P0 is a no-go for the strongest Aesop causal mechanism:
 - joint-only over exact single-channel controls is only 2 goals in `oracle_core+retrieved`;
 - source composition is modest rather than decisive, since retrieved-only reaches 34/230 and oracle-core-only reaches 35/230.
 
-The paper can still keep the action-conditional evidence-allocation mainline because the typed action grid, fixed portfolio, homogeneous K=4 controls, and wallclock frontier remain intact. The Aesop section must be written as a source/exposure/search-sensitivity diagnostic rather than a strong facts-versus-simps complementarity result.
+The paper can keep the action-conditional evidence-allocation mainline because the typed action grid, fixed portfolio, homogeneous K=4 controls, wallclock frontier, retrieved-only anchor, and fresh-holdout gate all support the safer claim. The Aesop section must be written as a source/exposure/search-sensitivity diagnostic rather than a strong facts-versus-simps complementarity result.

@@ -1,0 +1,128 @@
+{
+  "tag": "fold0",
+  "matrix_json": "outputs/mathlib430_fresh_holdout_fold0_frozen_actions_merged.json",
+  "n_goals": 208,
+  "candidate_source": "retrieved_only",
+  "tested_actions": [
+    "aesop_core",
+    "aesop_core_plus_learned",
+    "aesop_core_plus_learned16",
+    "aesop_core_plus_learned32",
+    "aesop_core_plus_learned_swapped",
+    "aesop_learned16",
+    "aesop_learned32",
+    "aesop_learned8",
+    "hammerCore_core_plus_learned",
+    "hammer_empty"
+  ],
+  "portfolio_actions": [
+    "aesop_core_plus_learned16",
+    "hammerCore_core_plus_learned",
+    "aesop_core_plus_learned_swapped",
+    "aesop_core"
+  ],
+  "singleton_controls": [
+    "hammer_empty",
+    "aesop_core_plus_learned16",
+    "hammerCore_core_plus_learned",
+    "aesop_core_plus_learned_swapped",
+    "aesop_core",
+    "aesop_core_plus_learned32",
+    "aesop_learned16",
+    "aesop_learned32",
+    "aesop_core_plus_learned",
+    "aesop_learned8"
+  ],
+  "empty_success": 16,
+  "action_success": {
+    "aesop_core": 16,
+    "aesop_core_plus_learned": 20,
+    "aesop_core_plus_learned16": 20,
+    "aesop_core_plus_learned32": 20,
+    "aesop_core_plus_learned_swapped": 23,
+    "aesop_learned16": 20,
+    "aesop_learned32": 20,
+    "aesop_learned8": 20,
+    "hammerCore_core_plus_learned": 4,
+    "hammer_empty": 16
+  },
+  "best_single_action": "aesop_core_plus_learned_swapped",
+  "best_single_success": 23,
+  "tested_oracle": 28,
+  "strict_after_empty_n": 12,
+  "portfolio": [
+    {
+      "budget": 1,
+      "actions": [
+        "aesop_core_plus_learned16"
+      ],
+      "success": 24,
+      "strict_success": 8,
+      "strict_n": 12
+    },
+    {
+      "budget": 2,
+      "actions": [
+        "aesop_core_plus_learned16",
+        "hammerCore_core_plus_learned"
+      ],
+      "success": 24,
+      "strict_success": 8,
+      "strict_n": 12
+    },
+    {
+      "budget": 3,
+      "actions": [
+        "aesop_core_plus_learned16",
+        "hammerCore_core_plus_learned",
+        "aesop_core_plus_learned_swapped"
+      ],
+      "success": 28,
+      "strict_success": 12,
+      "strict_n": 12
+    },
+    {
+      "budget": 4,
+      "actions": [
+        "aesop_core_plus_learned16",
+        "hammerCore_core_plus_learned",
+        "aesop_core_plus_learned_swapped",
+        "aesop_core"
+      ],
+      "success": 28,
+      "strict_success": 12,
+      "strict_n": 12
+    }
+  ],
+  "paired_vs_best_single": {
+    "wins": [
+      "mathlib4::Complex.Real.Complex.Real.Complex.logDeriv_cosh",
+      "mathlib4::Finset.truncatedSup_union_left",
+      "mathlib4::ProbabilityTheory.Kernel.Invariant.comp_const",
+      "mathlib4::Set.inv_uIcc",
+      "mathlib4::SimpleGraph.Walk.IsSubwalk.darts_isInfix"
+    ],
+    "losses": [],
+    "ties_success": 23,
+    "ties_fail": 180
+  },
+  "paired_vs_empty": {
+    "wins": [
+      "mathlib4::CochainComplex.IsKInjective.rightOrthogonal",
+      "mathlib4::Complex.Real.Complex.Real.Complex.logDeriv_cosh",
+      "mathlib4::Finset.truncatedSup_union_left",
+      "mathlib4::Function.not_injective_const",
+      "mathlib4::Polynomial.hilbertPoly_X_pow_succ",
+      "mathlib4::ProbabilityTheory.Kernel.Invariant.comp_const",
+      "mathlib4::ProbabilityTheory.tilted_mul_apply_mgf",
+      "mathlib4::Set.inv_uIcc",
+      "mathlib4::SimpleGraph.Walk.IsSubwalk.darts_isInfix",
+      "mathlib4::Stream'.corec_id_id_eq_const",
+      "mathlib4::WithLp.prod_norm_eq_idemFst_sup_idemSnd",
+      "mathlib4::tendsto_const_mul_pow_nhds_iff"
+    ],
+    "losses": [],
+    "ties_success": 16,
+    "ties_fail": 180
+  }
+}

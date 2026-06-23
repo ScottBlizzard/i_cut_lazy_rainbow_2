@@ -16,6 +16,7 @@ The strongest verified route is not an adaptive learned router. It is a typed pr
 - Fixed typed portfolios solve 49/230 at K=1, 55/230 at K=2, 55/230 at K=3, and 57/230 at K=4 out of fold.
 - A train-fitted K=4 typed portfolio reaches the 58/230 oracle.
 - The retrieved-only anchor removes traced `proof_core`: empty Hammer solves 29/230, the best standalone action solves 35/230, the typed oracle solves 52/230, and fixed typed K=3/K=4 OOF reaches 52/230.
+- Two frozen fresh-holdout folds have 432 new replayable goals disjoint from the 230-goal design set; empty Hammer solves 30/432, the best predeclared singleton solves 54/432, the frozen K=3/K=4 portfolio solves 67/432, and the tested-action oracle solves 68/432.
 
 Important transparency point:
 
@@ -33,6 +34,7 @@ Canonical files:
 - `analysis/mathlib430_evidence_contract_audit.md`
 - `analysis/mathlib430_aesop_exact_controls_summary.md`
 - `analysis/mathlib430_retrieved_only_anchor_summary.md`
+- `analysis/mathlib430_fresh_holdout_summary.md`
 
 ## 1. Replayable Mathlib 4.30 Subset
 
@@ -141,6 +143,53 @@ Interpretation:
 - Fixed K=3 covers 23/23 strict after-`hammer_empty` goals and reaches the retrieved-only typed oracle.
 - This supports the paper as a downstream evidence-compiler method, not only an oracle-core mechanism study.
 - The result should still be described as a plug-in retrieved-only anchor, not as an official LeanSearch/LeanHammer full-system reproduction.
+
+## 2.6 Frozen Fresh Holdout
+
+Goal: prospectively validate the final retrieved-only typed portfolio after the action set is frozen, without tuning on the holdout.
+
+Canonical files:
+
+- `analysis/mathlib430_fresh_holdout_summary.md`
+- `analysis/mathlib430_fresh_holdout_fold0_summary.md`
+- `analysis/mathlib430_fresh_holdout_fold1_summary.md`
+- `outputs/mathlib430_fresh_holdout_fold0_frozen_actions_merged.md`
+- `outputs/mathlib430_fresh_holdout_fold1_frozen_actions_merged.md`
+- `outputs/fresh_holdout_fold0_jsons.tgz`
+- `outputs/fresh_holdout_fold1_jsons.tgz`
+- `scripts/run_fresh_holdout_fold0_a40.sh`
+- `src/evaluate_mathlib430_fresh_holdout.py`
+
+Protocol:
+
+- Folds: `phase3_second_stage_eval_fold0_goals_500.jsonl` and `phase3_second_stage_eval_fold1_goals_500.jsonl`.
+- Overlap with the original 230-goal action-design/evaluation set: 0 goals for each fold.
+- Candidate source: `retrieved_only`.
+- Frozen portfolio: `aesop_core_plus_learned16`, `hammerCore_core_plus_learned`, `aesop_core_plus_learned_swapped`, `aesop_core`.
+- Singleton controls were predeclared from the prior anchor, including the best Aesop learned variants.
+
+Replayability:
+
+| Fold | Input goals | Clean goals | Original-tactic replayable goals |
+|---|---:|---:|---:|
+| fold0 | 500 | 483 | 208 |
+| fold1 | 500 | 483 | 224 |
+| combined | 1000 | 966 | 432 |
+
+Core result:
+
+| Fold | Goals | Empty Hammer | Best singleton | Frozen K=1 | Frozen K=2 | Frozen K=3 | Frozen K=4 | Tested-action oracle | Strict K=4 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| fold0 | 208 | 16 | 23 | 24 | 24 | 28 | 28 | 28 | 12/12 |
+| fold1 | 224 | 14 | 31 | 32 | 34 | 39 | 39 | 40 | 25/26 |
+| combined | 432 | 30 | 54 | 56 | 58 | 67 | 67 | 68 | 37/38 |
+
+Interpretation:
+
+- The fresh-holdout gate passes on two disjoint folds.
+- The frozen K=3/K=4 typed portfolio beats the best predeclared singleton on both folds.
+- The final K=4 paired deltas are +5/-0 versus the fold0 best singleton and +9/-1 versus the fold1 best singleton.
+- The result should be framed as prospective validation of the frozen typed-compiler effect, not as a benchmark-scale population estimate.
 
 ## 3. Aesop Channel/Source Mechanism
 
